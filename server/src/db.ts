@@ -4,7 +4,7 @@ import users from './schema/user.schema.js';
 
 const db = drizzle({ 
         connection: { 
-            dataDir: process.env.DATABASE_PATH || './pgdata/' 
+            dataDir: process.env.DATABASE_PATH 
         }, 
         casing: 'snake_case',
         schema: {

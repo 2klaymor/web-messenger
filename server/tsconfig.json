@@ -109,5 +109,9 @@
   },
   "files": [
     "tsconfig.json"
-  ]
+  ],
+  "include": [
+    "src/**/*.ts",
+    "test/**/*.spec.ts"
+  ],
 }

@@ -1,0 +1,110 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Пользователи
+model User {
+  id           Int       @id @default(autoincrement())
+  name         String    @unique
+  displayName  String?
+  passwordHash String
+  createdAt    DateTime  @default(now())
+  lastSeen     DateTime?
+
+  sentMessages       Message[]         @relation("SentMessages")
+  receivedMessages   Message[]         @relation("ReceivedMessages")
+  participantInChats ChatParticipant[]
+  contacts           Contact[]         @relation("UserContacts")
+  contactOf          Contact[]         @relation("ContactOf")
+
+  @@map("users")
+}
+
+// Чаты
+model Chat {
+  id        Int      @id @default(autoincrement())
+  name      String?
+  isGroup   Boolean  @default(false)
+  avatarUrl String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  messages     Message[]
+  participants ChatParticipant[]
+
+  @@map("chats")
+}
+
+model ChatParticipant {
+  id       Int      @id @default(autoincrement())
+  userId   Int
+  chatId   Int
+  role     String   @default("member") // admin, member
+  joinedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chatId]) // Пользователь может быть только один раз в чате
+  @@map("chat_participants")
+}
+
+
+// Сообщения
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String // Содержимое сообщения
+  senderId  Int
+  chatId    Int
+  replyToId Int? // ID сообщения, на которое отвечают
+  isEdited  Boolean  @default(false)
+  isDeleted Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  sender      User         @relation("SentMessages", fields: [senderId], references: [id])
+  receivers   User[]       @relation("ReceivedMessages") // Получатели (для отметки прочитано)
+  chat        Chat         @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  replyTo     Message?     @relation("Reply", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies     Message[]    @relation("Reply")
+  attachments Attachment[]
+
+  @@map("messages")
+}
+
+// Вложения
+model Attachment {
+  id        Int      @id @default(autoincrement())
+  messageId Int
+  type      String // file, image, audio, video, etc.
+  url       String // Ссылка на файл
+  name      String // Имя файла
+  size      Int // Размер в байтах
+  createdAt DateTime @default(now())
+
+  message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
+
+  @@map("attachments")
+}
+
+model Contact {
+  id          Int      @id @default(autoincrement())
+  userId      Int // Владелец контакта
+  contactId   Int // ID контакта
+  displayName String? // Отображаемое имя контакта (для текущего пользователя)
+  blocked     Boolean  @default(false) // Заблокирован ли контакт
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user    User @relation("UserContacts", fields: [userId], references: [id], onDelete: Cascade)
+  contact User @relation("ContactOf", fields: [contactId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contactId]) // Уникальность контакта для пользователя
+  @@map("contacts")
+}

@@ -200,3 +200,8 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/react,node,visualstudiocode,windows
+
+# Database
+.server/data/
+.server/data/*
+.server/data/**/*

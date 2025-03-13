@@ -1,0 +1,37 @@
+@import '../styles/variables';
+
+
+// dropdown
+.dis-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dis-dropdown-menu {
+  position: absolute;
+  padding: 10px;
+  display: none;
+  width: 100%;
+  font-size: $font-size-xs;
+  list-style: none;
+  background-color: #fff;
+  border: 1px solid;
+  border-radius: 5%;
+  }
+
+.dis-dropdown-menu li a {
+  color: $primary-bg;
+  text-decoration: none;
+
+  &.active {
+    background-color: $sc; // change this to your desired background color
+  }
+}
+
+.dis-dropdown-menu li a:hover {
+  color: $secondary;
+}
+
+.dis-show {
+  display: block;
+}

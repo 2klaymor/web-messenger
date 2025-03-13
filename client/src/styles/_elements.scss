@@ -1,0 +1,42 @@
+// general element styles
+@import './variables';
+
+
+// default tags
+body {
+  font-family: "Source Code Pro", Courier New, Courier, monospace;
+  font-size: $font-size-base;
+  color: $primary-text;
+  background-color: $primary-bg;
+}
+
+nav {
+  height: 60px;
+  background: $primary-bg;
+}
+
+h1 {
+  font-size: $font-size-base;
+}
+
+
+// classes
+.btn {
+  color: $primary-text;
+  background-color: $primary-bg;
+  border-color: $primary-text;
+}
+
+.btn:hover, Link {
+  color: $primary-text;
+  background-color: $secondary
+}
+
+.theme {
+  height: 40px;
+  width: 40px;
+  background-image: $switch-theme-logo;
+  background-size: cover;
+  border: none;
+}
+

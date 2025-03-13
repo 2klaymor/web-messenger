@@ -1,0 +1,12 @@
+@import '../variables';
+
+
+.body-start {
+  display: flex;
+  justify-content: center;
+}
+
+.logo-start {
+  height: 90vh;
+  width: auto;
+}

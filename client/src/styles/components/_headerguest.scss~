@@ -1,0 +1,6 @@
+@import '../variables';
+
+
+.icon-header {
+  height: 40px;
+}

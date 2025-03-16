@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { hash, compare } from 'bcryptjs';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { UserEntity } from './user.entitiy';
+import { ContactUserEntity, UserEntity } from './user.entitiy';
 
 @Injectable()
 export class UserService {
@@ -186,5 +186,80 @@ export class UserService {
     }
 
     return user.createdAt;
+  }
+
+  // Получение даты последнего посещения пользователя
+  async lastSeen(name: string): Promise<Date | null> {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        name: name
+      },
+      select: {
+        lastSeen: true
+      }
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    return user.lastSeen;
+  }
+
+  // TODO: Поменять схему так, чтобы не нужно было каждый раз находить id пользователя,
+  //       чтобы добавить его в контакты, потому что name для каждого пользователя уникален
+  //       и его можно использовать для идентификации target-пользователя userRelation.
+
+  // async targetUserIsRelated(targetUserName: string) {
+  //   const targetUser = await this.findByUsername(targetUserName);
+
+  //   if (!targetUser) {
+  //     return null;
+  //   }
+
+  //   const relationExists = await this.prisma.userRelation.findUnique({})
+  // }
+  
+  // Добавь ДРУГОГО пользователя в контакты
+  // async addUserToContacts(id: number, targetUserName: string, displayName: string): Promise<ContactUserEntity | null> {
+    // const relationExists = await this.prisma.userRelation.findUnique({
+    //   where: {
+    //     userId_targetUserId: {
+    //       userId: id,
+    //       targetUserId: targetUserId
+    //     }
+    //   },
+    //   select: { id: true }
+    // });
+
+    // if (relationExists) {
+    //   return null;
+    // }
+
+    // const addedUser = await this.prisma.userRelation.create({
+    //   data: {
+    //     userId: id,
+    //     targetUserId: targetUserId,
+    //     displayName: displayName
+    //   },
+    //   select: {
+    //     targetUserId: true,
+    //     displayName: true
+    //   }
+    // });
+
+    // return addedUser;
+  // }
+
+  async removeUserFromContacts() {
+    
+  }
+
+  async blockUser() {
+
+  }
+
+  async findContacts() {
+    
   }
 }

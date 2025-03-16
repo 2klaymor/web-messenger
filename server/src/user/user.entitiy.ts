@@ -5,3 +5,8 @@ export interface UserEntity {
     createdAt: Date,
     lastSeen: Date | null,
 }
+
+export interface ContactUserEntity {
+    targetUserId: number,
+    displayName: string | null,
+}

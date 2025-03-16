@@ -52,6 +52,14 @@ export class UserController {
     return createdAt;
   }
 
+  // Получение даты последнего посещения пользователя
+  @Get('last-seen')
+  async lastSeen(@Query('name') name: string) {
+    const lastSeen = await this.userService.lastSeen(name);
+
+    return lastSeen;
+  }
+
   // Получение конкретного пользователя по ИМЕНИ
   @Get()
   async findByUsername(@Query('name') name: string) {

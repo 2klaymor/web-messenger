@@ -1,12 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
-import { PrismaService } from '../prisma/prisma.service';
-
-import { Prisma, User } from '@prisma/client';
 import { hash, compare } from 'bcryptjs';
-import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
-import { UpdateUserDisplayNameDto } from './dto/update-user-displayname.dto';
+
+import { PrismaService } from '../prisma/prisma.service';
+import { UserEntity } from './user.entitiy';
 
 @Injectable()
 export class UserService {
@@ -14,13 +10,20 @@ export class UserService {
 
   // CRUD Операции
   // Создание пользователя
-  async create(createUserDto: CreateUserDto): Promise<User> {
-    const passwordHash = await hash(createUserDto.password, 10);
+  async create(name: string, password: string): Promise<UserEntity> {
+    const passwordHash = await hash(password, 10);
 
     const createdUser = await this.prisma.user.create({
       data: {
-        name: createUserDto.name,
+        name: name,
         passwordHash: passwordHash
+      },
+      select: {
+        id: true,
+        name: true,
+        displayName: true,
+        createdAt: true,
+        lastSeen: true
       }
     });
 
@@ -28,17 +31,32 @@ export class UserService {
   }
 
   // Получение всех пользователей (если они есть, иначе null)
-  async findAll(): Promise<User[] | null> {
-    const foundUsers = await this.prisma.user.findMany();
+  async findAll(): Promise<UserEntity[] | null> {
+    const foundUsers = await this.prisma.user.findMany({
+      select: {
+        id: true,
+        name: true,
+        displayName: true,
+        createdAt: true,
+        lastSeen: true
+      }
+    });
 
     return foundUsers;
   }
 
   // Получение конкретного пользователя по АЙДИ (если он есть, иначе null)
-  async findById(id: number): Promise<User | null> {
+  async findById(id: number): Promise<UserEntity | null> {
     const foundUser = await this.prisma.user.findUnique({
       where: {
         id: id
+      },
+      select: {
+        id: true,
+        name: true,
+        displayName: true,
+        createdAt: true,
+        lastSeen: true
       }
     });
     
@@ -46,10 +64,17 @@ export class UserService {
   }
 
   // Получение конкретного пользователя по ИМЕНИ (если он есть, иначе null)
-  async findByUsername(name: string): Promise<User | null> {
+  async findByUsername(name: string): Promise<UserEntity | null> {
     const foundUser = await this.prisma.user.findUnique({
       where: {
         name: name
+      },
+      select: {
+        id: true,
+        name: true,
+        displayName: true,
+        createdAt: true,
+        lastSeen: true
       }
     });
 
@@ -75,8 +100,8 @@ export class UserService {
   // }
 
   // Обновление ПАРОЛЯ пользователя
-  async updatePassword(id: number, updateUserPasswordDto: UpdateUserPasswordDto): Promise<User | null> {
-    const passwordHash = await hash(updateUserPasswordDto.password, 10);
+  async updatePassword(id: number, password: string): Promise<Boolean> {
+    const passwordHash = await hash(password, 10);
 
     const updatedUser = await this.prisma.user.update({
       where: {
@@ -87,32 +112,32 @@ export class UserService {
       }
     });
 
-    return updatedUser;
+    return !!updatedUser;
   }
 
   // Обновление ОТОБРАЖАЕМОГО ИМЕНИ пользователя
-  async updateDisplayName(id: number, updateUserDisplayNameDto: UpdateUserDisplayNameDto): Promise<User | null> {
+  async updateDisplayName(id: number, displayName: string): Promise<boolean> {
     const updatedUser = await this.prisma.user.update({
       where: {
         id: id
       },
       data: {
-        displayName: updateUserDisplayNameDto.displayName
+        displayName: displayName
       }
     });
 
-    return updatedUser;
+    return !!updatedUser.displayName;
   }
 
   // Удаление пользователя
-  async remove(id: number): Promise<User | null> {
-    const deletedUser = await this.prisma.user.delete({
+  async remove(id: number): Promise<boolean> {
+    const removedUser = await this.prisma.user.delete({
       where: {
         id: id
       }
     });
 
-    return deletedUser;
+    return !!removedUser;
   }
 
   // Всопомогательные операции
@@ -122,7 +147,7 @@ export class UserService {
       where: {
         name: name
       }
-    })
+    });
 
     return !!user;
   }

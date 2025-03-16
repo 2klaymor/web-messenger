@@ -1,12 +1,35 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["strictUndefinedChecks"]
 }
 
 datasource db {
   provider = "sqlite"
   url      = env("DATABASE_URL")
 }
+
+// Типы чатов
+enum ChatType {
+  DIRECT
+  GROUP
+  CHANNEL
+}
+
+// Роли участников чата
+enum ParticipantRole {
+  ADMIN
+  MODERATOR
+  MEMBER
+}
+
+// Типы вложений
+enum AttachmentType {
+  FILE
+  IMAGE
+  AUDIO
+  VIDEO
+  DOCUMENT
+}
+
 
 // Пользователи
 model User {
@@ -16,24 +39,27 @@ model User {
   passwordHash String
   createdAt    DateTime  @default(now())
   lastSeen     DateTime?
+  avatarUrl    String?   // Добавлено поле для аватара пользователя
 
-  sentMessages       Message[]         @relation("SentMessages")
-  receivedMessages   Message[]         @relation("ReceivedMessages")
+  sentMessages       Message[]          @relation("SentMessages")
   participantInChats ChatParticipant[]
-  contacts           Contact[]         @relation("UserContacts")
-  contactOf          Contact[]         @relation("ContactOf")
+  contacts           Contact[]          @relation("UserContacts")
+  contactOf          Contact[]          @relation("ContactOf")
+  readStatus         MessageReadStatus[] // Добавлено отношение для отслеживания статуса прочтения
 
   @@map("users")
 }
 
+
 // Чаты
 model Chat {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  isGroup   Boolean  @default(false)
-  avatarUrl String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String?
+  type        ChatType @default(DIRECT)
+  avatarUrl   String?
+  description String?  // Добавлено описание чата
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   messages     Message[]
   participants ChatParticipant[]
@@ -41,15 +67,20 @@ model Chat {
   @@map("chats")
 }
 
+
+// Участники чата (Отношение Пользователь-Чат)
 model ChatParticipant {
-  id       Int      @id @default(autoincrement())
+  id       Int           @id @default(autoincrement())
   userId   Int
   chatId   Int
-  role     String   @default("member") // admin, member
-  joinedAt DateTime @default(now())
+  role     ParticipantRole @default(MEMBER)
+  joinedAt DateTime      @default(now())
+  leftAt   DateTime?     // Добавлена возможность отслеживать, когда пользователь покинул чат
+  isActive Boolean       @default(true) // Активен ли пользователь в чате
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chat        Chat      @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  permissions String?   // Разрешения в формате JSON, сохраняются как текст в SQLite
 
   @@unique([userId, chatId]) // Пользователь может быть только один раз в чате
   @@map("chat_participants")
@@ -65,46 +96,87 @@ model Message {
   replyToId Int? // ID сообщения, на которое отвечают
   isEdited  Boolean  @default(false)
   isDeleted Boolean  @default(false)
+  deletedAt DateTime? // Время удаления сообщения
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  sender      User         @relation("SentMessages", fields: [senderId], references: [id])
-  receivers   User[]       @relation("ReceivedMessages") // Получатели (для отметки прочитано)
-  chat        Chat         @relation(fields: [chatId], references: [id], onDelete: Cascade)
-  replyTo     Message?     @relation("Reply", fields: [replyToId], references: [id], onDelete: SetNull)
-  replies     Message[]    @relation("Reply")
+  sender      User                @relation("SentMessages", fields: [senderId], references: [id])
+  chat        Chat                @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  replyTo     Message?            @relation("Reply", fields: [replyToId], references: [id], onDelete: SetNull)
+  replies     Message[]           @relation("Reply")
   attachments Attachment[]
+  readStatus  MessageReadStatus[] // Статус прочтения сообщения всеми участниками
 
   @@map("messages")
 }
 
+
+// Статус прочтения сообщений (Отношение Пользователь-Сообщение)
+model MessageReadStatus {
+  id         Int       @id @default(autoincrement())
+  messageId  Int
+  userId     Int
+  isRead     Boolean   @default(false)
+  readAt     DateTime?
+  deliveredAt DateTime? // Время доставки сообщения
+  
+  message    Message   @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@unique([messageId, userId]) // Уникальность статуса для пары сообщение-пользователь
+  @@map("message_read_status")
+}
+
+
 // Вложения
 model Attachment {
-  id        Int      @id @default(autoincrement())
-  messageId Int
-  type      String // file, image, audio, video, etc.
-  url       String // Ссылка на файл
-  name      String // Имя файла
-  size      Int // Размер в байтах
-  createdAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  messageId   Int
+  type        AttachmentType
+  url         String // Ссылка на файл
+  name        String // Имя файла
+  size        Int // Размер в байтах
+  contentType String? // MIME тип
+  metadata    String?   // Метаданные в формате JSON, сохраняются как текст в SQLite
+  createdAt   DateTime @default(now())
 
   message Message @relation(fields: [messageId], references: [id], onDelete: Cascade)
 
   @@map("attachments")
 }
 
+// Контакты
 model Contact {
   id          Int      @id @default(autoincrement())
   userId      Int // Владелец контакта
   contactId   Int // ID контакта
   displayName String? // Отображаемое имя контакта (для текущего пользователя)
+  notes       String? // Заметки о контакте
   blocked     Boolean  @default(false) // Заблокирован ли контакт
+  isFavorite  Boolean  @default(false) // Добавлен ли в избранное
+  groupId     Int?     // Возможность группировать контакты
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   user    User @relation("UserContacts", fields: [userId], references: [id], onDelete: Cascade)
   contact User @relation("ContactOf", fields: [contactId], references: [id], onDelete: Cascade)
+  group   ContactGroup? @relation(fields: [groupId], references: [id], onDelete: SetNull)
 
   @@unique([userId, contactId]) // Уникальность контакта для пользователя
   @@map("contacts")
+}
+
+
+// Группы контактов
+model ContactGroup {
+  id        Int       @id @default(autoincrement())
+  userId    Int       // Владелец группы
+  name      String    // Название группы
+  color     String?   // Цвет группы (для UI)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  
+  contacts  Contact[]
+  
+  @@map("contact_groups")
 }

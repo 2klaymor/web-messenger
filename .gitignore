@@ -207,3 +207,6 @@ $RECYCLE.BIN/
 /server/data/
 /server/data/*
 /server/data/**/*
+
+# Old Prisma schemas
+*.old.prisma

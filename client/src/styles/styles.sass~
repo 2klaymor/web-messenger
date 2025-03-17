@@ -6,18 +6,19 @@
 @import './mixins'
 @import './elements'
 
-//c
-@import './components/headerguest'
-@import './components/headeruser'
-@import 'components/start'
-@import './components/signin'
-@import './components/signup'
-@import './components/home'
-@import './components/footer'
+//layout
+@import '../layout/headerguest'
+@import '../layout/headeruser'
+@import './components/start'
+@import '../pages/signin'
+@import '../pages/signup'
+@import '../pages/home'
+@import '../layout/footer'
 
 
-//placeholders
-@import '../placeholders/contact'
+//features
+@import '../features/contact'
+@import '../features/message'
 
 
 

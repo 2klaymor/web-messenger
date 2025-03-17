@@ -1,9 +1,28 @@
 import {createContext, useState, useEffect} from 'react';
 
+import favicon_w from './assets/favicon-white.png';
+import favicon_b from './assets/favicon-black.png';
+import logo_w from './assets/logo-white.png';
+import logo_b from './assets/logo-black.png';
+import logo_blur_w from './assets/logo-white-blur.png';
+import logo_blur_b from './assets/logo-black-blur.png';
+import logo_blur_stretched_w from './assets/logo-white-blur-stretched.png';
+import logo_blur_stretched_b from './assets/logo-black-blur-stretched.png';
+import theme_logo_w from './assets/theme-white.png';
+import theme_logo_b from './assets/theme-black.png';
+import attach_w from './assets/attach-white.png'
+import attach_b from './assets/attach-black.png'
+import send_w from './assets/send-white.png'
+import send_b from './assets/send-black.png'
+
+const paths = {
+
+}
+
 const ThemeContext = createContext();
 
 const ThemeProvider = ({children}) => {
-    const [theme, setTheme] = useState(localStorage.getItem('theme' || 'dark'));
+    const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
 
     const handleThemeChange = () => {
         const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -26,21 +45,21 @@ export {ThemeProvider, ThemeContext};
 
 export const images = {
     light: {
-        favicon: '/favicon-white.png',
-        logo: '/logo-white.png',
-        logo_blur: '/logo-white-blur.png',
-        logo_blur_stretched: '/logo-white-blur-stretched.png',
-        theme_logo: '/theme-white.png',
-        attach: '/attach-white.png',
-        send: '/send-white.png',
+        favicon: '../assets/favicon-white.png',
+        logo: '../assets/logo-white.png',
+        logo_blur: '../assets/logo-white-blur.png',
+        logo_blur_stretched: '../assets/logo-white-blur-stretched.png',
+        theme_logo: '../assets/theme-white.png',
+        attach: '../assets/attach-white.png',
+        send: '../assets/send-white.png',
     },
     dark: {
-        favicon: '/favicon-black.png',
-        logo: '/logo-black.png',
-        logo_blur: '/logo-black-blur.png',
-        logo_blur_stretched: '/logo-black-blur-stretched.png',
-        theme_logo: '/theme-black.png',
-        attach: '/attach-black.png',
-        send: '/send-black.png',
+        favicon: '../assets/favicon-black.png',
+        logo: '../assets/logo-black.png',
+        logo_blur: '../assets/logo-black-blur.png',
+        logo_blur_stretched: '../assets/logo-black-blur-stretched.png',
+        theme_logo: '../assets/theme-black.png',
+        attach: '../assets/attach-black.png',
+        send: '../assets/send-black.png',
     },
 };

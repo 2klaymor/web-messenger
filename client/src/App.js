@@ -1,17 +1,17 @@
 import {Routes, Route} from "react-router-dom";
-import {ThemeProvider} from './theme'
-import {LanguageProvider} from './language';
 
 import './styles/styles.sass'
 
-import Page from './Page';
-import HeaderGuest from "./components/HeaderGuest";
-import HeaderUser from "./components/HeaderUser";
-import Start from './components/Start';
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Home from './components/Home';
+import {ThemeProvider} from './utils/theme'
+import {LanguageProvider} from './utils/language';
 
+import Page from './utils/Page';
+import HeaderGuest from "./layout/HeaderGuest";
+import HeaderUser from "./layout/HeaderUser";
+import Start from './pages/Start';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
 
 function App() {
     return (
@@ -46,7 +46,7 @@ function App() {
         </Routes>
         </ThemeProvider>
         </LanguageProvider>
-    );
+    )
 }
 
 export default App;

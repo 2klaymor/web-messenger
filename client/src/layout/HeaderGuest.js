@@ -1,15 +1,13 @@
 import {Link} from 'react-router-dom';
 import {useContext} from 'react';
 
-import {LanguageContext, translations} from '../language';
-import {ThemeContext, images} from '../theme';
-
+import {LanguageContext, translations} from '../utils/language';
+import {ThemeContext, images} from '../utils/theme';
 
 const HeaderGuest = () => {
     const { language } = useContext(LanguageContext);
     const t = translations[language];
     const { theme, handleThemeChange } = useContext(ThemeContext);
-
 
     return (
         <nav className="navbar fixed-top">
@@ -33,7 +31,7 @@ const HeaderGuest = () => {
             </Link>
 
         </nav>
-    );
+    )
 }
 
 export default HeaderGuest;

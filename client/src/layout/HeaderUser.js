@@ -1,17 +1,15 @@
 import {Link} from 'react-router-dom';
-import {use, useContext, useEffect} from 'react';
+import {useContext, useEffect} from 'react';
 
-import {ThemeContext, images} from '../theme';
-import {LanguageContext, translations} from '../language';
-import useDropdownState from "../dropdowns";
-
+import {LanguageContext, translations} from '../utils/language';
+import {ThemeContext, images} from '../utils/theme';
+import useDropdownState from "../utils/dropdowns";
 
 const HeaderUser = () => {
     const { language } = useContext(LanguageContext);
     const t = translations[language];
     const {theme, handleThemeChange} = useContext(ThemeContext);
 
-    // define states
     const {dropdownStates, openDropdown, closeDropdown} = useDropdownState({
         search: false,
         profile: false,
@@ -83,7 +81,7 @@ const HeaderUser = () => {
             </div>
 
         </nav>
-    );
+    )
 }
 
 export default HeaderUser;

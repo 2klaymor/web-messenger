@@ -1,15 +1,15 @@
 import {useContext} from "react";
-import {ThemeContext} from "../theme";
-import {images} from '../theme';
+
+import {ThemeContext, images} from "../utils/theme";
 
 const Start = () => {
-    const {theme, handleThemeChange} = useContext(ThemeContext);
+    const {theme} = useContext(ThemeContext);
 
     return (
         <div className="body-start">
             <img className="logo-start" src={images[theme].logo_blur} alt="logo"/>
         </div>
-    );
-};
+    )
+}
 
 export default Start;

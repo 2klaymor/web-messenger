@@ -1,26 +1,5 @@
 import {createContext, useState} from 'react';
 
-
-export const LanguageContext = createContext();
-
-export const LanguageProvider = ({children}) => {
-    const [language, setLanguage] = useState(
-        localStorage.getItem('language') || 'en'
-    );
-
-
-    const changeLanguage = (lng) => {
-        setLanguage(lng);
-        localStorage.setItem('language', lng);
-    };
-
-    return (
-        <LanguageContext.Provider value={{language, changeLanguage}}>
-            {children}
-        </LanguageContext.Provider>
-    );
-};
-
 export const translations = {
     en: {
         labels: {
@@ -71,3 +50,23 @@ export const translations = {
         start_typing: "начните печатать..."
     },
 };
+
+export const LanguageContext = createContext();
+
+export const LanguageProvider = ({children}) => {
+    const [language, setLanguage] = useState(
+        localStorage.getItem('language') || 'en'
+    );
+
+    const changeLanguage = (lng) => {
+        setLanguage(lng);
+        localStorage.setItem('language', lng);
+    };
+
+    return (
+        <LanguageContext.Provider value={{language, changeLanguage}}>
+            {children}
+        </LanguageContext.Provider>
+    )
+}
+

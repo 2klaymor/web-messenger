@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
 import {useContext} from "react";
 
-import {LanguageContext, translations} from '../language';
-import {ThemeContext, images} from '../theme';
+import {LanguageContext, translations} from '../utils/language';
+import {ThemeContext, images} from '../utils/theme';
 
 const SignUp = () => {
     const {language} = useContext(LanguageContext);
@@ -34,8 +34,8 @@ const SignUp = () => {
                     <button className="btn" type="submit">{t.labels.continue}</button>
 
                     <p>
-                        already have an account?&nbsp;
-                        <Link to="/signin">sign in</Link>
+                        {t.old_user}&nbsp;
+                        <Link to="/signin">{t.labels.signin}</Link>
                     </p>
 
                 </div>
@@ -43,7 +43,7 @@ const SignUp = () => {
 
         </div>
 
-    );
+    )
 }
 
 export default SignUp;

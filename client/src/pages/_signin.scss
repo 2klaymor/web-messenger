@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../styles/variables';
 
 
 .body-signin {
@@ -18,6 +18,6 @@
 .form-signin {
   padding: 20px;
   width: 400px;
-  border: 1px solid $primary-text;
+  border: 1px solid var(--secondary);
   border-radius: 10px;
 }

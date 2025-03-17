@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../styles/variables';
 
 .user-navbar {
   border-bottom: 1px solid var(--tertiary);
@@ -33,11 +33,10 @@
 .profile-button {
   height: 40px;
   width: 40px;
-  background-image: url('../../../public/pfp.png');
+  background-image: url('../../public/pfp.png');
   background-size: cover;
   border-radius: 50%;
   position: relative;
-  border: 1px solid blue;
 }
 
 .profile-container .app-dropdown-menu {

@@ -1,14 +1,9 @@
 import {useState} from 'react';
 
-
 const useDropdownState = (initialState) => {
     const [dropdownStates, setDropdownStates] = useState(initialState);
 
     const openDropdown = (name) => {
-        // setDropdownStates: updates dropdown states
-        // takes an arrow function as an argument
-        // which takes the previous dropdown states, creates a new object
-        // and returns it with updated states
         setDropdownStates((prevStates) => ({
             ...prevStates,
             [name]: true
@@ -22,11 +17,7 @@ const useDropdownState = (initialState) => {
         }));
     };
 
-    return { dropdownStates, openDropdown, closeDropdown}
-
-    // return {dropdownStates,
-    //     handleFocus: (name) => openDropdown(name),
-    //     handleBlur: (name) => closeDropdown(name)}
-};
+    return {dropdownStates, openDropdown, closeDropdown}
+}
 
 export default useDropdownState;

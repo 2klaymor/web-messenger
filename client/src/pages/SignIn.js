@@ -1,9 +1,8 @@
-import {Link} from 'react-router-dom';
 import {useContext} from "react";
+import {Link} from 'react-router-dom';
 
-import {LanguageContext, translations} from '../language';
-import {ThemeContext, images} from '../theme';
-
+import {LanguageContext, translations} from '../utils/language';
+import {ThemeContext, images} from '../utils/theme';
 
 const SignIn = () => {
     const {language} = useContext(LanguageContext);
@@ -40,7 +39,7 @@ const SignIn = () => {
             </p>
 
         </div>
-    );
+    )
 }
 
 export default SignIn;

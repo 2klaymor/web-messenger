@@ -27,7 +27,7 @@ export class UserService {
 
 
   // Получение всех пользователей (если они есть, иначе null)
-  async getAll(startFrom: number, limit:number): Promise<UserEntity[] | null> {
+  async getAll(startFrom: number, limit:number): Promise<UserEntity[]> {
     const foundUsers = await this.prisma.user.findMany({
       skip: startFrom,  // С какого ID начать поиск, пропустив его
       take: limit,      // Сколько взять

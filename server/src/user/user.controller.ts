@@ -1,6 +1,7 @@
-import { Controller, Get, Post, Body, Patch, Put, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Put, Param, Delete, Query, Request } from '@nestjs/common';
+
 import { UserService } from './user.service';
-import { CreateUserDto, CheckUserPasswordDto, UpdateUserDisplayNameDto, GetAllUsersDto } from './user.dto';
+import { CreateUserDto, CheckUserPasswordDto, UpdateUserDisplayNameDto } from './user.dto';
 
 
 @Controller('user')
@@ -27,43 +28,50 @@ export class UserController {
   //    https://www.prisma.io/docs/orm/prisma-client/queries/pagination#cursor-based-pagination
   //
   @Get()
-  async getAll(@Body() getAllUsersDto: GetAllUsersDto) {
-    if (!getAllUsersDto.startFrom) getAllUsersDto.startFrom = 0;
-    if (!getAllUsersDto.limit) getAllUsersDto.limit = 20;
+  async getAll(
+    @Query('start-from') startFrom?: string,
+    @Query('limit') limit?: string
+  ) {
+
+    console.log(`startFrom: ${startFrom},\nlimit: ${limit}`);
+    console.log(startFrom ? +startFrom : 0);
+    console.log(limit ? +limit : 20);
 
     const foundUsers = await this.userService.getAll(
-      getAllUsersDto.startFrom,
-      getAllUsersDto.limit
+      startFrom ? +startFrom : 0,
+      limit ? +limit : 20
     );
 
     return foundUsers;
   }
 
 
-  // Получение конкретного пользователя по УНИКАЛЬНОМУ ИМЕНИ
-  @Get()
-  async getByUsername(@Query('name') name: string) {
-    const foundUser = await this.userService.getByUsername(name); 
+  // // Получение конкретного пользователя по УНИКАЛЬНОМУ ИМЕНИ
+  // @Get()
+  // async getByUsername(@Query('name') name: string) {
+  //   const foundUser = await this.userService.getByUsername(name); 
 
-    return foundUser;
-  }
+  //   return foundUser;
+  // }
 
 
   // Проверка на то, не занято ли УНИКАЛЬНОЕ ИМЯ
-  @Get('check-username')
-  async checkUsername(@Query('name') name: string) {
+  @Get('check-username/:name')
+  async checkUsername(@Param('name') name: string) {
     const checkUsername = await this.userService.checkUsername(name);
 
     return checkUsername;
   }
 
 
-  // Получение конкретного пользователя по АЙДИ
+  // Получение конкретного пользователя по АЙДИ или УНИКАЛЬНОМУ ИМЕНИ
   @Get(':id')
-  async getById(@Param('id') id: string) {
-    const foundUser = await this.userService.getById(+id);
-
-    return foundUser;
+  async getByIdOrUsername(@Param('id') idOrUsername: string) {
+    if (!isNaN(Number(idOrUsername))) {                         // <-- #FIXME такое надо менять и делать через pipe-ы/другие валидаторы параметров    
+      return await this.userService.getById(+idOrUsername);     //            очень плохо, но пока работает.
+    } else {
+      return await this.userService.getByUsername(idOrUsername);
+    }
   }
 
 

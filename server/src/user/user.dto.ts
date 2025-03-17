@@ -5,11 +5,6 @@ export class CreateUserDto {
     password: string;
 }
 
-export class GetAllUsersDto {
-    startFrom?: number;
-    limit?: number;
-}
-
 export class UpdateUserDto {
     displayName?: string;
     password?: string;

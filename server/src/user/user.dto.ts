@@ -5,6 +5,11 @@ export class CreateUserDto {
     password: string;
 }
 
+export class GetAllUsersDto {
+    startFrom?: number;
+    limit?: number;
+}
+
 export class UpdateUserDto {
     displayName?: string;
     password?: string;
@@ -14,6 +19,6 @@ export class UpdateUserDisplayNameDto extends PartialType(UpdateUserDto) {
     displayName: string;
 }
 
-export class UserPasswordDto extends PartialType(UpdateUserDto) {
+export class CheckUserPasswordDto extends PartialType(UpdateUserDto) {
     password: string;
 }

@@ -9,4 +9,6 @@ export interface UserEntity {
 export interface ContactUserEntity {
     targetUserId: number,
     displayName: string | null,
+    isBlocked: boolean,
+    isFavorite: boolean,
 }

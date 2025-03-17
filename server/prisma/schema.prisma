@@ -43,7 +43,7 @@ model UserRelation {
   targetUserId        Int       // Цель отношения
   displayName         String?   // Кастомное имя
   // notes       String?   // Заметки об отношении
-  blocked             Boolean   @default(false) // Заблокирован ли пользователь
+  isBlocked           Boolean   @default(false) // Заблокирован ли пользователь
   isFavorite          Boolean   @default(false) // В избранном ли
   // createdAt   DateTime  @default(now())
   // updatedAt   DateTime  @updatedAt

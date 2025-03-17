@@ -4,7 +4,10 @@ import {createContext, useState} from 'react';
 export const LanguageContext = createContext();
 
 export const LanguageProvider = ({children}) => {
-    const [language, setLanguage] = useState('ru');
+    const [language, setLanguage] = useState(
+        localStorage.getItem('language') || 'en'
+    );
+
 
     const changeLanguage = (lng) => {
         setLanguage(lng);
@@ -27,6 +30,8 @@ export const translations = {
             my_profile: "my profile",
             settings: "settings",
             logout: "logout",
+            online: "online",
+            offline: "offline",
         },
 
         signin_welcome: "sign in to deadin.site",

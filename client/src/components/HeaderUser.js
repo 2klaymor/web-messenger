@@ -1,8 +1,14 @@
 import {Link} from 'react-router-dom';
+import {useContext} from 'react';
+
+import {ThemeContext} from '../theme';
 import useCustomState from "../utils";
+import {Images} from '../theme';
 
 
-const Test = () => {
+const HeaderUser = () => {
+
+    const {theme, handleThemeChange} = useContext(ThemeContext);
 
     // define states
     const {dropdownStates, handleFocus, handleBlur} = useCustomState({
@@ -11,15 +17,15 @@ const Test = () => {
     })
 
     return (
-        <nav className="navbar fixed-top">
+        <nav className="user-navbar navbar fixed-top">
 
-            <Link to="/" className="navbar-brand link-light ms-5">
-                <img className="icon-header pe-3" src="/favicon.jpg" alt="icon"/>
+            <Link to="/" className="navbar-brand ms-5">
+                <img className="icon-header pe-3" src={Images[theme].favicon} alt="icon"/>
                 deadin.site
             </Link>
 
             {/* search dropdown */}
-            <form className="dis-dropdown m-auto">
+            <form className="dis-dropdown search-bar">
 
                 <input className="form-control" type="search" placeholder="search"
                        onClick={() => handleFocus('search')}
@@ -33,7 +39,9 @@ const Test = () => {
 
             </form>
 
-            <button type="button" className="theme btn ms-auto"></button>
+            <button type="button" className="theme btn ms-auto" onClick={handleThemeChange}>
+                <img src={Images[theme].theme_logo} alt="change theme"/>
+            </button>
 
             {/* profile dropdown */}
             <div className="profile dis-dropdown">
@@ -64,4 +72,4 @@ const Test = () => {
     );
 }
 
-export default Test;
+export default HeaderUser;

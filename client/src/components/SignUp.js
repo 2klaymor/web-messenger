@@ -1,12 +1,17 @@
 import {Link} from 'react-router-dom';
 
+import {useContext} from "react";
+import {ThemeContext} from "../theme";
+import {Images} from '../theme';
 
 const SignUp = () => {
+    const {theme, handleThemeChange} = useContext(ThemeContext);
+
     return (
         <div className="d-flex flex-row">
 
             {/* row element 1 */}
-            <img className="logo-signup" src="/logo-white-blur-stretched.jpg" alt="logo"/>
+            <img className="logo-signup" src={Images[theme].logo_blur_stretched} alt="logo"/>
 
             {/* row element 2 */}
             <div className="m-auto">

@@ -1,0 +1,15 @@
+// colors
+$primary-bg: #fff;
+$primary-text: #000;
+$secondary: #9ca1a1;
+$tertiary: #292929;
+$danger: #BF0600;
+
+// font sizes
+$font-size-base: 30px;
+$font-size-s: 20px;
+$font-size-xs: 15px;
+$font-size-xxs: 10px;
+
+// paths
+$switch-theme-logo: url('../../public/theme-light.png');

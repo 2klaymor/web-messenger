@@ -1,0 +1,11 @@
+export const translations = {
+    en: {
+        signin: "sign in",
+        signup: "sign up",
+        signin_welcome: "sign in to deadin.site"
+    },
+    ru: {
+        signin: "вход",
+        signup: "регистрация",
+    },
+};

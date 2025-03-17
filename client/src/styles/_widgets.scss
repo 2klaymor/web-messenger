@@ -1,4 +1,4 @@
-@import '../styles/variables';
+@import './variables';
 
 
 // dropdown
@@ -14,18 +14,17 @@
   width: 100%;
   font-size: $font-size-xs;
   list-style: none;
-  background-color: #fff;
-  border: 1px solid;
-  border-radius: 5%;
+  background-color: var(--primary-bg);
+  border: 2px solid var(--tertiary);
+  border-top: none;
+  border-radius: 7px;
+  //box-shadow: 5px 5px 2px var(--secondary);
   }
 
 .dis-dropdown-menu li a {
-  color: $primary-bg;
+  color: var(--primary-text);
   text-decoration: none;
-}
 
-.dis-dropdown-menu li a:hover {
-  color: $secondary;
 }
 
 .dis-show {

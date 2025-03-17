@@ -1,21 +1,22 @@
-@import '../../styles/variables';
+@import '../variables';
 
 .contacts {
   height: calc(100vh - 85px);
-  border: 1px solid red;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .chat {
   display: flex;
   flex-direction: column;
   width: calc(100vw - 300px);
-  //border: 1px solid cyan;
+  height: calc(100vh - 85px);
 }
 
 .chat-info {
   text-align: center;
   font-size: $font-size-s;
-  //border: 1px solid blue;
+  background-color: var(--primary-bg);
 }
 
 .online-status {
@@ -23,10 +24,11 @@
 }
 
 .chat-history {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
   font-size: $font-size-s;
-  background-color: $tertiary;
-  //border: 1px solid cornflowerblue;
+  background-image: url('../../../public/bg1.png');
+  overflow-y: auto;
 }
 
 .chat-input {
@@ -34,45 +36,48 @@
   flex-direction: row;
   padding: 10px;
   margin-top: auto;
-  align-items: baseline;
+  align-items: center;
   font-size: $font-size-s;
-  //border: transparent transparent $primary-text $primary-text;
 }
+
 .chat-input .btn {
-  margin-left: -50px;
   border: none;
+  background-color: transparent; // убрать фон кнопки
+  &:hover {
+    background-color: transparent; // убрать эффект hover кнопки
+  }
 }
 
 .chat-input img {
-  height: 2em;
+  height: 1.5em;
+  filter: brightness(var(--btn-brightness));
+
+  &:hover {
+    filter: brightness(1);
+    cursor: pointer;
+  }
+}
+
+.chat-input input {
+  display: none;
 }
 
 .chat-input textarea {
   display: block;
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 10px;
+  margin-right: 10px;
 
   max-height: 300px;
-  width: calc(100% - 100px);
+  width: 100%;
 
   resize: none;
 
   font-size: $font-size-xs;
-  background-color: $primary-bg;
-  color: $primary-text;
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  border: none;
 
-
-  &::-webkit-scrollbar {
-    width: 5px; // ширина скроллбара
-    background-color: $primary-bg // цвет фона скроллбара
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $secondary;// цвет скроллбара
-    border-radius: 5px; // радиус скругления углов скроллбара
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background-color: #888; // цвет скроллбара при наведении курсора
+  &:focus {
+    outline: none;
   }
 }

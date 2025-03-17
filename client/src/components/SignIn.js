@@ -1,12 +1,17 @@
 import {Link} from 'react-router-dom';
 
+import {useContext} from "react";
+import {ThemeContext} from "../theme";
+import {Images} from '../theme';
 
 const SignIn = () => {
+    const {theme, handleThemeChange} = useContext(ThemeContext);
+
     return (
         <div className="body-signin">
 
             {/* top */}
-            <img className="logo-signin" src="/logo-black-blur.png" alt="logo"/>
+            <img className="logo-signin" src={Images[theme].logo_blur} alt="logo"/>
             <h1>sign in to deadin.site</h1>
 
             {/* form */}

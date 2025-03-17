@@ -1,14 +1,25 @@
-// colors
-$primary-bg: #000;
-$primary-text: #fff;
-$secondary: #635E5E;
-$tertiary: #292424;
-$danger: #BF0600;
-
-// font sizes
+//fonts
 $font-size-base: 30px;
 $font-size-s: 20px;
 $font-size-xs: 15px;
+$font-size-xxs: 10px;
 
-// paths
-$switch-theme-logo: url('../../public/theme-light.png');
+[data-theme="dark"] {
+  --primary-bg: #000;
+  --primary-text: #fff;
+  --secondary: #635E5E;
+  --tertiary: #292929;
+  --danger: #BF0600;
+  --btn-brightness: 0.5;
+  --btn-brightness-hover: 1;
+}
+
+[data-theme="light"] {
+  --primary-bg: #fff;
+  --primary-text: #000;
+  --secondary: #9ca1a1;
+  --tertiary: #d6d6d6;
+  --danger: #BF0600;
+  --btn-brightness: 0.5;
+  --btn-brightness-hover: 1;
+}

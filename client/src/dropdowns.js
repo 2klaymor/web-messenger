@@ -1,10 +1,10 @@
 import {useState} from 'react';
 
-// updates states
-const useCustomState = (initialState) => {
+
+const useDropdownState = (initialState) => {
     const [dropdownStates, setDropdownStates] = useState(initialState);
 
-    const handleFocus = (name) => {
+    const openDropdown = (name) => {
         // setDropdownStates: updates dropdown states
         // takes an arrow function as an argument
         // which takes the previous dropdown states, creates a new object
@@ -15,17 +15,18 @@ const useCustomState = (initialState) => {
         }));
     };
 
-    const handleBlur = (name) => {
+    const closeDropdown = (name) => {
         setDropdownStates((prevStates) => ({
             ...prevStates,
             [name]: false
         }));
     };
 
-    return {dropdownStates,
-        handleFocus: (name) => handleFocus(name),
-        handleBlur: (name) => handleBlur(name)}
+    return { dropdownStates, openDropdown, closeDropdown}
+
+    // return {dropdownStates,
+    //     handleFocus: (name) => openDropdown(name),
+    //     handleBlur: (name) => closeDropdown(name)}
 };
 
-
-export default useCustomState;
+export default useDropdownState;

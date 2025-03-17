@@ -1,14 +1,14 @@
 @import '../variables';
 
 .user-navbar {
-  border-bottom: 1px solid var(--secondary);
+  border-bottom: 1px solid var(--tertiary);
 }
 
 .icon-header {
   height: 40px;
 }
 
-.search-bar {
+.search-container {
   flex:1;
   margin-left: 100px;
   margin-right: 50px;
@@ -17,7 +17,7 @@
   }
 }
 
-.search-bar input {
+.search-container input {
   border: none;
   border-radius: 10px;
   background-color: var(--tertiary);
@@ -37,9 +37,10 @@
   background-size: cover;
   border-radius: 50%;
   position: relative;
+  border: 1px solid blue;
 }
 
-.profile .dis-dropdown-menu {
+.profile-container .app-dropdown-menu {
   margin-top: 10px;
   min-width: max-content;
   right: 0;

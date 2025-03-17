@@ -3,7 +3,7 @@ import {use, useContext, useEffect} from 'react';
 
 import {ThemeContext, images} from '../theme';
 import {LanguageContext, translations} from '../language';
-import useDropdownState from "../dropdowns";
+import useDropdownState from "../utils";
 
 
 const HeaderUser = () => {

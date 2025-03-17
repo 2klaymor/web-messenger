@@ -15,7 +15,8 @@
   font-size: $font-size-xs;
   list-style: none;
   background-color: var(--primary-bg);
-  border: 2px solid var(--tertiary);
+  border: 2px solid
+  var(--tertiary);
   border-top: none;
   border-radius: 7px;
 

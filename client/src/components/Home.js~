@@ -1,8 +1,8 @@
 import {useEffect, useRef} from 'react';
 import TextareaAutosize from "react-textarea-autosize";
 import {useContext} from "react";
-import {ThemeContext} from "../paths";
-import {Images} from '../paths';
+import {ThemeContext} from "../theme";
+import {images} from '../theme';
 
 import ContactPlaceholder from "../placeholders/contact";
 import MessageSent from "../placeholders/MessageSent";
@@ -84,13 +84,13 @@ const Home = () => {
                     {/* input */}
                     <div className="chat-input">
                         <label htmlFor="file-input">
-                            <img src={Images[theme].attach}/>
+                            <img src={images[theme].attach}/>
                             <input type="file" id="file-input" />
                         </label>
 
                         <TextareaAutosize placeholder="start typing..."/>
                         <button className="btn" type="button">
-                            <img src={Images[theme].send}/>
+                            <img src={images[theme].send}/>
                         </button>
                     </div>
                 </div>

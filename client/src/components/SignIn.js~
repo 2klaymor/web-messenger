@@ -4,11 +4,10 @@ import {useContext} from "react";
 import {LanguageContext, translations} from '../language';
 import {ThemeContext, images} from '../theme';
 
-
 const SignIn = () => {
     const {language} = useContext(LanguageContext);
     const t = translations[language];
-    const {theme} = useContext(ThemeContext);
+    const {theme } = useContext(ThemeContext);
 
     return (
         <div className="body-signin">

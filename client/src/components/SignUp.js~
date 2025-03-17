@@ -34,8 +34,8 @@ const SignUp = () => {
                     <button className="btn" type="submit">{t.labels.continue}</button>
 
                     <p>
-                        {t.old_user}&nbsp;
-                        <Link to="/signin">{t.labels.signin}</Link>
+                        already have an account?&nbsp;
+                        <Link to="/signin">sign in</Link>
                     </p>
 
                 </div>

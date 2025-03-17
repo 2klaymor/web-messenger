@@ -1,5 +1,5 @@
 import {Routes, Route} from "react-router-dom";
-import {ThemeProvider} from './paths'
+import {ThemeProvider} from './theme'
 
 import './styles/styles.sass'
 
@@ -10,10 +10,12 @@ import Start from './components/Start';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import Home from './components/Home';
+import {LanguageProvider} from "./language";
 
 
 function App() {
     return (
+        <LanguageProvider>
         <ThemeProvider>
         <Routes>
 
@@ -43,6 +45,7 @@ function App() {
 
         </Routes>
         </ThemeProvider>
+        </LanguageProvider>
     );
 }
 

@@ -1,13 +1,14 @@
 import {Link} from 'react-router-dom';
 import {useContext} from 'react';
 
-import {ThemeContext} from '../theme';
+import {ThemeContext, images} from '../theme';
+import {LanguageContext, translations} from '../language';
 import useCustomState from "../utils";
-import {Images} from '../theme';
 
 
 const HeaderUser = () => {
-
+    const { language } = useContext(LanguageContext);
+    const t = translations[language];
     const {theme, handleThemeChange} = useContext(ThemeContext);
 
     // define states
@@ -20,14 +21,14 @@ const HeaderUser = () => {
         <nav className="user-navbar navbar fixed-top">
 
             <Link to="/" className="navbar-brand ms-5">
-                <img className="icon-header pe-3" src={Images[theme].favicon} alt="icon"/>
+                <img className="icon-header pe-3" src={images[theme].favicon} alt="icon"/>
                 deadin.site
             </Link>
 
             {/* search dropdown */}
             <form className="dis-dropdown search-bar">
 
-                <input className="form-control" type="search" placeholder="search"
+                <input className="form-control" type="search" placeholder={t.labels.search}
                        onClick={() => handleFocus('search')}
                        onBlur={() => handleBlur('search')}/>
 
@@ -40,7 +41,7 @@ const HeaderUser = () => {
             </form>
 
             <button type="button" className="theme btn ms-auto" onClick={handleThemeChange}>
-                <img src={Images[theme].theme_logo} alt="change theme"/>
+                <img src={images[theme].theme_logo} alt="change theme"/>
             </button>
 
             {/* profile dropdown */}
@@ -61,9 +62,9 @@ const HeaderUser = () => {
                     onMouseOver={() => handleFocus('profile')}
                     onMouseOut={() => handleBlur('profile')}
                 >
-                    <li><Link to="#" className="">my profile</Link></li>
-                    <li><Link to="#" className="">settings</Link></li>
-                    <li><Link to="/" className="">log out</Link></li>
+                    <li><Link to="#" className="">{t.labels.my_profile}</Link></li>
+                    <li><Link to="#" className="">{t.labels.settings}</Link></li>
+                    <li><Link to="/" className="">{t.labels.logout}</Link></li>
                 </ul>
 
             </div>

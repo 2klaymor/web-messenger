@@ -1,3 +1,22 @@
+import {createContext, useState} from 'react';
+
+
+export const LanguageContext = createContext();
+
+export const LanguageProvider = ({children}) => {
+    const [language, setLanguage] = useState('ru');
+
+    const changeLanguage = (lng) => {
+        setLanguage(lng);
+    };
+
+    return (
+        <LanguageContext.Provider value={{language, changeLanguage}}>
+            {children}
+        </LanguageContext.Provider>
+    );
+};
+
 export const translations = {
     en: {
         labels: {
@@ -5,6 +24,11 @@ export const translations = {
             signup: "sign up",
             continue: "continue",
             search: "search",
+            my_profile: "my profile",
+            settings: "settings",
+            logout: "logout",
+            online: "online",
+            offline: "offline",
         },
 
         signin_welcome: "sign in to deadin.site",
@@ -25,6 +49,9 @@ export const translations = {
             signup: "зарегистрироваться",
             continue: "продолжить",
             search: "поиск",
+            my_profile: "мой профиль",
+            settings: "настройки",
+            logout: "выход",
         },
 
         signin_welcome: "вход в deadin.site",

@@ -1,18 +1,16 @@
 import {useEffect, useRef} from 'react';
-import TextareaAutosize from "react-textarea-autosize";
 import {useContext} from "react";
-import {ThemeContext} from "../theme";
-import {Images} from '../theme';
 
+import TextareaAutosize from "react-textarea-autosize";
 import ContactPlaceholder from "../placeholders/contact";
 import MessageSent from "../placeholders/MessageSent";
 import MessageReceived from "../placeholders/MessageReceived";
 
+import {LanguageContext, translations} from '../language';
+import {ThemeContext, images} from '../theme';
+
+
 const Home = () => {
-    const {theme, handleThemeChange} = useContext(ThemeContext);
-
-    const chatHistoryRef = useRef(null); // Создаем ссылку на контейнер
-
     const contacts = [
         {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
         {name: 'kaneki ken.', lastMessage: 'die...die..die'},
@@ -40,11 +38,16 @@ const Home = () => {
         {contents: 'Хорошо, я тоже люблю играть за ассасинов. Но Anti-Mage - это что-то особенное. Он такой сильный.', time: '20:13'}
         ];
 
+    const {language} = useContext(LanguageContext);
+    const t = translations[language];
+    const {theme} = useContext(ThemeContext);
+    const chatHistoryRef = useRef(null); // Создаем ссылку на контейнер
+
     useEffect(() => {
         if (chatHistoryRef.current) {
             chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight;
         }
-    }, []);  // Пустой массив зависимостей = выполняется только при монтировании
+    }, []);
 
     return (
         <div>
@@ -84,13 +87,13 @@ const Home = () => {
                     {/* input */}
                     <div className="chat-input">
                         <label htmlFor="file-input">
-                            <img src={Images[theme].attach}/>
+                            <img src={images[theme].attach}/>
                             <input type="file" id="file-input" />
                         </label>
 
-                        <TextareaAutosize placeholder="start typing..."/>
+                        <TextareaAutosize placeholder={t.start_typing}/>
                         <button className="btn" type="button">
-                            <img src={Images[theme].send}/>
+                            <img src={images[theme].send}/>
                         </button>
                     </div>
                 </div>

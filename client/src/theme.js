@@ -11,7 +11,6 @@ const ThemeProvider = ({children}) => {
         document.documentElement.setAttribute('data-theme', newTheme);
     };
 
-    // Устанавливаем тему при первом рендере
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
     }, [theme]);
@@ -25,7 +24,7 @@ const ThemeProvider = ({children}) => {
 
 export {ThemeProvider, ThemeContext};
 
-export const Images = {
+export const images = {
     light: {
         favicon: '/favicon-white.png',
         logo: '/logo-white.png',

@@ -5,5 +5,15 @@
   padding: 0 40px;
   display: flex;
   font-size: $font-size-xs;
-  border-top: 1px solid $tertiary;
+  border-top: 1px solid var(--tertiary);
+}
+
+.change-lang {
+  margin-left: auto;
+}
+
+.footer button {
+  font-size: $font-size-xs;
+  padding: 0 10px;
+  border: none;
 }

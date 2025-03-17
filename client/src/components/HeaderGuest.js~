@@ -6,9 +6,9 @@ import {ThemeContext, images} from '../theme';
 
 
 const HeaderGuest = () => {
-    const { language } = useContext(LanguageContext);
+    const {language, changeLanguage} = useContext(LanguageContext);
     const t = translations[language];
-    const { theme, handleThemeChange } = useContext(ThemeContext);
+    const {theme, handleThemeChange} = useContext(ThemeContext);
 
 
     return (

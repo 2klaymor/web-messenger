@@ -17,3 +17,12 @@ export class UpdateUserDisplayNameDto extends PartialType(UpdateUserDto) {
 export class CheckUserPasswordDto extends PartialType(UpdateUserDto) {
     password: string;
 }
+
+export class AddContactDto {
+    targetUserId: number;
+    displayName: string | null;
+}
+
+export class RemoveContactDto extends PartialType(AddContactDto) {
+    targetUserId: number;
+}

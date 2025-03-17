@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Put, Param, Delete, Query, Request } from '@nestjs/common';
 
 import { UserService } from './user.service';
-import { CreateUserDto, CheckUserPasswordDto, UpdateUserDisplayNameDto } from './user.dto';
+import { CreateUserDto, CheckUserPasswordDto, UpdateUserDisplayNameDto, AddContactDto, RemoveContactDto } from './user.dto';
 
 
 @Controller('user')
@@ -144,5 +144,44 @@ export class UserController {
     const userRemoved = await this.userService.remove(+id);
 
     return userRemoved;
+  }
+
+  
+  // --- КОНТАКТЫ
+  // Получение контактов пользователя
+  @Get(':id/contacts')
+  async getContacts(@Param('id') id: string) {
+    const contacts = await this.userService.getContacts(+id);
+
+    return contacts;
+  }
+
+  // Добавление пользователя в контакты
+  @Post(':id/contacts')
+  async addUserToContacts(
+    @Param('id') id: string, 
+    @Body() addContactDto: AddContactDto
+  ) {
+    const addedUser = await this.userService.addUserToContacts(
+      +id, 
+      addContactDto.targetUserId,
+      addContactDto.displayName
+    );
+
+    return addedUser;
+  }
+
+  // Удаление пользователя из контактов
+  @Delete(':id/contacts')
+  async removeUserFromContacts(
+    @Param('id') id: string,
+    @Body() removeContactDto: RemoveContactDto
+  ) {
+    const removedUser = await this.userService.removeUserFromContacts(
+      +id,
+      removeContactDto.targetUserId
+    );
+
+    return removedUser;
   }
 }

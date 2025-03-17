@@ -190,13 +190,55 @@ export class UserService {
   }
 
 
+  // --- КОНТАКТЫ ---
+  // Получение контактов пользователя с указанным АЙДИ
+  async getContacts(id: number) {
+    const foundContacts = await this.prisma.userRelation.findMany({
+      where: {
+        userId: id
+      },
+      omit: {
+        id: true,
+        userId: true
+      }
+    });
+
+    return foundContacts;
+  }
+
+  async getContactById(id: number, targetUserId: number) {
+    const foundContact = await this.prisma.userRelation.findUnique({
+      where: {
+        userId_targetUserId: {
+          userId: id,
+          targetUserId: targetUserId
+        }
+      },
+      omit: {
+        id: true,
+        userId: true
+      }
+    });
+
+    return foundContact;
+  }
+
+
   // Добавление пользователя в контакты (если такой пользователь существует, иначе null)
   async addUserToContacts(
     id: number, 
     targetUserId: number, 
-    displayName: string
+    displayName: string | null
   ): Promise<ContactUserEntity | null> {
-    const addedContact = await this.prisma.userRelation.create({
+    if (+id === +targetUserId) {  // <-- Проверка на попытку добавить самого себя
+      return null;
+    }
+
+    if (!! await this.getContactById(id, targetUserId)) {  // <-- Проверка на попытку добавить пользователя, который уже есть в контактах
+      return null;
+    }
+
+    const addedUser = await this.prisma.userRelation.create({
       data: {
         userId: id,
         targetUserId: targetUserId,
@@ -208,18 +250,93 @@ export class UserService {
       }
     });
 
-    return addedContact;
+    return addedUser;
   }
 
-  async removeUserFromContacts() {
-    
+
+  // Удаление пользователя из контактов
+  async removeUserFromContacts(id: number, targetUserId: number) {
+    if (+id === +targetUserId) {  // <-- Проверка на попытку удалить самого себя
+      return null;
+    }
+
+    if (! await this.getContactById(id, targetUserId)) {  // <-- Проверка на попытку удалить пользователя, которого нет в контактах
+      return null;
+    }
+
+    const removedUser = await this.prisma.userRelation.delete({
+      where: {
+        userId_targetUserId: {
+          userId: id,
+          targetUserId: targetUserId
+        }
+      },
+      select: {
+        target: {
+          omit: {
+            passwordHash: true
+          }
+        }
+      }
+    });
+
+    return removedUser;
   }
 
-  async blockUser() {
 
-  }
+  // // Блокировка пользователя
+  // async blockUser(id: number, targetUserId: number) {
+  //   const blockedUser = await this.prisma.userRelation.upsert({
+  //     where: {
+  //       userId_targetUserId: {
+  //         userId: id,
+  //         targetUserId: targetUserId
+  //       }
+  //     },
+  //     create: {
+  //       userId: id,
+  //       targetUserId: targetUserId,
+  //       isBlocked: true
+  //     },
+  //     update: {
+  //       isBlocked: true
+  //     },
+  //     select: {
+  //       target: {
+  //         omit: {
+  //           passwordHash: true
+  //         }
+  //       }
+  //     }
+  //   });
 
-  async findContacts() {
-    
-  }
+  //   return blockedUser;
+  // }
+
+
+  // Разблокировка пользователя
+  // async unblockUser(id: number, targetUserId: number) {
+  //   const userInContacts = await this.prisma.userRelation.findUnique({
+  //     where: {
+  //       userId_targetUserId: {
+  //         userId: id,
+  //         targetUserId: targetUserId
+  //       }
+  //     }
+  //   });
+
+  //   if (!userInContacts) {
+      
+  //   }
+
+    // const unblockedUser = await this.prisma.userRelation.update({
+    //   where: {
+    //     userId: id,
+    //     targetUserId: targetUserId
+    //   },
+    //   update: {
+    //     isBlocked: false
+    //   }
+    // })
+  // }
 }

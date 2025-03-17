@@ -1,6 +1,0 @@
-import {useContext} from "react";
-import {ThemeContext} from "../paths";
-import {Images} from '../paths';
-
- const {theme, handleThemeChange} = useContext(ThemeContext);
-src={Images[theme].theme_logo}

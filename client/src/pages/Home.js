@@ -8,33 +8,9 @@ import ContactPlaceholder from "../features/contact";
 import MessageSent from "../features/MessageSent";
 import MessageReceived from "../features/MessageReceived";
 
+import {mockContacts, mockMessages} from '../utils/mockData'
+
 const Home = () => {
-    const contacts = [
-        {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-        {name: 'kaneki ken.', lastMessage: 'die...die..die'},
-        {name: 'roma', lastMessage: ')'},
-        {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-        {name: 'kaneki ken.', lastMessage: 'die...die..die'},
-        {name: 'roma', lastMessage: ')'},
-        {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-        {name: 'kaneki ken.', lastMessage: 'die...die..die'},
-        {name: 'roma', lastMessage: ')'},
-        {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-        {name: 'kaneki ken.', lastMessage: 'die...die..die'},
-        {name: 'roma', lastMessage: ')'}
-    ];
-
-    const sentmessages = [
-        {contents: 'Привет, как дела?', time: '12:50'},
-        {contents: 'Да, я тоже люблю играть в Доту. Какой твой любимый герой?', time: '04:20'},
-        {contents: 'Мой любимый герой - Phantom Assassin. Я люблю играть за ассасинов.', time: '20:13'}
-        ];
-
-    const receivedmessages = [
-        {contents: 'Хорошо, играю в Доту. Ты тоже играешь?', time: '12:50'},
-        {contents: 'Мой любимый герой - Anti-Mage. А у тебя?', time: '04:20'},
-        {contents: 'Хорошо, я тоже люблю играть за ассасинов. Но Anti-Mage - это что-то особенное. Он такой сильный.', time: '20:13'}
-        ];
 
     const {language} = useContext(LanguageContext);
     const t = translations[language];
@@ -54,7 +30,7 @@ const Home = () => {
 
                 {/* contacts */}
                 <div className="contacts">
-                    {contacts.map((contact, index) => (
+                    {mockContacts.map((contact, index) => (
                         <ContactPlaceholder key={index} path={"/pfp.png"}
                                             name={contact.name} lastMessage={contact.lastMessage}/>
                     ))}
@@ -70,12 +46,12 @@ const Home = () => {
 
                     {/* messages */}
                     <div className="chat-history" ref={chatHistoryRef}>
-                        {sentmessages.map((message, index) => (
+                        {mockMessages.map((message, index) => (
                             <div key={index}>
-                                <MessageSent contents={message.contents} time={message.time}/>
-                                {receivedmessages[index] && (
-                                    <MessageReceived contents={receivedmessages[index].contents}
-                                                     time={receivedmessages[index].time}/>
+                                {message.sender === 'me' ? (
+                                    <MessageSent contents={message.contents} time={message.time}/>
+                                    ) : (
+                                        <MessageReceived contents={message.contents} time={message.time}/>
                                 )}
                             </div>
                         ))}

@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
 
+import {ThemeProvider} from './utils/theme'
+import {LanguageProvider} from './utils/language';
 import App from './App';
 
 const root = ReactDOM.createRoot(
@@ -10,8 +12,13 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <App/>
-        </BrowserRouter>
+        <LanguageProvider>
+            <ThemeProvider>
+                <BrowserRouter>
+                    <App/>
+                </BrowserRouter>
+            </ThemeProvider>
+        </LanguageProvider>
     </React.StrictMode>
+
 );

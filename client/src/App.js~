@@ -2,7 +2,7 @@ import {Routes, Route} from "react-router-dom";
 
 import './styles/styles.sass'
 
-import Page from './utils/page';
+import Page from './utils/Page';
 import HeaderGuest from "./layout/HeaderGuest";
 import HeaderUser from "./layout/HeaderUser";
 import Start from './pages/Start';

@@ -8,7 +8,7 @@ body {
   font-size: $font-size-base;
   color: var(--primary-text);
   background-color: var(--primary-bg);
-  transition: all 0.4s linear;
+  //transition: all 0.4s linear;
 }
 
 nav {
@@ -41,6 +41,7 @@ h1 {
   color: var(--primary-text);
   background-color: var(--primary-bg);
   border-color: var(--secondary);
+  transition: none;
 }
 
 .btn:hover, Link {

@@ -214,3 +214,5 @@ api-test/
 design/
 *.js~
 *.scss~
+**/*~
+*~

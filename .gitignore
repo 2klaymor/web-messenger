@@ -203,6 +203,12 @@ $RECYCLE.BIN/
 
 /client/.idea/
 
+# Design
+/client/design
+
+# API tests in client
+/client/api-test
+
 # Database
 /server/data/
 /server/data/*
@@ -210,3 +216,9 @@ $RECYCLE.BIN/
 
 # Old Prisma schemas
 *.old.prisma
+
+# Future Prisma schemas
+*.futureproto.prisma
+
+# Draft files
+*.draft.ts

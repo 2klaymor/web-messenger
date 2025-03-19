@@ -33,8 +33,30 @@ export class AuthService {
   }
 
 
+  // Валидация пользователя (проверка логина и пароля)
+  // Применяется в локальной стратегии аутентификации
+  async validateUser(name: string, password: string) {
+    const user = await this.usersService.getByUsername(name);
+
+    if (!user) {
+      return null;
+    }
+
+    const isValidPassword = await compare(password, user.passwordHash);
+
+    if (!isValidPassword) {
+      return null;
+    }
+
+    return user; // <-- Возвращаем user-а, а не просто true для того, чтобы его можно было
+                 //     получить в контроллере, так как этот метод вызовится до него,
+                 //     в Guard-е, чтобы принять его в контроллере и сгенерировать токены
+  }
+
+
   // --- ПРИВАТНЫЕ ---
   // Генерация токенов
+  // Идентификация происходит по УНИКАЛЬНОМУ ИМЕНИ пользователя
   async generateTokens(res: Response,  name: string) {
     const accessToken = await this.jwtService.signAsync({ name }, {
       secret: this.configService.getOrThrow('JWT_ACCESS_SECRET'),

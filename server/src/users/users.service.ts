@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 
-import { UserEntity } from './users.entity';
+// import { UserEntity } from './users.entity';
 
 
 @Injectable()
@@ -11,14 +11,10 @@ export class UsersService {
 
   // ПУБЛИЧНЫЕ
   // Получение конкретного пользователя по УНИКАЛЬНОМУ ИМЕНИ
-  async getByUsername(name: string): Promise<UserEntity | null> {
+  async getByUsername(name: string) {
     const foundUser = await this.prisma.user.findUnique({
       where: {
         name: name
-      },
-      omit: {
-        id: true,
-        passwordHash: true
       }
     });
 
@@ -27,7 +23,7 @@ export class UsersService {
 
 
   // Получение даты последнего посещения пользователя
-  async lastSeen(name: string): Promise<Date | null> {
+  async lastSeen(name: string) {
     const user = await this.prisma.user.findUnique({
       where: {
         name: name
@@ -46,7 +42,7 @@ export class UsersService {
 
 
   // Обновление ПАРОЛЯ пользователя
-  async updatePassword(name: string, passwordHash: string): Promise<Boolean> {
+  async updatePassword(name: string, passwordHash: string) {
     const updatedUser = await this.prisma.user.update({
       where: {
         name: name
@@ -61,7 +57,7 @@ export class UsersService {
 
 
   // Обновление ОТОБРАЖАЕМОГО ИМЕНИ пользователя
-  async updateDisplayName(name: string, displayName: string): Promise<boolean> {
+  async updateDisplayName(name: string, displayName: string) {
     const updatedUser = await this.prisma.user.update({
       where: {
         name: name
@@ -71,12 +67,12 @@ export class UsersService {
       }
     });
 
-    return !!updatedUser.displayName;
+    return !!updatedUser;
   }
 
 
-  // Проверка существования пользователя по имени / проверка того, не занято ли имя (для регистрации)
-  async checkUserExistence(name: string): Promise<boolean> {
+  // Проверка существования пользователя по имени / проверка того, не занято ли УНИКАЛЬНОЕ ИМЯ (для регистрации)
+  async checkUserExistence(name: string) {
     const user = await this.prisma.user.findUnique({
       where: {
         name: name
@@ -89,15 +85,11 @@ export class UsersService {
 
   // --- ПРИВАТНЫЕ --- 
   // Создание пользователя
-  async createUser(name: string, passwordHash: string): Promise<UserEntity> {
+  async createUser(name: string, passwordHash: string) {
     const createdUser = await this.prisma.user.create({
       data: {
         name: name,
         passwordHash: passwordHash
-      },
-      omit: {
-        id: true,
-        passwordHash: true
       }
     });
 
@@ -106,33 +98,13 @@ export class UsersService {
 
 
   // Удаление пользователя
-  async removeUser(name: string): Promise<boolean> {
+  async removeUser(name: string) {
     const removedUser = await this.prisma.user.delete({
       where: {
         name: name
       }
     });
 
-    return !!removedUser;
+    return removedUser;
   }
-
-
-  // Проверка введенного пароля на соответствие паролю в базе данных
-  // async checkPassword(name: string, password: string): Promise<boolean> {
-  //   const user = await this.prisma.user.findUnique({
-  //     where: {
-  //       name: name
-  //     },
-  //     select: {
-  //       passwordHash: true
-  //     }
-  //   });
-    
-  //   if (!user) {
-  //     return false;
-  //   }
-
-  //   return await compare(password, user.passwordHash);
-  // }
-
 }

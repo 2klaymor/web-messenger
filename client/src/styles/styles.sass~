@@ -1,0 +1,24 @@
+// contains all of the stylesheets
+@import 'bootstrap/dist/css/bootstrap.css'
+
+@import './variables'
+@import './widgets'
+@import './mixins'
+@import './elements'
+
+//layout
+@import '../layout/headerguest'
+@import '../layout/headeruser'
+@import './components/start'
+@import '../pages/signin'
+@import '../pages/signup'
+@import '../pages/home'
+@import '../layout/footer'
+
+
+//features
+@import '../features/contact'
+@import '../features/message'
+
+
+

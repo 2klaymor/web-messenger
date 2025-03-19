@@ -1,0 +1,34 @@
+@import './variables';
+
+
+// dropdown
+.app-dropdown-container {
+  position: relative;
+  display: inline-block;
+}
+
+.app-dropdown-menu {
+  position: absolute;
+  padding: 10px;
+  display: none;
+  width: 100%;
+  font-size: $font-size-xs;
+  list-style: none;
+  background-color: var(--primary-bg);
+  border: 2px solid
+  var(--tertiary);
+  border-top: none;
+  border-radius: 7px;
+
+  //box-shadow: 5px 5px 2px var(--secondary);
+  }
+
+.app-dropdown-menu li a {
+  color: var(--primary-text);
+  text-decoration: none;
+
+}
+
+.app-show {
+  display: block;
+}

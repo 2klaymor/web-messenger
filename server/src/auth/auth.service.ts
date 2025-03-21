@@ -58,12 +58,14 @@ export class AuthService {
   // Генерация токенов
   // Идентификация происходит по УНИКАЛЬНОМУ ИМЕНИ пользователя
   async generateTokens(res: Response,  name: string) {
-    const accessToken = await this.jwtService.signAsync({ name }, {
+    const accessToken = await this.jwtService.signAsync(
+      { name }, {
       secret: this.configService.getOrThrow('JWT_ACCESS_SECRET'),
       expiresIn: this.configService.getOrThrow('JWT_ACCESS_EXPIRES'),
     });
 
-    const refreshToken = await this.jwtService.signAsync({ name }, {
+    const refreshToken = await this.jwtService.signAsync(
+      { name }, {
       secret: this.configService.getOrThrow('JWT_REFRESH_SECRET'),
       expiresIn: this.configService.getOrThrow('JWT_REFRESH_EXPIRES'),
     });

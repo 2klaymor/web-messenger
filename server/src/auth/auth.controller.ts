@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Response } from 'express';
 
 import { AuthService } from './auth.service';
-import { LoginUserDto, RegisterUserDto } from './auth.dto';
-import { AuthGuard } from '@nestjs/passport';
+import { RegisterUserDto } from './auth.dto';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 
 
@@ -32,6 +32,14 @@ export class AuthController {
   @UseGuards(AuthGuard('local'))
   @Post('login')                                          // Тут с помощью специального декоратора можем вытащить user-а и его поля.
   async login(@Res({ passthrough: true }) res: Response,  @CurrentUser('name') name: string) {
+    return await this.authService.generateTokens(res, name);
+  }
+
+
+  // Обновление access токена по refresh токену
+  @UseGuards(AuthGuard('jwt-refresh'))
+  @Post('refresh')
+  async refresh(@Res({ passthrough: true }) res: Response,  @CurrentUser('name') name: string) {
     return await this.authService.generateTokens(res, name);
   }
 }

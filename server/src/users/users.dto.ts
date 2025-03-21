@@ -5,24 +5,10 @@ export class CreateUserDto {
     password: string;
 }
 
-export class UpdateUserDto {
-    displayName?: string;
-    password?: string;
-}
-
-export class UpdateUserDisplayNameDto extends PartialType(UpdateUserDto) {
+export class UpdateUserDisplayNameDto {
     displayName: string;
 }
 
-export class CheckUserPasswordDto extends PartialType(UpdateUserDto) {
+export class CheckUserPasswordDto {
     password: string;
-}
-
-export class AddContactDto {
-    targetUserId: number;
-    displayName: string | null;
-}
-
-export class RemoveContactDto extends PartialType(AddContactDto) {
-    targetUserId: number;
 }

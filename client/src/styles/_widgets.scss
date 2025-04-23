@@ -1,6 +1,5 @@
 @import './variables';
 
-
 // dropdown
 .app-dropdown-container {
   position: relative;
@@ -9,23 +8,19 @@
 
 .app-dropdown-menu {
   position: absolute;
-  padding: 10px;
   display: none;
   width: 100%;
-  font-size: $font-size-xs;
-  list-style: none;
-  background-color: var(--primary-bg);
-  border: 2px solid var(--tertiary);
-  border-top: none;
+  padding: 0.5rem;
+  border: 1px solid var(--tertiary);
   border-radius: 7px;
+  font-size: $font-size-s;
+  background-color: var(--primary-bg);
+  list-style: none;
 
-  //box-shadow: 5px 5px 2px var(--secondary);
+  li a {
+    text-decoration: none;
+    color: var(--primary-text);
   }
-
-.app-dropdown-menu li a {
-  color: var(--primary-text);
-  text-decoration: none;
-
 }
 
 .app-show {

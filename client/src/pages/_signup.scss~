@@ -1,0 +1,33 @@
+@import '../styles/variables';
+
+.signup-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-start;
+    font-size: $font-size-s;
+
+    img {
+        width: 45%;
+        padding: 5% 10%;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 10%;
+
+        label, input {
+            margin-bottom: 0.5rem;
+        }
+
+        button {
+            margin: 1rem;
+        }
+
+        a {
+            text-wrap: nowrap;
+        }
+    }
+}

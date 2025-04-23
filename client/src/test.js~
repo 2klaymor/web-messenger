@@ -1,0 +1,7 @@
+const heading = <h1 style={{color:"red"}}>Добро пожаловать</h1>;
+
+function Test () {
+    return heading;
+}
+
+export default Test;

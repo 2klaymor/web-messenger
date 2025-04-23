@@ -1,0 +1,27 @@
+@import '../styles/variables';
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 60%;
+  min-width: 50px;
+
+  margin: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: $font-size-s;
+}
+.message-sent {
+  background-color: var(--primary-text);
+  color: var(--primary-bg);
+}
+
+.message-received {
+  background-color: var(--secondary);
+  color: var(--primary-text);
+}
+
+.message-time {
+  font-size: $font-size-xs;
+}

@@ -1,83 +1,94 @@
 @import '../styles/variables';
 
-.contacts {
-  height: calc(100vh - 85px);
-  overflow-y: auto;
-  overflow-x: hidden;
+.home {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  background-color: var(--header);
 }
 
+//row 1
+.contacts {
+  width: 20%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid var(--tertiary);
+}
+
+//row 2
 .chat {
   display: flex;
   flex-direction: column;
-  width: calc(100vw - 300px);
-  height: calc(100vh - 85px);
-}
+  width: 80%;
 
-.chat-info {
-  text-align: center;
-  font-size: $font-size-s;
-  background-color: var(--primary-bg);
-}
+  .chat-info {
+    padding: 0.2rem;
+    border-bottom: 1px solid var(--tertiary);
 
-.online-status {
-  font-size: $font-size-xs;
-}
+    .name {
+      text-transform: uppercase;
+    }
 
-.chat-history {
-  display: flex;
-  flex-direction: column;
-  font-size: $font-size-s;
-  background-image: url('../assets/bg1.png');
-  overflow-y: auto;
-}
+    .online-status {
+      font-size: $font-size-xs;
+      color: var(--secondary)
+    }
+  }
 
-.chat-input {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  margin-top: auto;
-  align-items: center;
-  font-size: $font-size-s;
-}
+  .chat-history {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: $font-size-s;
+    background-image: url('../assets/bg1.png');
+  }
 
-.chat-input .btn {
-  border: none;
-  background-color: transparent; // убрать фон кнопки
-  &:hover {
-    background-color: transparent; // убрать эффект hover кнопки
+  .chat-input {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    padding: 0.2rem 0.5rem 0.5rem;
+    font-size: $font-size-s;
+    background-color: var(--primary-bg);
+
+    button {
+      border: none;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+
+    img {
+      height: 1.5rem;
+      filter: opacity(0.7);
+
+      &:hover {
+        filter: opacity(1);
+        cursor: pointer;
+      }
+    }
+
+    input {
+      display: none;
+    }
+
+    textarea {
+      display: block;
+      margin: 0.5rem 0.5rem 0 0.5rem;
+      width: 100%;
+      max-height: 20vh;
+      border: none;
+      font-size: $font-size-s;
+      color: var(--primary-text);
+      background-color: var(--primary-bg);
+      resize: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }
 
-.chat-input img {
-  height: 1.5em;
-  filter: brightness(0.5);
-
-  &:hover {
-    filter: brightness(1);
-    cursor: pointer;
-  }
-}
-
-.chat-input input {
-  display: none;
-}
-
-.chat-input textarea {
-  display: block;
-  margin-left: 10px;
-  margin-right: 10px;
-
-  max-height: 300px;
-  width: 100%;
-
-  resize: none;
-
-  font-size: $font-size-xs;
-  background-color: var(--primary-bg);
-  color: var(--primary-text);
-  border: none;
-
-  &:focus {
-    outline: none;
-  }
-}

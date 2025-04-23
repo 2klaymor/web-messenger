@@ -1,0 +1,42 @@
+@import '../../styles/variables';
+
+.signup-container {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    justify-content: flex-start;
+    font-size: $font-size-s;
+
+    .logo {
+        width: 45%;
+        padding: 5% 10%;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-right: 10%;
+
+        label, input {
+            margin-bottom: 0.5rem;
+        }
+
+        button {
+            margin: 0.5rem 0;
+        }
+
+        a {
+            text-wrap: nowrap;
+        }
+
+        .password-container {
+            position: relative;
+
+            input {
+                padding-right: 2rem;
+            }
+        }
+        
+    }
+}

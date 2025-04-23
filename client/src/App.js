@@ -2,12 +2,12 @@ import {Routes, Route} from "react-router-dom";
 
 import './styles/styles.sass'
 
-import Page from './utils/page';
+import Page from './layout/page';
 import HeaderGuest from "./layout/HeaderGuest";
 import HeaderUser from "./layout/HeaderUser";
 import Start from './pages/Start';
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
+import SignIn from './features/auth/SignIn';
+import SignUp from './features/auth/SignUp';
 import Home from './pages/Home';
 
 function App() {

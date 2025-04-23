@@ -1,0 +1,19 @@
+// a reusable page layout component
+// wraps the main content with a header and footer
+import Footer from "../layout/Footer";
+
+const Page = ({ components: [header, content] }) => {
+    return (
+        <div className="d-flex flex-column" style={{height: "100vh", maxHeight: "100vh", maxWidth: "100vw"}}>
+            {header}
+            <div className="d-flex flex-grow-1 overflow-y-auto">
+                {content}
+            </div>
+            <div className="mt-auto">
+                <Footer/>
+            </div>
+        </div>
+    )
+}
+
+export default Page;

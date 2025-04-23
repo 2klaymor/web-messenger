@@ -8,11 +8,12 @@ const Footer = () => {
         <div className="footer">
 
             <span>2025</span>
-            <div className="change-lang">
-                <button className="btn" type="button" onClick={() => changeLanguage('en')}>EN</button>
-                <button className="btn" type="button" onClick={() => changeLanguage('ru')}>RU</button>
+            <div className="ms-2">
+                <button type="button" onClick={() => changeLanguage('en')}>EN</button>
+                <button type="button" onClick={() => changeLanguage('ru')}>RU</button>
             </div>
-            <span className="ms-auto">tg: @bratworth </span>
+            <span className="ms-auto">tg:&nbsp;</span>
+            <span className="">@bratworth </span>
             <span className="ms-2">@kklaymor</span>
 
         </div>

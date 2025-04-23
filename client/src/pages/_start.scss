@@ -1,9 +1,11 @@
-.body-start {
+.start-container {
   display: flex;
   justify-content: center;
-}
+  align-items: center;
+  flex-grow: 1;
 
-.logo-start {
-  height: 90vh;
-  width: auto;
+  img {
+    max-height: 100%;
+    max-width: 100%;
+  }
 }

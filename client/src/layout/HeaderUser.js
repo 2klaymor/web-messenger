@@ -1,9 +1,9 @@
-import {Link} from 'react-router-dom';
 import {useContext, useEffect} from 'react';
+import {Link} from 'react-router-dom';
 
 import {LanguageContext, translations} from '../utils/language';
 import {ThemeContext, images} from '../utils/theme';
-import useDropdownState from "../utils/dropdowns";
+import useDropdownState from "../components/dropdowns";
 
 const HeaderUser = () => {
     const { language } = useContext(LanguageContext);
@@ -35,17 +35,17 @@ const HeaderUser = () => {
     }, []);
 
     return (
-        <nav className="user-navbar navbar fixed-top">
+        <nav className="header header-user">
 
-            <Link to="/" className="navbar-brand ms-5">
-                <img className="icon-header pe-3" src={images[theme].favicon} alt="icon"/>
+            <Link to="/" className="header-link">
+                <img className="pe-3" src={images[theme].favicon} alt="icon"/>
                 deadin.site
             </Link>
 
             {/* search dropdown */}
-            <form className="app-dropdown-container search-container">
+            <form className="search-container app-dropdown-container">
 
-                <input className="form-control" type="search" placeholder={t.labels.search}
+                <input type="search" placeholder={t.labels.search}
                        onClick={() => openDropdown('search')}/>
 
                 <ul className={`app-dropdown-menu 
@@ -56,26 +56,35 @@ const HeaderUser = () => {
 
             </form>
 
-            <button type="button" className="theme btn ms-auto" onClick={handleThemeChange}>
+            <button type="button" className="theme ms-auto" onClick={handleThemeChange}>
                 <img src={images[theme].theme_logo} alt="change theme"/>
             </button>
 
             {/* profile dropdown */}
             <div className="profile-container app-dropdown-container">
 
-                <button className="profile-button btn ms-2 me-5" type="button"
-                        onClick={() =>
-                            dropdownStates.profile ? closeDropdown('profile') : openDropdown('profile')
-                        }
-                >
-                </button>
+                <div className="profile-button" onClick={() =>
+                    dropdownStates.profile ? closeDropdown('profile') : openDropdown('profile')
+                }>
+                    <button type="button"></button>
+                    <img src={images[theme].arrow} alt="down arrow"></img>
+                </div>
 
                 <ul className={`app-dropdown-menu
                 ${dropdownStates.profile ? 'app-show' : ''}`}
                 >
-                    <li><Link to="#" className="">{t.labels.my_profile}</Link></li>
-                    <li><Link to="#" className="">{t.labels.settings}</Link></li>
-                    <li><Link to="/" className="">{t.labels.logout}</Link></li>
+                    <li>
+                        <button type="button">
+                            <img src="/pfp.png" alt="pfp"></img>
+                        </button>
+                        <p>канеки кек</p>
+
+                    </li>
+
+                    <hr></hr>
+                    {/*<li><Link to="#">{t.labels.my_profile}</Link></li>*/}
+                    <li><Link to="#">{t.labels.settings}</Link></li>
+                    <li><Link to="/">{t.labels.logout}</Link></li>
                 </ul>
 
             </div>

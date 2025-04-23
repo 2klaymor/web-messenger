@@ -8,12 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap"
           rel="stylesheet">
     <title>deadin.site</title>
-    <script>
-        (function () {
-            const theme = localStorage.getItem('theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', theme);
-        })();
-    </script>
 </head>
 <body>
 <div id="root"></div>

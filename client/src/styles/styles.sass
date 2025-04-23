@@ -1,24 +1,28 @@
 // contains all of the stylesheets
+
+// external libraries
 @import 'bootstrap/dist/css/bootstrap.css'
 
+// core styles
 @import './variables'
-@import './widgets'
-@import './mixins'
 @import './elements'
+@import './widgets'
 
-//layout
-@import '../layout/headerguest'
-@import '../layout/headeruser'
-@import '../pages/start'
-@import '../pages/signin'
-@import '../pages/signup'
-@import '../pages/home'
+
+// layout
+@import '../layout/header'
 @import '../layout/footer'
 
+// pages
+@import '../pages/start'
+@import '../features/auth/signin'
+@import '../features/auth/signup'
+@import '../features/auth/emailverificationform'
+@import '../pages/home'
 
-//features
-@import '../features/contact'
-@import '../features/message'
+// features
+@import '../features/chat/contact'
+@import '../features/chat/message'
 
 
 

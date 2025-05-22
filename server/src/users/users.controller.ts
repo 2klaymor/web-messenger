@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
 
 import { UsersService } from './users.service';
-import { CreateUserDto, CheckUserPasswordDto, UpdateUserDisplayNameDto } from './users.dto';
+import { CheckUserPasswordDto, UpdateUserDisplayNameDto } from './users.dto';
+import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
 
 
 @Controller('users')
@@ -26,9 +28,10 @@ export class UsersController {
   
 
   // Обновление ПАРОЛЯ пользователя
-  @Patch(':name/password')
+  @UseGuards(JwtAccessGuard)
+  @Patch('password')
   async updatePassword(
-    @Param('name') name: string, 
+    @CurrentUser('name') name: string, 
     @Body() checkUserPasswordDto: CheckUserPasswordDto
   ) {
     const passwordUpdated = await this.usersService.updatePassword(
@@ -41,9 +44,10 @@ export class UsersController {
 
 
   // Обновление ОТОБРАЖАЕМОГО ИМЕНИ
-  @Patch(':name/display-name')
+  @UseGuards(JwtAccessGuard)
+  @Patch('display-name')
   async updateDisplayName(
-    @Param('name') name: string, 
+    @CurrentUser('name') name: string, 
     @Body() updateUserdisplayNameDto: UpdateUserDisplayNameDto
   ) {
     const displayNameUpdated = await this.usersService.updateDisplayName(

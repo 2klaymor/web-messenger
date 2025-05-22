@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, UseGuards} from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Controller, Post, Body, Res, UseGuards} from '@nestjs/common';
 import { Response } from 'express';
 
 import { AuthService } from './auth.service';
 import { RegisterUserDto } from './auth.dto';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
+import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
+import { LocalGuard } from './guards/local.guard';
 
 
 @Controller('auth')
@@ -29,7 +30,7 @@ export class AuthController {
   // Логин, генерирует токены если пользователь прошел аутентификацию,
   // иначе локальная стратегия сама кинет ошибку Unauthorized,
   // за аутентификацию отвечает стратегия а не AuthService.
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalGuard)
   @Post('login')                                          // Тут с помощью специального декоратора можем вытащить user-а и его поля.
   async login(@Res({ passthrough: true }) res: Response,  @CurrentUser('name') name: string) {
     return await this.authService.generateTokens(res, name);
@@ -37,7 +38,7 @@ export class AuthController {
 
 
   // Обновление access токена по refresh токену
-  @UseGuards(AuthGuard('jwt-refresh'))
+  @UseGuards(JwtRefreshGuard)
   @Post('refresh')
   async refresh(@Res({ passthrough: true }) res: Response,  @CurrentUser('name') name: string) {
     return await this.authService.generateTokens(res, name);

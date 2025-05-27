@@ -1,0 +1,32 @@
+@import '../../../shared/styles/variables';
+
+.signup {
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-evenly;
+    font-size: $font-size-s;
+
+    &__logo {
+        width: 45%;
+        padding: 5% 10%;
+    }
+
+    &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 10%;
+
+    h1, label, input {
+        margin-bottom: 0.5rem;
+    }
+
+    button {
+        margin: 0.5rem 0;
+    }
+
+    a {
+        text-wrap: nowrap;
+    }
+}
+}

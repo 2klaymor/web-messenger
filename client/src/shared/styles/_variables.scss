@@ -1,0 +1,56 @@
+//fonts
+$font-size-l: 1.9rem;
+$font-size-m: 1.5rem;
+$font-size-base: 1rem;
+$font-size-s: 0.9rem;
+$font-size-xs: 0.6rem;
+$font-size-error: 0.7rem;
+
+$black: #000;
+$white: #fff;
+
+[data-theme="light"] {
+  --primary-bg: #fff;
+  --primary-text: #000;
+  --secondary: #9ca1a1;
+  --tertiary: #d6d6d6;
+  --header: #f3f6f4;
+  --modal-bg: rgba(235, 235, 235, 0.8);
+  --danger: #BF0600;
+  --link: #305CDE;
+
+  --bg: $white;
+  --bg-1: #9ca1a1;
+  --bg-2: #d6d6d6;
+  --bg-3: #d6d6d6;
+  --overlay: rgba(235, 235, 235, 0.8);
+
+  --text: $black;
+  --text-link: #305CDE;
+  --text-danger: #BF0600;
+}
+
+[data-theme="dark"] {
+  --primary-bg: #000;
+  --primary-text: #fff;
+  --secondary: #635E5E;
+  --tertiary: #292929;
+  --header: #090909;
+  --modal-bg: rgba(20, 20, 20, 0.8);
+  --danger: #BF0600;
+  --link: #305CDE;
+
+  --bg: $black;
+  --bg-1: #635E5E;
+  --bg-2: #292929;
+  --bg-3: #090909;
+  --overlay: rgba(20, 20, 20, 0.8);
+
+  --text: $white;
+  --text-link: #305CDE;
+  --text-danger: #BF0600;
+}
+
+
+
+

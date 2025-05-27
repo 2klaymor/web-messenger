@@ -1,0 +1,11 @@
+// reusables
+
+@mixin transform-scale {
+  transition: transform 0.5s;
+  // решает проблему с прыгающим текстом, занимает много ресурсов
+  will-change: transform;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}

@@ -1,26 +1,19 @@
 export const mockContacts = [
-    {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-    {name: 'kaneki ken.', lastMessage: 'meow'},
-    {name: 'roma', lastMessage: ')'},
-    {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-    {name: 'kaneki ken.', lastMessage: 'miu'},
-    {name: 'roma', lastMessage: ')'},
-    {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-    {name: 'kaneki ken.', lastMessage: 'wiwiwi'},
-    {name: 'roma', lastMessage: ')'},
-    {name: 'SHADOW FRIEND', lastMessage: 'Hello'},
-    {name: 'kaneki ken.', lastMessage: 'мямямя'},
-    {name: 'roma', lastMessage: ')'}
+    {name: 'SHADOW FRIEND', lastMessage: 'Hello', time: '12:50', seen: true},
+    {name: 'kaneki ken.', lastMessage: 'meow', time: '12:50', seen: false},
+    {name: 'roma', lastMessage: ')', time: '12:50', seen: true},
+    {name: 'SHADOW FRIEND', lastMessage: 'Hello', time: '12:50', seen: false},
+    {name: 'kaneki ken.', lastMessage: 'miu', time: '12:50', seen: false},
+    {name: 'roma', lastMessage: ')', time: '12:50', seen: true},
+    {name: 'SHADOW FRIEND', lastMessage: 'Hello', time: '12:50', seen: true},
+    {name: 'kaneki ken.', lastMessage: 'wiwiwi', time: '12:50', seen: false},
+    {name: 'roma', lastMessage: ')', time: '12:50', seen: true},
+    {name: 'SHADOW FRIEND', lastMessage: 'Hello', time: '12:50', seen: false},
+    {name: 'kaneki ken.', lastMessage: 'мямямя', time: '12:50', seen: false},
+    {name: 'roma', lastMessage: ')', time: '12:50', seen: true}
 ];
 
 export const mockMessages = [
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'},
     {
         sender: "them",
         contents: 'Хорошо, я тоже люблю играть за ассасинов. Но Anti-Mage - это что-то особенное. Он такой сильный.',

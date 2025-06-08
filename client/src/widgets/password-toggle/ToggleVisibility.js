@@ -1,10 +1,9 @@
 import {images} from "../../app/providers/themeContext";
-import {useContext} from "react";
 
 const ToggleVisibility = ({state, setState}) => {
 
     const togglePasswordVisibility = () => {
-        setState(prevState => !prevState); // Переключаем состояние отображения пароля
+        setState(prevState => !prevState);
     };
 
     return <img className="toggle-visibility-eye" src={state ? images.static.show: images.static.hide}

@@ -1,0 +1,14 @@
+.bullet-point {
+  display: flex;
+
+  &__img {
+    width: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  p {
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    &:hover { opacity: 1; }
+  }
+}

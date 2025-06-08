@@ -1,0 +1,21 @@
+// показать/скрыть пароль
+.toggle-visibility-eye {
+  position: absolute;
+  right: 0.6rem;
+  top: 43%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  cursor: pointer;
+  filter: opacity(0.7);
+  &:hover { filter: opacity(1); }
+}
+
+.toggle-visibility-input {
+  position: relative;
+
+  input {
+    margin-bottom: 0.5rem;
+    padding-right: 2rem;
+  }
+}

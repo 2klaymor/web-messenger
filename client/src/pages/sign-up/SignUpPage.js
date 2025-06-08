@@ -1,14 +1,14 @@
 import {useContext} from "react";
 import {Link} from 'react-router-dom';
 
-import {LanguageContext, translations} from "../../../app/providers/languageContext";
-import {ThemeContext, images} from "../../../app/providers/themeContext";
+import {LanguageContext, translations} from "../../app/providers/languageContext";
+import {ThemeContext, images} from "../../app/providers/themeContext";
 
-import ErrorMessage from "../../../shared/ui/ErrorMessage";
-import ToggleVisibility from "../../../widgets/password-toggle/ToggleVisibility";
-import EmailVerificationModal from "../../../features/sign-up/ui/EmailVerificationModal";
+import ErrorMessage from "../../shared/ui/ErrorMessage";
+import ToggleVisibility from "../../widgets/password-toggle/ToggleVisibility";
+import EmailVerificationModal from "../../features/sign-up/ui/EmailVerificationModal";
 
-import {useSignUp} from "../../../features/sign-up/model/useSignUp";
+import {useSignUp} from "../../features/sign-up/model/useSignUp";
 
 const SignUpPage = () => {
     const {language} = useContext(LanguageContext);

@@ -1,0 +1,7 @@
+@use '../styles/variables' as  *;
+
+// сообщение об ошибке
+.error-message {
+  font-size: $font-size-error;
+  color: var(--danger);
+}

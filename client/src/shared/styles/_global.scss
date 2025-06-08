@@ -11,18 +11,18 @@ body {
   font-family: "Source Code Pro", Courier New, Courier, monospace;
   font-size: $font-size-base;
   line-height: 1.5;
-  color: var(--primary-text);
-  background-color: var(--primary-bg);
+  color: var(--text);
+  background-color: var(--bg);
 }
 
 h1 {
-  font-size: $font-size-l;
+  font-size: $font-size-xl;
   font-weight: 500;
   line-height: 1.2;
 }
 
 a {
-  color: var(--link);
+  color: var(--text-link);
   text-decoration: none;
 }
 
@@ -36,30 +36,27 @@ input, textarea, select, button, p, ul, li {
   line-height: inherit;
 }
 
-button {
+button, input {
   padding: 0.375rem 0.75rem;
-  border: 1px solid var(--tertiary);
   border-radius: 0.375rem;
-  color: var(--primary-text);
-  background-color: var(--header);
+  border: 1px solid var(--bg-3);
+}
+
+button {
+  color: var(--text);
+  background-color: var(--bg-3);
   cursor: pointer;
 
-  &:hover { color: var(--primary-text); }
+  &:hover { background-color: var(--bg-2); }
   &:focus { outline: none; }
 }
 
 input {
   width: 100%;
-  padding: 0.375rem 0.75rem;
-  border: 1px solid var(--tertiary);
-  border-radius: 0.375rem;
-  color: #000;
+  color: $black;
   transition: box-shadow 0.2s ease;
 
-  &::placeholder {
-    color: var(--secondary);
-  }
-
+  &::placeholder { color: var(--bg-1); }
   &:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
@@ -79,32 +76,14 @@ input[type="search"]::-webkit-search-results-decoration {
   width: 5px;
   height: 5px;
   border-radius: 5px;
-  background-color: var(--primary-bg);
+  background-color: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--secondary);
+  background-color: var(--bg-1);
   border-radius: 5px;
 
   &:hover {
     background-color: #888;
   }
 }
-
-//button {
-//  padding: 0.375rem 0.75rem;
-//  border: 1px solid var(--tertiary);
-//  border-radius: 0.375rem;
-//  color: var(--primary-text);
-//  background-color: var(--header);
-//  cursor: pointer;
-//
-//  &:hover {
-//    color: var(--primary-text);
-//    background-color: var(--tertiary) !important;
-//  }
-//
-//  &:focus {
-//    outline: none;
-//  }
-//}

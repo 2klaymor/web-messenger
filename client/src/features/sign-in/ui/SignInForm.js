@@ -1,38 +1,16 @@
-import {useState, useContext} from "react";
-import {Link, useNavigate} from 'react-router-dom';
-
-import {LanguageContext, translations} from '../../../app/providers/languageContext';
-import {ThemeContext, images} from '../../../app/providers/themeContext';
-
+import {Link} from 'react-router-dom';
 import ErrorMessage from '../../../shared/ui/ErrorMessage';
 import ToggleVisibility from "../../../widgets/password-toggle/ToggleVisibility";
+import useSignIn from "../model/useSignIn";
 
-import {handleSignIn} from "../../../features/sign-up/model/authHandler";
-
-const SignInPage = () => {
-    const {language} = useContext(LanguageContext);
-    const t = translations[language];
-    const {theme} = useContext(ThemeContext);
-
-    const [userData, setUserData] = useState({
-        login: '',
-        password: '',
-    });
-    const [errorKey, setErrorKey] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const navigate = useNavigate();
-
-    const handleSubmit = () => {
-        const { success} = handleSignIn(userData.login, userData.password);
-
-        if (success) {
-            navigate('/home');
-            setErrorKey('');
-        }
-        else {
-            setErrorKey('invalid_data');
-        }
-    };
+const SignInForm = () => {
+    const {
+        images, t, theme,
+        userData, setUserData,
+        errorKey,
+        showPassword, setShowPassword,
+        handleSubmit,
+    } = useSignIn();
 
     return (
         <div className="signin">
@@ -54,7 +32,7 @@ const SignInPage = () => {
                                ({...prev, login: e.target.value}))}
                 />
 
-                <div className="pt-3">
+                <div className="mt-3">
                     <label htmlFor="inputPassword">{t.password}</label>
                     <Link to="#" className="ms-auto">{t.forgot_password}</Link>
                 </div>
@@ -83,4 +61,4 @@ const SignInPage = () => {
     )
 }
 
-export default SignInPage;
+export default SignInForm;

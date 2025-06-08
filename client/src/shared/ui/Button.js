@@ -1,13 +1,14 @@
-export function Button({
-                           children,
-                           variant = 'primary',
-                           disabled = false,
-                           ...restProps
-                       }) {
+export default function Button({
+                                   children,
+                                   disabled = false,
+                                   userClassName = '',
+                                   ...restProps})
+{
     const className = [
         'button',
-        `button_${variant}`,
-        disabled && 'button_disabled',,
+        // `button-${variant}`,
+        disabled && 'button_disabled',
+        userClassName,
     ]
         .filter(Boolean)
         .join(' ');

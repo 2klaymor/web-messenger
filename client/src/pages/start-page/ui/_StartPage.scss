@@ -3,9 +3,17 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  overflow: hidden;
 
-  img {
-    max-height: 100%;
-    max-width: 100%;
+  .logo-wrapper {
+    position: relative;
+    transition: transform 0.2s ease-out;
+
+    &__img {
+      max-height: 100%;
+      max-width: 100%;
+    }
   }
 }
+
+

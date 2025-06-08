@@ -1,11 +1,14 @@
-//fonts
-$font-size-l: 1.9rem;
-$font-size-m: 1.5rem;
+// FONTS
+$font-size-xl: 1.7rem;
+$font-size-l: 1.5rem;
+$font-size-m: 1.2rem;
 $font-size-base: 1rem;
 $font-size-s: 0.9rem;
 $font-size-xs: 0.6rem;
 $font-size-error: 0.7rem;
 
+
+// COLORS
 $black: #000;
 $white: #fff;
 
@@ -19,13 +22,13 @@ $white: #fff;
   --danger: #BF0600;
   --link: #305CDE;
 
-  --bg: $white;
+  --bg: #{$white};
   --bg-1: #9ca1a1;
   --bg-2: #d6d6d6;
-  --bg-3: #d6d6d6;
+  --bg-3: #f3f6f4;
   --overlay: rgba(235, 235, 235, 0.8);
 
-  --text: $black;
+  --text: #{$black};
   --text-link: #305CDE;
   --text-danger: #BF0600;
 }
@@ -40,17 +43,13 @@ $white: #fff;
   --danger: #BF0600;
   --link: #305CDE;
 
-  --bg: $black;
+  --bg: #{$black};
   --bg-1: #635E5E;
   --bg-2: #292929;
   --bg-3: #090909;
   --overlay: rgba(20, 20, 20, 0.8);
 
-  --text: $white;
+  --text: #{$white};
   --text-link: #305CDE;
   --text-danger: #BF0600;
 }
-
-
-
-

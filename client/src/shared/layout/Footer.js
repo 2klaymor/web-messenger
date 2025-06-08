@@ -1,5 +1,6 @@
 import {useContext} from 'react';
 import {LanguageContext} from '../../app/providers/languageContext';
+import SwitchLanguage from "../../widgets/switch-language/SwitchLanguage";
 
 const Footer = () => {
     const {changeLanguage} = useContext(LanguageContext);
@@ -8,10 +9,12 @@ const Footer = () => {
         <div className="footer">
 
             <p>2025</p>
-            <div className="ml-2">
-                <button type="button" onClick={() => changeLanguage('en')}>EN</button>
-                <button type="button" onClick={() => changeLanguage('ru')}>RU</button>
-            </div>
+            {/*<div className="ml-2">*/}
+            {/*    <button type="button" onClick={() => changeLanguage('en')}>EN</button>*/}
+            {/*    <button type="button" onClick={() => changeLanguage('ru')}>RU</button>*/}
+            {/*</div>*/}
+            <SwitchLanguage/>
+
             <p className="ml-auto">tg:</p>
             <p className="ml-1">@bratworth </p>
             <p className="ml-1">@kklaymor</p>

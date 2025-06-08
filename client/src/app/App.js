@@ -5,9 +5,10 @@ import '../shared/styles/styles.sass'
 import PageLayout from '../shared/layout/PageLayout';
 import HeaderGuest from "../shared/layout/HeaderGuest";
 import HeaderUser from "../shared/layout/HeaderUser";
+import Footer from "../shared/layout/Footer";
 import StartPage from '../pages/start-page/ui/StartPage';
-import SignInPage from '../pages/sign-up/ui/SignInPage';
-import SignUpPage from '../pages/sign-in/ui/SignUpPage';
+import SignInPage from '../pages/sign-in/ui/SignInPage';
+import SignUpPage from '../pages/sign-up/SignUpPage';
 import HomePage from '../pages/home/ui/HomePage';
 
 function App() {
@@ -16,19 +17,19 @@ function App() {
 
             <Route path="/"
                 element={
-                <PageLayout components={[<HeaderGuest/>, <StartPage/>]} />
+                <PageLayout components={[<HeaderGuest/>, <StartPage/>, <Footer/>]} />
                 }
             />
 
             <Route path="/signin"
                element={
-                <PageLayout components={[<HeaderGuest/>, <SignInPage/>]}/>
+                <PageLayout components={[<HeaderGuest/>, <SignInPage/>, <Footer/>]}/>
                }
             />
 
             <Route path="/signup"
                element={
-                <PageLayout components={[<HeaderGuest/>, <SignUpPage/>]}/>
+                <PageLayout components={[<HeaderGuest/>, <SignUpPage/>, <Footer/>]}/>
                }
             />
 

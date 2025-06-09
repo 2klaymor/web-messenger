@@ -12,6 +12,10 @@
     &__img {
       max-height: 100%;
       max-width: 100%;
+
+      @media (max-width: 1024px) {
+        padding: 0 2rem;
+      }
     }
   }
 }

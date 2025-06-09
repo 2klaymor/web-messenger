@@ -11,6 +11,8 @@ import SignInPage from '../pages/sign-in/ui/SignInPage';
 import SignUpPage from '../pages/sign-up/SignUpPage';
 import HomePage from '../pages/home/ui/HomePage';
 
+import Test from "../api-test/Test";
+
 function App() {
     return (
         <Routes>
@@ -37,6 +39,12 @@ function App() {
                element={
                 <PageLayout components={[<HeaderUser/>, <HomePage/>]}/>
                }
+            />
+
+            <Route path="/test"
+                   element={
+                       <Test/>
+                   }
             />
 
         </Routes>

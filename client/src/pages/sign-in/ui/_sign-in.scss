@@ -1,6 +1,5 @@
 @import '../../../shared/styles/variables';
 
-
 .signin {
   display: flex;
   flex-direction: column;
@@ -10,33 +9,20 @@
   align-items: center;
   font-size: $font-size-s;
 
-  h1 {
-    margin-bottom: 0.5rem;
-    text-align: center;
-  }
-
   &__logo {
     max-width: 100vw;
     max-height: 40%;
     margin-bottom: 2rem;
   }
 
-  &__form {
-    margin: 0 1rem 0.5rem;
-    padding: 1rem;
-    border: 1px solid var(--tertiary);
-    border-radius: 10px;
+  h1 {
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
 
-    label {
-      margin-bottom: 0.5rem;
-    }
-
-    a {
-      float: right;
-    }
-
-    button {
-      margin-top: 0.5rem;
-    }
+  &__forgot-password-link {
+    float: right;
   }
 }
+
+

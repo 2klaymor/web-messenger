@@ -30,7 +30,7 @@ const SignUpPage = () => {
             <img className="signup__logo" src={images[theme].logo_blur} alt="logo"/>
 
             {/* row element 2 */}
-            <div className="signup__form">
+            <div className="form">
 
                 <h1>{t.signup_welcome}</h1>
                 {/* username */}
@@ -61,8 +61,9 @@ const SignUpPage = () => {
                                  setUserData(prev => ({...prev, password: e.target.value}))}
                     />
 
-                    <ToggleVisibility state={showPassword}
-                                      setState={setShowPassword}/>
+
+                    {/*<ToggleVisibility state={showPassword}*/}
+                    {/*                  setState={setShowPassword}/>*/}
                 </div>
                 <ErrorMessage errorKey={errorKeys.password}/>
 

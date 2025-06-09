@@ -1,0 +1,21 @@
+@use '../styles/variables' as  *;
+
+.form {
+  margin: 0 1rem 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--bg-2);
+  border-radius: 10px;
+
+  label {
+    margin-bottom: 0.4rem;
+  }
+
+  .button {
+    margin-top: 0.5rem;
+  }
+
+  &__auth-link {
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+}

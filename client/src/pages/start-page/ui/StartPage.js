@@ -1,40 +1,51 @@
-import  {useContext, useRef, useState} from "react";
+import {useContext, useRef, useEffect} from "react";
 import {ThemeContext, images} from "../../../app/providers/themeContext";
 
 export default function StartPage() {
     const {theme} = useContext(ThemeContext);
     const wrapperRef = useRef(null);
-
-    const [tilt, setTilt] = useState({rotateX: 0, rotateY: 0});
     const maxAngle = 12; // максимально возможный угол наклона
+    const frame = useRef(null);
 
-    function updateTiltByCoords(x, y, width, height) {
-        const normX = (x / width - 0.5) * 2;
-        const normY = (y / height - 0.5) * 2;
+    useEffect(() => {
+        const el = wrapperRef.current;
+        if (!el) return;
 
-        const rotateY = normX * maxAngle;
-        const rotateX = -normY * maxAngle;
+        const handleMouseMove = (e) => {
+            cancelAnimationFrame(frame.current);
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            frame.current = requestAnimationFrame(() => {
+                const normX = (x / rect.width - 0.5) * 2;
+                const normY = (y / rect.height - 0.5) * 2;
+                const rotateY = normX * maxAngle;
+                const rotateX = -normY * maxAngle;
+                el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            });
+        };
 
-        setTilt({rotateX, rotateY});
-    }
+        const handleMouseLeave = () => {
+            cancelAnimationFrame(frame.current);
+            el.style.transform = "";
+        };
 
-    function handleMouseMove(e) {
-        if (!wrapperRef.current) return;
-        const rect = wrapperRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        updateTiltByCoords(x, y, rect.width, rect.height);
-    }
+        el.addEventListener("mousemove", handleMouseMove, {passive: true});
+        el.addEventListener("mouseleave", handleMouseLeave);
+
+        return () => {
+            cancelAnimationFrame(frame.current);
+            el.removeEventListener("mousemove", handleMouseMove);
+            el.removeEventListener("mouseleave", handleMouseLeave);
+            el.style.transform = "";
+        };
+    }, [maxAngle]);
 
     return (
         <div className="start-page">
             <div
-                className="logo-wrapper"
                 ref={wrapperRef}
-                onMouseMove={handleMouseMove}
-                style={{
-                    transform: `perspective(800px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`
-                }}
+                className="logo-wrapper"
             >
                 <img
                     className="logo-wrapper__img"

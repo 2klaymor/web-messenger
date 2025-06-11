@@ -6,12 +6,18 @@
   background-color: var(--bg-3);
   cursor: pointer;
 
-  &:focus {
-    outline: none;
-  }
+  &:focus { outline: none; }
+  &:hover { background-color: var(--bg-2); }
 
   &_disabled {
     cursor: not-allowed;
     background-color: var(--bg-2);
+  }
+
+  &_no-style {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    &:hover { background-color: transparent; }
   }
 }

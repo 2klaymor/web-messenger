@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {LanguageContext, translations} from '../../app/providers/languageContext';
+import {LanguageContext, translations} from '../../app/utils/languageContext';
 
 const ErrorMessage = ({errorKey}) => {
     const { language } = useContext(LanguageContext);

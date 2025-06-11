@@ -3,19 +3,28 @@
 .form {
   margin: 0 1rem 0.5rem;
   padding: 1rem;
+  background-color: var(--bg-3);
   border: 1px solid var(--bg-2);
   border-radius: 10px;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
 
   label {
     margin-bottom: 0.4rem;
   }
 
   .button {
+    background-color: var(--bg);
     margin-top: 0.5rem;
+
+    &:hover {
+      background-color: var(--bg-2);
+    }
   }
 
   &__auth-link {
     margin-bottom: 1rem;
-    text-align: center;
   }
 }

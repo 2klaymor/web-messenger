@@ -1,9 +1,9 @@
 import {mockMessages} from "../../../mocks/mockData";
 import { MessageSent, MessageReceived,} from "./Message";
-import {images, ThemeContext} from "../../../app/providers/themeContext";
+import {images, ThemeContext} from "../../../app/utils/themeContext";
 import TextareaAutosize from "react-textarea-autosize";
 import {useContext, useEffect, useRef} from "react";
-import {LanguageContext, translations} from "../../../app/providers/languageContext";
+import {LanguageContext, translations} from "../../../app/utils/languageContext";
 
 const ChatWindow = () => {
     const {theme} = useContext(ThemeContext);
@@ -46,7 +46,7 @@ const ChatWindow = () => {
                     <input type="file" id="file-input"/>
                 </label>
 
-                <TextareaAutosize placeholder={t.start_typing}/>
+                <TextareaAutosize placeholder={t.home.chat.textarea_placeholder}/>
                 <img src={images[theme].send}/>
             </div>
         </div>

@@ -1,8 +1,8 @@
 import {useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {LanguageContext, translations} from '../../app/providers/languageContext';
-import {ThemeContext, images} from '../../app/providers/themeContext';
-import Button from "../ui/Button";
+import {LanguageContext, translations} from '../../../app/utils/languageContext';
+import {ThemeContext, images} from '../../../app/utils/themeContext';
+import Button from "../../ui/Button";
 
 const HeaderGuest = () => {
     const { language } = useContext(LanguageContext);
@@ -25,8 +25,8 @@ const HeaderGuest = () => {
             <div className="header__navigation">
                 {/*временный быстрый переход на домашнюю страницу*/}
                 {/*<Button onClick={() => navigate('/home')}>дом</Button>*/}
-                <Button onClick={() => navigate('/signin')}>{t.labels.signin}</Button>
-                <Button onClick={() => navigate('/signup')}>{t.labels.signup}</Button>
+                <Button onClick={() => navigate('/signin')}>{t.buttons.sign_in}</Button>
+                <Button onClick={() => navigate('/signup')}>{t.buttons.sign_up}</Button>
             </div>
         </nav>
     )

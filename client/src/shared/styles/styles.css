@@ -1,10 +1,10 @@
-/* Error: expected "}".
- *    ,
- * 17 |   }
- *    |    ^
- *    '
- *   ..\ui\_form.scss 17:4  @use
- *   styles.sass 17:1       root stylesheet */
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import '../styles/variables';
+ *   |         ^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   ..\layout\ui\_footer.scss 1:9  @use
+ *   styles.sass 11:1               root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -14,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: 'Error: expected "}".\a    \2577 \a 17 \2502    }\a    \2502     ^\a    \2575 \a   ..\\ui\\_form.scss 17:4  @use\a   styles.sass 17:1       root stylesheet';
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import '../styles/variables';\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   ..\\layout\\ui\\_footer.scss 1:9  @use\a   styles.sass 11:1               root stylesheet";
 }

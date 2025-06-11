@@ -1,30 +1,34 @@
-import {useState} from "react";
+import {useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom';
-import {checkPassword} from '../api';
+import {postSignIn} from '../api-sign-in';
+import {useAuth} from "../../../app/utils/authContext";
 
 export default function useSignIn() {
-    const [userData, setUserData] = useState({ login: '',  password: '' });
+    const nameRef = useRef(null);
+    const passwordRef = useRef(null);
+
     const [errorKey, setErrorKey] = useState('');
     const navigate = useNavigate();
+    const {updateIsAuth} = useAuth();
 
     const handleSubmit = async () => {
-        setErrorKey('');
+        setErrorKey(null);
+
+        const name = nameRef.current?.value || '';
+        const password = passwordRef.current?.value || '';
+
         try {
-            const isValid = await checkPassword(userData.login, userData.password);
-            console.log('isValid:', isValid);
-            if (isValid) {
-                navigate('/home');
-            } else {
-                setErrorKey('invalid_data');
-                console.log('invalid data');
-            }
-        } catch (error) {
-            setErrorKey('invalid_data');
+            await postSignIn({name, password});
+            updateIsAuth(true);
+            navigate('/home');
+        } catch (err) {
+            console.error('SignIn error', err);
+            setErrorKey('invalid_credentials');
         }
     };
 
     return {
-        userData, setUserData,
+        nameRef, passwordRef,
         handleSubmit,
         errorKey,
     };

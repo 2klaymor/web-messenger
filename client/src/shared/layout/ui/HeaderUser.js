@@ -1,28 +1,17 @@
-import {useContext, useEffect, useState} from 'react';
+import {useContext} from 'react';
 import {Link} from 'react-router-dom';
-import {LanguageContext, translations} from '../../app/providers/languageContext';
-import {ThemeContext, images} from '../../app/providers/themeContext';
-import SwitchLanguage from "../../widgets/switch-language/SwitchLanguage";
-import LinkBulletPoint from "../ui/LinkBulletPoint";
+import {LanguageContext, translations} from '../../../app/utils/languageContext';
+import {ThemeContext, images} from '../../../app/utils/themeContext';
+import useHeaderUser from "../model/useHeaderUser";
+import SwitchLanguage from "../../../widgets/switch-language/SwitchLanguage";
+import BulletPoint from "../../ui/BulletPoint";
 
 const HeaderUser = () => {
     const { language } = useContext(LanguageContext);
     const t = translations[language];
-    const {theme, handleThemeChange} = useContext(ThemeContext);
+    const {theme, handleThemeChange} = useContext(ThemeContext)
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {
-        function handleClickOutside(e) {
-            // Если клик был не по контейнеру профиля, закрываем dropdown
-            if (!e.target.closest('.header-user__dropdown')) {
-                setIsOpen(false);
-            }
-        }
-
-        document.addEventListener('click', handleClickOutside);
-        return () => document.removeEventListener('click', handleClickOutside);
-    }, []);
+    const {isOpen, setIsOpen, handleLogout} = useHeaderUser();
 
     return (
         <nav className="header header-user">
@@ -69,16 +58,18 @@ const HeaderUser = () => {
 
                 <ul className={`header-user__dropdown-menu dropdown__menu ${isOpen ? 'dropdown__menu_show' : ''}`}>
                     <li>
-                        <img className="header-user__dropdown-menu-pfp" src="/pfp.png" alt="pfp"></img>
-                        <p className="header-user__username">канеки кеck</p>
-                        <p className="header-user__handle">@tokiogul</p>
+                        <Link to="/home">
+                            <img className="header-user__dropdown-menu-pfp" src="/pfp.png" alt="pfp"></img>
+                            <p className="header-user__username">канеки кеck</p>
+                            <p className="header-user__handle">@tokiogul</p>
+                        </Link>
                     </li>
 
                     <hr></hr>
 
                     <div className="header-user__dropdown-list-items">
-                        <LinkBulletPoint to="#" imageKey="settings">{t.labels.settings}</LinkBulletPoint>
-                        <LinkBulletPoint to="/" imageKey="logout">{t.labels.logout}</LinkBulletPoint>
+                        <BulletPoint to="#" wrap="link" imageKey="settings">{t.home.profile.settings}</BulletPoint>
+                        <BulletPoint to="/" onClick={handleLogout} imageKey="logout">{t.home.profile.log_out}</BulletPoint>
                     </div>
 
                     <SwitchLanguage/>

@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
+    "eruda": "^3.4.1",
     "sass-embedded": "^1.88.0"
   }
 }

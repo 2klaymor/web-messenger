@@ -1,5 +1,5 @@
-import {userExists} from '../api/authService';
-import {findUserByUsername, findUserByEmail} from "../api/authService";
+import {userExists} from '../api/api-sign-up';
+import {findUserByUsername, findUserByEmail} from "../api/api-sign-up";
 
 // регистрация
 export const handleSignUp = (username, email) => {

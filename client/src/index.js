@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {BrowserRouter} from "react-router-dom";
 
-import {ThemeProvider} from './app/providers/themeContext'
-import {LanguageProvider} from './app/providers/languageContext';
+import {ThemeProvider} from './app/utils/themeContext'
+import {LanguageProvider} from './app/utils/languageContext';
+import {AuthProvider} from './app/utils/authContext';
 import App from './app/App';
 
 const root = ReactDOM.createRoot(
@@ -11,14 +12,16 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-    <React.StrictMode>
+    // <React.StrictMode>
         <LanguageProvider>
             <ThemeProvider>
-                <BrowserRouter>
-                    <App/>
-                </BrowserRouter>
+                <AuthProvider>
+                    <BrowserRouter>
+                        <App/>
+                    </BrowserRouter>
+                </AuthProvider>
             </ThemeProvider>
         </LanguageProvider>
-    </React.StrictMode>
+    // </React.StrictMode>
 
 );

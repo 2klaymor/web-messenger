@@ -1,11 +1,12 @@
-import {Link} from 'react-router-dom';
 import {useContext} from "react";
-import {LanguageContext, translations} from "../../../app/providers/languageContext";
-import {images, ThemeContext} from "../../../app/providers/themeContext";
+import {Link} from 'react-router-dom';
+import {LanguageContext, translations} from "../../../app/utils/languageContext";
+import {images, ThemeContext} from "../../../app/utils/themeContext";
+import useSignIn from "../model/useSignIn";
 import Button from '../../../shared/ui/Button';
 import ErrorMessage from '../../../shared/ui/ErrorMessage';
-import useSignIn from "../model/useSignIn";
-import {ToggleVisibility} from "../../../widgets/password-toggle/ToggleVisibility";
+import {ToggleVisibilityIcon} from "../../../widgets/password-toggle/ToggleVisibilityIcon";
+import {useToggleVisibility} from "../../../widgets/password-toggle/useToggleVisibility";
 
 const SignInForm = () => {
     const {language} = useContext(LanguageContext);
@@ -13,57 +14,57 @@ const SignInForm = () => {
     const {theme} = useContext(ThemeContext);
 
     const {
-        userData, setUserData,
-        handleSubmit, errorKey,
+        nameRef, passwordRef, handleSubmit, errorKey
     } = useSignIn();
-    const {showPassword, inputRef, ToggleVisibilityIcon} = ToggleVisibility();
+    const { show, toggle} = useToggleVisibility(passwordRef);
 
     return (
         <div className="signin">
 
             {/* top */}
             <img className="signin__logo" src={images[theme].logo_blur} alt="logo"/>
-            <h1>{t.signin_welcome}</h1>
+            <h1>{t.sign_in.title}</h1>
 
             {/* form */}
             <div className="form">
 
-                <label htmlFor="inputLogin">{t.login}</label>
-                <input type="email"
-                       id="inputLogin"
-                       placeholder="example@example.com"
-                       value={userData.login}
-                       onChange={(e) =>
-                           setUserData(prev =>
-                               ({...prev, login: e.target.value}))}
+                <label htmlFor="inputName">{t.fields.login_label}</label>
+                <input
+                    id="inputName"
+                    name="name"
+                    type="email"
+                    autoComplete="username"
+                    placeholder="example@example.com"
+                    ref={nameRef}
                 />
 
                 <div className="mt-2">
-                    <label htmlFor="inputPassword">{t.password}</label>
-                    <Link to="#" className="signin__forgot-password-link">{t.forgot_password}</Link>
+                    <label htmlFor="inputPassword">{t.fields.password}</label>
+                    <Link to="#" className="signin__forgot-password-link">{t.sign_in.forgot_password}</Link>
                 </div>
                 <div className="toggle-visibility-wrapper">
-                    <input id="inputPassword"
-                           ref={inputRef}
-                           type={showPassword ? 'text' : 'password'}
-                           value={userData.password}
-                           onChange={(e) =>
-                               setUserData(prev =>
-                                   ({...prev, password: e.target.value}))}
+                    <input
+                        id="inputPassword"
+                        name="password"
+                        type={show ? 'text' : 'password'}
+                        autoComplete="current-password"
+                        ref={passwordRef}
                     />
-                    <ToggleVisibilityIcon/>
+                    <ToggleVisibilityIcon
+                        show={show}
+                        onClick={toggle}
+                    />
                 </div>
 
                 <ErrorMessage errorKey={errorKey}/>
-                <Button onClick={handleSubmit}>{t.labels.signin}</Button>
+                <Button onClick={handleSubmit}>{t.buttons.sign_in}</Button>
 
             </div>
 
             <div className="form__auth-link">
-                <p className="">{t.new_user}&nbsp;</p>
-                <Link to="/signup">{t.labels.signup}</Link>
+                <p className="">{t.sign_in.new_user_prompt}&nbsp;</p>
+                <Link to="/signup">{t.buttons.sign_up}</Link>
             </div>
-
 
         </div>
     )

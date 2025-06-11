@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {useContext, useState} from "react";
 
-import {LanguageContext, translations} from "../../../app/providers/languageContext";
-import {ThemeContext, images} from "../../../app/providers/themeContext";
+import {LanguageContext, translations} from "../../../app/utils/languageContext";
+import {ThemeContext, images} from "../../../app/utils/themeContext";
 
 const EmailVerificationModal = ({onClose, email}) => {
     const {language} = useContext(LanguageContext);
@@ -42,10 +42,10 @@ const EmailVerificationModal = ({onClose, email}) => {
         <div className="modal-container">
             <div className="modal-content">
                 <img className="modal-close" src={images[theme].close} onClick={onClose} alt="close"/>
-                <h1>{t.signup.confirm_email}</h1>
-                <p>{t.signup.we_sent}<strong>{email}</strong></p>
-                <p>{t.signup.please_enter}</p>
-                <p className="modal-hint">{t.signup.have_to_confirm}</p>
+                <h1>{t.signup.email_confirmation.title}</h1>
+                <p>{t.signup.email_confirmation.sent_notice}<strong>{email}</strong></p>
+                <p>{t.signup.email_confirmation.instruction}</p>
+                <p className="modal-hint">{t.signup.email_confirmation.explanation}</p>
 
                 <div className="modal-input">
                     {code.map((digit, i) => (
@@ -61,10 +61,10 @@ const EmailVerificationModal = ({onClose, email}) => {
                     ))}
                 </div>
 
-                <button className="modal-button" onClick={handleSubmit}>{t.labels.next} →</button>
+                <button className="modal-button" onClick={handleSubmit}>{t.buttons.next} →</button>
 
-                <p>{t.signup.did_not_receive}</p>
-                <Link to="#" onClick={() => console.log("sent")}>{t.signup.resend}</Link>
+                <p>{t.signup.email_confirmation.resend_prompt}</p>
+                <Link to="#" onClick={() => console.log("sent")}>{t.signup.email_confirmation.resend_button}</Link>
 
             </div>
 

@@ -210,9 +210,11 @@ data/
 *.old.prisma
 
 # Client
+/client/build/
 api-test/
 design/
 *.js~
 *.scss~
 **/*~
 *~
+client/*.bat

@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {LanguageContext, translations} from "../../app/providers/languageContext";
-import {images, ThemeContext} from "../../app/providers/themeContext";
+import {LanguageContext, translations} from "../../app/utils/languageContext";
+import {images, ThemeContext} from "../../app/utils/themeContext";
 
 export default function SwitchLanguage() {
     const {language, changeLanguage} = useContext(LanguageContext);

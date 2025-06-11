@@ -2,7 +2,7 @@
 
 .signup {
     display: flex;
-    flex-grow: 1;
+    width: 100%;
     justify-content: space-evenly;
     font-size: $font-size-s;
 
@@ -11,22 +11,19 @@
         padding: 5% 10%;
     }
 
-    &__form {
+    .form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding-right: 10%;
 
-        h1, label, input {
-            margin-bottom: 0.5rem;
+        &__auth-link {
+            margin-top: 0.5rem;
         }
+    }
 
-        button {
-            margin: 0.5rem 0;
-        }
-
-        a {
-            text-wrap: nowrap;
+    @media(max-width: 670px) {
+        &__logo {
+            display: none;
         }
     }
 }

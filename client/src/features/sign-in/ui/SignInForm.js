@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {Link} from 'react-router-dom';
-import {LanguageContext, translations} from "../../../app/utils/languageContext";
-import {images, ThemeContext} from "../../../app/utils/themeContext";
+import {LanguageContext, translations} from "../../../app/contexts/languageContext";
+import {images, ThemeContext} from "../../../app/contexts/themeContext";
 import useSignIn from "../model/useSignIn";
 import Button from '../../../shared/ui/Button';
 import ErrorMessage from '../../../shared/ui/ErrorMessage';

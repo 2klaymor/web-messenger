@@ -1,5 +1,5 @@
 import {useContext, useRef, useEffect} from "react";
-import {ThemeContext, images} from "../../../app/utils/themeContext";
+import {ThemeContext, images} from "../../../app/contexts/themeContext";
 
 export default function StartPage() {
     const {theme} = useContext(ThemeContext);

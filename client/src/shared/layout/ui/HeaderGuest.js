@@ -1,7 +1,7 @@
 import {useContext} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
-import {LanguageContext, translations} from '../../../app/utils/languageContext';
-import {ThemeContext, images} from '../../../app/utils/themeContext';
+import {LanguageContext, translations} from '../../../app/contexts/languageContext';
+import {ThemeContext, images} from '../../../app/contexts/themeContext';
 import Button from "../../ui/Button";
 
 const HeaderGuest = () => {
@@ -23,8 +23,6 @@ const HeaderGuest = () => {
                  alt="toggle theme"/>
 
             <div className="header__navigation">
-                {/*временный быстрый переход на домашнюю страницу*/}
-                {/*<Button onClick={() => navigate('/home')}>дом</Button>*/}
                 <Button onClick={() => navigate('/signin')}>{t.buttons.sign_in}</Button>
                 <Button onClick={() => navigate('/signup')}>{t.buttons.sign_up}</Button>
             </div>

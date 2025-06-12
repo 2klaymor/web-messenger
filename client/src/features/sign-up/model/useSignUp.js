@@ -1,8 +1,14 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
-import {handleSignUp} from "./authHandler";
+import {postSignUp} from "../api/api-sign-up";
+import {getUserMe} from "../../../entities/user/api-user-entity";
+import {useAuth} from "../../../app/contexts/authContext";
 
 export const useSignUp = () => {
+    const {setUser} = useAuth();
+    const navigate = useNavigate();
+    const passwordRef = useRef(null);
+
     const [userData, setUserData] = useState({
         username: '',
         email: '',
@@ -13,82 +19,88 @@ export const useSignUp = () => {
         username: '',
         email: '',
         password: '',
-        submit: '',
+        submit: ''
     });
 
-    const [showPassword, setShowPassword] = useState(false);
-    const [showVerification, setShowVerification] = useState(false);
-    const emailRegex = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/iu;
+    const [isDisabled, setIsDisabled] = useState(false);
 
-    const validateEmail = (email) => {
-        if (!email) return '';
-        return emailRegex.test(email) ? '' : 'invalid_email';
-    };
+    // const [showVerification, setShowVerification] = useState(false);
 
-    const validatePassword = (password) => {
-        if (!password) return '';
-        return password.length >= 8 ? '' : 'short_password';
-    }
-
-    // обновление полей при изменении введенных данных
+    // валидация полей
     useEffect(() => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        const emailError = userData.email && !emailRegex.test(userData.email) ? 'invalid_email' : '';
+        const passwordError = userData.password && userData.password.length < 8 ? 'password_too_short' : '';
+
+
         setErrorKeys(prev => ({
             ...prev,
-            email: validateEmail(userData.email),
-            password: validatePassword(userData.password),
+            email: emailError,
+            password: passwordError,
         }));
-    }, [userData.email, userData.password]);
 
+        const isInvalid = !userData.username || !userData.email || !userData.password || emailError || passwordError;
+        setIsDisabled(isInvalid);
+
+    }, [userData.username, userData.email, userData.password]);
+
+    // сброс ошибки в username после сабмита
     useEffect(() => {
         if (errorKeys.username) {
-            setErrorKeys(prev => ({
-                ...prev,
-                username: '',
-            }));
+            setErrorKeys(prev => ({...prev, username: ''}));
         }
     }, [userData.username]);
 
 
-    // обработка нажатия на кнопку
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         const {username, email, password} = userData;
 
+        // есть ошибки - не отправляем запрос
+        // ПЛОХО т.к. пользователь может переопределить errorKeys в консоли. нужна доп. проверка на сервере
         if (!username || !email || !password) {
-            setErrorKeys(prev => ({
-                ...prev,
-                submit: 'fill_all_fields'
-            }));
+            setErrorKeys(prev => ({...prev, submit: 'fill_all_fields'}));
             return;
         }
 
-        if (errorKeys.email === 'invalid_email' || errorKeys.password === 'short_password') {
-            setErrorKeys(prev => ({
-                ...prev,
-                submit: ''
-            }));
+        if (errorKeys.email || errorKeys.password) {
+            setErrorKeys(prev => ({...prev, submit: ''}));
             return;
         }
 
-        if (!errorKeys.username && !errorKeys.email && !errorKeys.password) {
-            const result = handleSignUp(username, email, password);
+        try {
+            // запрос на регистрацию
+            const accessToken = await postSignUp({
+                // displayName: username,
+                name: username,
+                password
+            });
 
-            if (result.success) {
-                setShowVerification(true);
-            } else {
+            // регистрация не удалась
+            if (!accessToken) {
                 setErrorKeys(prev => ({
                     ...prev,
-                    ...result.errors,
-                    submit: '',
+                    username: 'username_taken', // ← вот тут
                 }));
+                return;
             }
+
+            // регистрация удалась
+            const me = await getUserMe();
+            setUser(me);
+            navigate('/setup');
+            // setShowVerification(true);
+
+        } catch (err) {
+            setErrorKeys(prev => ({...prev, submit: 'signup_failed'}));
         }
     };
 
     return {
+        passwordRef,
         userData, setUserData,
         errorKeys, setErrorKeys,
-        showPassword, setShowPassword,
-        showVerification, setShowVerification,
-        handleSubmit
+        // showVerification, setShowVerification,
+        isDisabled, handleSubmit
     };
 };

@@ -26,12 +26,12 @@ api.interceptors.response.use(
             originalRequest.url?.includes("/auth/login") ||
             originalRequest.url?.includes("/auth/signup");
 
-        // если это запрос на вход/регистрацию - не трогаем
+        // если это попытка войти/зарегистрироваться - не трогаем
         if (isAuthRequest) {
             return Promise.reject(error);
         }
 
-        // если рефреш не удался - ничего не делаем
+        // не трогаем запрос на рефреш
         if (
             error.response?.status === 401 &&
             originalRequest.url?.includes("/auth/refresh")
@@ -42,16 +42,20 @@ api.interceptors.response.use(
         // если accessToken истёк, пробуем рефреш
         if (error.response?.status === 401 && !originalRequest._retry) {
             originalRequest._retry = true;
+
             try {
                 const {data: newAccessToken} = await api.post("/auth/refresh");
                 localStorage.setItem("accessToken", newAccessToken);
                 originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
                 return api.request(originalRequest);
             } catch (refreshError) {
+                // токен не восстановился — чистим и редиректим
+                localStorage.removeItem("accessToken");
                 return Promise.reject(refreshError);
             }
         }
 
         return Promise.reject(error);
+
     }
 );

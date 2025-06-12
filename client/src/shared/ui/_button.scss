@@ -10,8 +10,8 @@
   &:hover { background-color: var(--bg-2); }
 
   &_disabled {
-    cursor: not-allowed;
-    background-color: var(--bg-2);
+    cursor: default;
+    background-color: var(--bg-3) !important;
   }
 
   &_no-style {

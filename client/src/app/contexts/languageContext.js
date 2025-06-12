@@ -29,7 +29,10 @@ export const translations = {
             invalid_email: "please enter a valid email",
             email_taken: "this email is already taken",
             password_too_short: "password must contain at least 8 characters",
-            all_fields_required: "please fill in all fields"
+            all_fields_required: "please fill in all fields",
+            fill_display_name: "name cannot be empty",
+            access_denied: "it seems you don't have access to this page",
+            not_found: "this page doesnt exist",
         },
 
         sign_in: {
@@ -50,6 +53,26 @@ export const translations = {
                 resend_prompt: "did not receive the code?",
                 resend_button: "resend",
             },
+        },
+
+        setup: {
+            title: "getting started",
+            name: "name",
+            about_me: "about me",
+            dota_rank: "dota 2 rank",
+            ranks: {
+                not_a_player: "i dont play dota",
+                uncalibrated: "uncalibrated",
+                herald: "herald",
+                guardian: "guardian",
+                crusader: "crusader",
+                archon: "archon",
+                legend: "legend",
+                ancient: "ancient",
+                divine: "divine",
+                immortal: "immortal",
+            },
+            finish: "finish",
         },
 
         home: {
@@ -93,6 +116,9 @@ export const translations = {
             email_taken: "этот e-mail уже занят",
             password_too_short: "пароль должен содержать минимум 8 символов",
             all_fields_required: "пожалуйста, заполните все поля",
+            fill_display_name: "имя не может быть пустым",
+            access_denied: "кажется, у вас нет доступа к этой странице",
+            not_found: "такая страница не найдена",
         },
 
         sign_in: {
@@ -113,6 +139,26 @@ export const translations = {
                 resend_prompt: "не получили код?",
                 resend_button: "отправить еще раз",
             },
+        },
+
+        setup: {
+            title: "дополните свой профиль",
+            name: "имя",
+            about_me: "обо мне",
+            dota_rank: "ранг в доте",
+            ranks: {
+                not_a_player: "не играю в доту",
+                uncalibrated: "на калибровке",
+                herald: "рекрут",
+                guardian: "страж",
+                crusader: "рыцарь",
+                archon: "герой",
+                legend: "легенда",
+                ancient: "властелин",
+                divine: "божество",
+                immortal: "титан",
+            },
+            finish: "завершить",
         },
 
         home: {

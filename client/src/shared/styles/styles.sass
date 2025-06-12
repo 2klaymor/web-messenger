@@ -7,12 +7,15 @@
 @use 'global'
 
 // /layout
+@use '../layout/ui/loading-screen'
+@use '../layout/ui/error-page'
 @use '../layout/ui/header'
 @use '../layout/ui/footer'
 
 // /ui
 @use '../ui/error-message'
 @use '../ui/button'
+@use '../../features/set-pfp/set-pfp'
 @use '../ui/bullet-point'
 @use '../ui/form'
 
@@ -26,6 +29,7 @@
 @use '../../pages/sign-in/ui/sign-in'
 @use '../../pages/sign-up/sign-up'
 @use '../../features/sign-up/ui/email-verification-modal'
+@use '../../pages/profile-setup/ui/profile-setup-page'
 
 // home
 @use '../../pages/home/ui/HomePage'
@@ -34,7 +38,3 @@
 
 // start
 @use '../../pages/start-page/ui/StartPage'
-
-
-
-

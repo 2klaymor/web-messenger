@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {useContext, useState} from "react";
 
-import {LanguageContext, translations} from "../../../app/utils/languageContext";
-import {ThemeContext, images} from "../../../app/utils/themeContext";
+import {LanguageContext, translations} from "../../../app/contexts/languageContext";
+import {ThemeContext, images} from "../../../app/contexts/themeContext";
 
 const EmailVerificationModal = ({onClose, email}) => {
     const {language} = useContext(LanguageContext);

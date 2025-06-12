@@ -1,28 +1,37 @@
 import {useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom';
+import {useAuth} from "../../../app/contexts/authContext";
 import {postSignIn} from '../api-sign-in';
-import {useAuth} from "../../../app/utils/authContext";
+import {getUserMe} from "../../../entities/user/api-user-entity";
 
 export default function useSignIn() {
+    const {setUser} = useAuth();
+    const navigate = useNavigate();
+
     const nameRef = useRef(null);
     const passwordRef = useRef(null);
-
     const [errorKey, setErrorKey] = useState('');
-    const navigate = useNavigate();
-    const {updateIsAuth} = useAuth();
 
     const handleSubmit = async () => {
-        setErrorKey(null);
+        setErrorKey('');
 
-        const name = nameRef.current?.value || '';
-        const password = passwordRef.current?.value || '';
+        const name = nameRef.current?.value.trim();
+        const password = passwordRef.current?.value;
+
+        if (!name || !password) {
+            setErrorKey('all_fields_required');
+            return;
+        }
 
         try {
+            localStorage.removeItem("accessToken");
             await postSignIn({name, password});
-            updateIsAuth(true);
+
+            const userData = await getUserMe();
+            setUser(userData);
+
             navigate('/home');
         } catch (err) {
-            console.error('SignIn error', err);
             setErrorKey('invalid_credentials');
         }
     };

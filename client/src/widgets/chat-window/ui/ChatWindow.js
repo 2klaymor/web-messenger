@@ -1,9 +1,9 @@
 import {mockMessages} from "../../../mocks/mockData";
 import { MessageSent, MessageReceived,} from "./Message";
-import {images, ThemeContext} from "../../../app/utils/themeContext";
+import {images, ThemeContext} from "../../../app/contexts/themeContext";
 import TextareaAutosize from "react-textarea-autosize";
 import {useContext, useEffect, useRef} from "react";
-import {LanguageContext, translations} from "../../../app/utils/languageContext";
+import {LanguageContext, translations} from "../../../app/contexts/languageContext";
 
 const ChatWindow = () => {
     const {theme} = useContext(ThemeContext);

@@ -1,4 +1,4 @@
-import {images} from "../../app/utils/themeContext";
+import {images} from "../../app/contexts/themeContext";
 
 export function ToggleVisibilityIcon({show, onClick}) {
     const src = show ? images.static.show : images.static.hide;

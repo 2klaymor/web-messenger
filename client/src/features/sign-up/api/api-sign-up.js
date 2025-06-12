@@ -1,21 +1,32 @@
-import {mockUsers} from '../../../mocks/mockUsers';
+import {api} from "../../../shared/api/instance";
 
-// авторизация
-export const userExists = (login, password) => {
-    login = login.toLowerCase();
-    return mockUsers.find(user =>
-        (user.email.toLowerCase() === login || user.name.toLowerCase() === login)
-        && user.passwordHash === password);
-};
+export async function postSignUp({displayName, name, password}) {
+    try {
+        const response = await api.post('/auth/register', {
+            // displayName,
+            name,
+            password
+        });
 
-// проверка занятости юзернейма
-export const findUserByUsername = (username) => {
-    return mockUsers.find(user =>
-        user.name.toLowerCase() === username.toLowerCase());
-}
+        const accessToken = response.data;
 
-// проверка занятости e-mail
-export const findUserByEmail = (email) => {
-    return mockUsers.find(user =>
-        user.email.toLowerCase() === email.toLowerCase());
+        // accessToken не пришел?
+        if (!accessToken) {
+            console.warn("no access token in response");
+            return null;
+        }
+
+        // сохраняем токен в localStorage
+        try {
+            localStorage.setItem('accessToken', accessToken);
+        } catch (error) {
+            console.warn("access token save error", error);
+        }
+
+        return accessToken;
+
+    } catch (error) {
+        console.error('signup error:', error);
+        throw error;
+    }
 }

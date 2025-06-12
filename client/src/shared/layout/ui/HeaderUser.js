@@ -1,8 +1,9 @@
 import {useContext} from 'react';
 import {Link} from 'react-router-dom';
-import {LanguageContext, translations} from '../../../app/utils/languageContext';
-import {ThemeContext, images} from '../../../app/utils/themeContext';
+import {LanguageContext, translations} from '../../../app/contexts/languageContext';
+import {ThemeContext, images} from '../../../app/contexts/themeContext';
 import useHeaderUser from "../model/useHeaderUser";
+import {useAuth} from "../../../app/contexts/authContext";
 import SwitchLanguage from "../../../widgets/switch-language/SwitchLanguage";
 import BulletPoint from "../../ui/BulletPoint";
 
@@ -10,6 +11,7 @@ const HeaderUser = () => {
     const { language } = useContext(LanguageContext);
     const t = translations[language];
     const {theme, handleThemeChange} = useContext(ThemeContext)
+    const {user, signOut} = useAuth();
 
     const {isOpen, setIsOpen, handleLogout} = useHeaderUser();
 
@@ -20,20 +22,6 @@ const HeaderUser = () => {
                 <img src={images[theme].favicon} alt="logo"/>
                 deadin.site
             </Link>
-
-            {/* search container */}
-            {/*<form className="header-user__search-form dropdown">*/}
-
-            {/*    <input type="search"*/}
-            {/*           placeholder={t.labels.search}*/}
-            {/*           onClick={() => openDropdown('search')}/>*/}
-
-            {/*    <ul className={`header-user__search-form-results dropdown__menu ${dropdownStates.search ? 'show' : ''}`}>*/}
-            {/*        <li><Link to='#'>kaneki ken</Link></li>*/}
-            {/*        <li><Link to='#'>shadow friend</Link></li>*/}
-            {/*    </ul>*/}
-
-            {/*</form>*/}
 
             <SwitchLanguage/>
 
@@ -60,8 +48,8 @@ const HeaderUser = () => {
                     <li>
                         <Link to="/home">
                             <img className="header-user__dropdown-menu-pfp" src="/pfp.png" alt="pfp"></img>
-                            <p className="header-user__username">канеки кеck</p>
-                            <p className="header-user__handle">@tokiogul</p>
+                            <p className="header-user__username">{user.displayName}</p>
+                            <p className="header-user__handle">@{user.name}</p>
                         </Link>
                     </li>
 
@@ -69,7 +57,7 @@ const HeaderUser = () => {
 
                     <div className="header-user__dropdown-list-items">
                         <BulletPoint to="#" wrap="link" imageKey="settings">{t.home.profile.settings}</BulletPoint>
-                        <BulletPoint to="/" onClick={handleLogout} imageKey="logout">{t.home.profile.log_out}</BulletPoint>
+                        <BulletPoint to="/" onClick={signOut} imageKey="logout">{t.home.profile.log_out}</BulletPoint>
                     </div>
 
                     <SwitchLanguage/>

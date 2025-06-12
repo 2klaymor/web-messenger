@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {Link} from "react-router-dom";
-import {images, ThemeContext} from "../../app/utils/themeContext";
+import {images, ThemeContext} from "../../app/contexts/themeContext";
 
 
 export default function BulletPoint({

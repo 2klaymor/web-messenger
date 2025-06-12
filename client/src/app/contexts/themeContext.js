@@ -4,6 +4,7 @@ import favicon_l from '../../assets/logos/favicon-light.png';
 import logo_l from '../../assets/logos/logo-light.png';
 import logo_blur_l from '../../assets/logos/logo-light-blur.png';
 import logo_blur_stretched_l from '../../assets/logos/logo-light-blur-stretched.png';
+import signup_bg_l from '../../assets/signup-bg-dark.png'
 import theme_l from '../../assets/icons/theme-light.png';
 import menu_l from '../../assets/icons/menu-light.png'
 import settings_l from '../../assets/icons/settings-light.png'
@@ -18,6 +19,7 @@ import favicon_d from '../../assets/logos/favicon-dark.png';
 import logo_d from '../../assets/logos/logo-dark.png';
 import logo_blur_d from '../../assets/logos/logo-dark-blur.png';
 import logo_blur_stretched_d from '../../assets/logos/logo-dark-blur-stretched.png';
+import signup_bg_d from '../../assets/signup-bg-light.png'
 import theme_d from '../../assets/icons/theme-dark.png';
 import menu_d from '../../assets/icons/menu-dark.png'
 import settings_d from '../../assets/icons/settings-dark.png'
@@ -32,34 +34,33 @@ import show from '../../assets/icons/show.png'
 import hide from '../../assets/icons/hide.png'
 import read from '../../assets/icons/read.png'
 import unread from '../../assets/icons/unread.png'
+import pfp_placeholder from '../../assets/icons/pfp-placeholder.png'
+import edit from '../../assets/icons/edit.png'
 
 export const images = {
     static : {
         show: show, hide: hide,
         read: read, unread: unread,
+        pfp_placeholder: pfp_placeholder,
+        edit: edit,
     },
 
     light: {
         favicon: favicon_l,
         logo: logo_l, logo_blur: logo_blur_l, logo_blur_stretched: logo_blur_stretched_l,
+        signup_bg: signup_bg_l,
         theme: theme_l,
-        menu: menu_l,
-        settings: settings_l, logout: logout_l,
-        arrow: arrow_l,
-        close: close_l,
-        attach: attach_l,
-        send: send_l,
+        menu: menu_l, settings: settings_l, logout: logout_l,
+        arrow: arrow_l, close: close_l, attach: attach_l, send: send_l,
     },
+
     dark: {
         favicon: favicon_d,
         logo: logo_d, logo_blur: logo_blur_d, logo_blur_stretched: logo_blur_stretched_d,
+        signup_bg: signup_bg_d,
         theme: theme_d,
-        menu: menu_d,
-        settings: settings_d, logout: logout_d,
-        arrow: arrow_d,
-        close: close_d,
-        attach: attach_d,
-        send: send_d,
+        menu: menu_d, settings: settings_d, logout: logout_d,
+        arrow: arrow_d, close: close_d, attach: attach_d, send: send_d,
     },
 };
 

@@ -1,4 +1,4 @@
-import {images} from "../../../app/utils/themeContext";
+import {images} from "../../../app/contexts/themeContext";
 
 const Contact = ({ path, name, time, lastMessage, lastMessageReadStatus }) => {
 

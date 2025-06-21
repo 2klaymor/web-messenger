@@ -1,22 +1,16 @@
-@import '../../shared/styles/variables';
+@import '../../../shared/styles/variables';
 
 .signup {
     display: flex;
+    justify-content: center;
     width: 100%;
-    justify-content: space-evenly;
-    font-size: $font-size-s;
-
-    &__logo {
-        width: 40%;
-        max-height: 90%;
-        align-self: center;
-        object-fit: contain;
-    }
 
     .form {
         display: flex;
         flex-direction: column;
         justify-content: center;
+        min-height: 100%;
+        z-index: 100;
 
         &__auth-link {
             margin-top: 0.5rem;

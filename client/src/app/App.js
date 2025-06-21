@@ -9,15 +9,16 @@ import ErrorPage from "../shared/layout/ui/ErrorPage";
 import PageLayout from '../shared/layout/ui/PageLayout';
 import StartPage from '../pages/start-page/ui/StartPage';
 import SignInPage from '../pages/sign-in/ui/SignInPage';
-import SignUpPage from '../pages/sign-up/SignUpPage';
+import SignUpPage from '../pages/sign-up/ui/SignUpPage';
 import ProfileSetupPage from "../pages/profile-setup/ui/ProfileSetupPage";
 import HomePage from '../pages/home/ui/HomePage';
+import SettingsPage from "../pages/settings/ui/SettingsPage";
 
 // import eruda from "eruda";
 // import {LoadingScreen} from "../shared/layout/ui/LoadingScreen";
 
 function App() {
-    // devtools для сафари
+    // // devtools для сафари
     // if (window.location.hostname === '192.168.1.120') {
     //     const script = document.createElement('script');
     //     script.src = 'https://cdn.jsdelivr.net/npm/eruda';
@@ -25,9 +26,11 @@ function App() {
     //     script.onload = function () {
     //         eruda.init();
     //     };
-    // }
+
 
     return (
+
+
         <Routes>
 
             <Route path="/"
@@ -64,6 +67,14 @@ function App() {
                        <PageLayout withFooter={false}> <HomePage/> </PageLayout>
                    </PrivateRoute>
                }
+            />
+
+            <Route path="/settings"
+                   element={
+                    <PrivateRoute>
+                        <PageLayout withFooter={false}> <SettingsPage/></PageLayout>
+                    </PrivateRoute>
+                }
             />
 
             <Route path="*" element={<ErrorPage code="404" errorKey="not_found"/>}/>

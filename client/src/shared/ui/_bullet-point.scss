@@ -1,5 +1,6 @@
 .bullet-point {
   display: flex;
+  color: var(--text);
   cursor: pointer;
 
   &__img {

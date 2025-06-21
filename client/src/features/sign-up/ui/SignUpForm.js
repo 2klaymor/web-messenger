@@ -1,18 +1,16 @@
 import {useContext} from "react";
 import {Link} from 'react-router-dom';
 import {LanguageContext, translations} from "../../../app/contexts/languageContext";
-import {ThemeContext, images} from "../../../app/contexts/themeContext";
 import {useSignUp} from "../model/useSignUp";
 import Button from "../../../shared/ui/Button";
 import ErrorMessage from "../../../shared/ui/ErrorMessage";
 import {ToggleVisibilityIcon} from "../../../widgets/password-toggle/ToggleVisibilityIcon";
 import {useToggleVisibility} from "../../../widgets/password-toggle/useToggleVisibility";
-// import EmailVerificationModal from "../../../features/sign-up/ui/EmailVerificationModal";
+
 
 const SignUpForm = () => {
     const {language} = useContext(LanguageContext);
     const t = translations[language];
-    const {theme} = useContext(ThemeContext);
 
     const {
         passwordRef,
@@ -24,27 +22,22 @@ const SignUpForm = () => {
     const {show, toggle} = useToggleVisibility()
 
     return (
-        <div className="signup">
+        <div className="form">
 
-            {/* row element 1 */}
-            <img className="signup__logo" src={images[theme].signup_bg} alt="logo"/>
-
-            {/* row element 2 */}
-            <div className="form">
-
-                <h1>{t.sign_up.title}</h1>
-                {/* username */}
-                <label htmlFor="inputUsername">{t.fields.username}</label>
+            <h1>{t.sign_up.title}</h1>
+            {/* username */}
+            <label htmlFor="inputUsername">{t.fields.username}
                 <input id="inputUsername"
                        type="text"
                        value={userData.username}
                        onChange={(e) =>
                            setUserData(prev => ({...prev, username: e.target.value}))}
                 />
-                <ErrorMessage errorKey={errorKeys.username}/>
+            </label>
+            <ErrorMessage errorKey={errorKeys.username}/>
 
-                {/* email */}
-                <label htmlFor="inputEmail">{t.fields.email}</label>
+            {/* email */}
+            <label htmlFor="inputEmail">{t.fields.email}
                 <input id="inputEmail"
                        type="email"
                        placeholder="example@example.com"
@@ -52,10 +45,11 @@ const SignUpForm = () => {
                        onChange={(e) =>
                            setUserData(prev => ({...prev, email: e.target.value}))}
                 />
-                <ErrorMessage errorKey={errorKeys.email}/>
+            </label>
+            <ErrorMessage errorKey={errorKeys.email}/>
 
-                {/* password */}
-                <label htmlFor="inputPassword">{t.fields.password}</label>
+            {/* password */}
+            <label htmlFor="inputPassword">{t.fields.password}
                 <div className="toggle-visibility-wrapper">
                     <input id="inputPassword"
                            ref={passwordRef}
@@ -69,23 +63,19 @@ const SignUpForm = () => {
                         onClick={toggle}
                     />
                 </div>
-                <ErrorMessage errorKey={errorKeys.password}/>
+            </label>
+            <ErrorMessage errorKey={errorKeys.password}/>
 
-                <Button disabled={isDisabled} onClick={handleSubmit}>{t.buttons.continue}</Button>
-                <ErrorMessage errorKey={errorKeys.submit}/>
+            <Button disabled={isDisabled} onClick={handleSubmit}>{t.buttons.continue}</Button>
+            <ErrorMessage errorKey={errorKeys.submit}/>
 
-                <div className="form__auth-link">
-                    <p>{t.sign_up.existing_user_prompt}&nbsp;</p>
-                    <Link to="/signin">{t.buttons.sign_in}</Link>
-                </div>
-
+            <div className="form__auth-link">
+                <p>{t.sign_up.existing_user_prompt}&nbsp;</p>
+                <Link to="/signin">{t.buttons.sign_in}</Link>
             </div>
 
-            {/*{showVerification && <EmailVerificationModal*/}
-            {/*    email={userData.email}*/}
-            {/*    onClose={() => setShowVerification(false)}/>}*/}
-        </div>
 
+        </div>
     )
 }
 

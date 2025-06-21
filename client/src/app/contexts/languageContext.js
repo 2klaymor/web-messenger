@@ -5,8 +5,10 @@ export const translations = {
         fields: {
             login_label: "username or email",
             username: "username",
+            display_name: "name",
             email: "email",
             password: "password",
+            about_me: "bio",
         },
 
         buttons: {
@@ -15,6 +17,9 @@ export const translations = {
             continue: "continue",
             search: "search",
             next: "next",
+            finish: "finish",
+            save: "save",
+            cancel: "cancel",
         },
 
         status: {
@@ -33,6 +38,8 @@ export const translations = {
             fill_display_name: "name cannot be empty",
             access_denied: "it seems you don't have access to this page",
             not_found: "this page doesnt exist",
+
+            success: "✓ saved",
         },
 
         sign_in: {
@@ -57,8 +64,6 @@ export const translations = {
 
         setup: {
             title: "getting started",
-            name: "name",
-            about_me: "about me",
             dota_rank: "dota 2 rank",
             ranks: {
                 not_a_player: "i dont play dota",
@@ -72,12 +77,32 @@ export const translations = {
                 divine: "divine",
                 immortal: "immortal",
             },
-            finish: "finish",
+        },
+
+        settings: {
+            account: "account",
+            security: "security",
+            blocked_users: "blocked users",
+            appearance: "appearance",
+            change_password: "change password",
+            new_password: "new password",
+            delete_account: "delete account",
+            language: "language",
+            theme: "theme",
+            change_theme: "change theme",
         },
 
         home: {
             chat: {
                 textarea_placeholder: "start typing..."
+            },
+
+            contacts: {
+                add: "add to contacts",
+                remove: "remove from contacts",
+                in_contacts: "in contacts",
+                block: "block",
+                unblock: "unblock",
             },
 
             profile: {
@@ -91,8 +116,10 @@ export const translations = {
         fields: {
             login_label: "юзернейм или email",
             username: "юзернейм",
+            display_name: "имя",
             email: "email",
             password: "пароль",
+            about_me: "био",
         },
 
         buttons: {
@@ -101,6 +128,10 @@ export const translations = {
             continue: "продолжить",
             search: "поиск",
             next: "далее",
+            finish: "завершить",
+            save: "сохранить",
+            cancel: "отмена",
+            add_to_contacts: "добавить в контакты",
         },
 
         status: {
@@ -119,6 +150,8 @@ export const translations = {
             fill_display_name: "имя не может быть пустым",
             access_denied: "кажется, у вас нет доступа к этой странице",
             not_found: "такая страница не найдена",
+
+            success: "✓ сохранено",
         },
 
         sign_in: {
@@ -143,8 +176,6 @@ export const translations = {
 
         setup: {
             title: "дополните свой профиль",
-            name: "имя",
-            about_me: "обо мне",
             dota_rank: "ранг в доте",
             ranks: {
                 not_a_player: "не играю в доту",
@@ -158,12 +189,32 @@ export const translations = {
                 divine: "божество",
                 immortal: "титан",
             },
-            finish: "завершить",
+        },
+
+        settings: {
+            account: "аккаунт",
+            security: "безопасность",
+            blocked_users: "заблокированные",
+            appearance: "внешний вид",
+            change_password: "изменить пароль",
+            new_password: "новый пароль",
+            delete_account: "удалить аккаунт",
+            language: "язык",
+            theme: "тема",
+            change_theme: "сменить тему",
         },
 
         home: {
             chat: {
                 textarea_placeholder: "начните печатать..."
+            },
+
+            contacts: {
+                add: "добавить в контакты",
+                removes: "удалить из контактов",
+                in_contacts: "в контактах",
+                block: "заблокировать",
+                unblock: "разблокировать",
             },
 
             profile: {

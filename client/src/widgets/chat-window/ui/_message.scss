@@ -1,4 +1,4 @@
-@import '../../../shared/styles/variables';
+@use '../../../shared/styles/variables' as *;
 
 .message {
   display: flex;
@@ -10,47 +10,36 @@
   margin: 0 0 0.5rem 0.5rem;
   padding: 0.5rem;
   border-radius: 10px;
-  font-size: $font-size-s;
   border-bottom-left-radius: 0;
-}
-.message-sent {
-  background-color: var(--primary-text);
-  color: var(--primary-bg);
-}
+  font-size: $font-size-s;
 
-.message-received {
-  background-color: var(--secondary);
-  color: var(--primary-text);
-}
+  &-sent {
+    background-color: white;
+    color: black;
 
-.message-time {
-  font-size: $font-size-xs;
-}
+    @media (max-width: 768px) {
 
-
-nav {
-  ul {
-    list-style: none;
-
-    li {
-      display: inline-block;
-
-      a {
-        color: white;
-      }
+      margin-right: 0.5rem;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 10px;
+      align-self: end;
     }
+    //
+    //@media (max-width: 768px) {
+    //
+    //
+    //
+    //
+    //
+    //}
   }
-}
 
+  &-received {
+    background-color: var(--bg-1);
+    color: var(--primary-text);
+  }
 
-nav ul {
-  list-style: none;
-}
-
-nav ul li {
-  display: inline-block;
-}
-
-nav ul li a {
-  color: white;
+  &__time {
+    font-size: $font-size-xs;
+  }
 }

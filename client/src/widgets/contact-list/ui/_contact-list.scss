@@ -1,0 +1,26 @@
+@use '../../../shared/styles/variables' as *;
+
+.contacts {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background-color: var(--bg-3);
+
+
+  //[data-theme='light'] & {
+  //  background-color: var(--bg);
+  //}
+  //
+  //[data-theme='dark'] & {
+  //}
+
+  margin: 0 0.5rem;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}

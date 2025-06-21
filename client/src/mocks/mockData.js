@@ -15,15 +15,52 @@ export const mockContacts = [
 
 export const mockMessages = [
     {
-        sender: "them",
-        contents: 'Хорошо, я тоже люблю играть за ассасинов. Но Anti-Mage - это что-то особенное. Он такой сильный.',
-        time: '20:13'
+        sender: "me",
+        contents: "Hey! How’s it going?",
+        time: "12:31"
     },
-    {sender: "me", contents: 'Мой любимый герой - Phantom Assassin. Я люблю играть за ассасинов.', time: '20:13'},
-    {sender: "them", contents: 'Мой любимый герой - Anti-Mage. А у тебя?', time: '04:20'},
-    {sender: "me", contents: 'Да, я тоже люблю играть в Доту. Какой твой любимый герой?', time: '04:20'},
-    {sender: "them", contents: 'Хорошо, играю в Доту. Ты тоже играешь?', time: '12:50'},
-    {sender: "me", contents: "Привет, как дела?", time: '12:50'}
+    {
+        sender: "them",
+        contents: "All good! Just finished a ranked match. You?",
+        time: "12:32"
+    },
+    {
+        sender: "me",
+        contents: "Nice! I was watching a replay. Trying to learn offlane better.",
+        time: "12:33"
+    },
+    {
+        sender: "them",
+        contents: "Offlane is tough. Who do you usually play?",
+        time: "12:34"
+    },
+    {
+        sender: "me",
+        contents: "Mostly Mars or Underlord. Sometimes Wraith King if I’m feeling lazy",
+        time: "12:35"
+    },
+    {
+        sender: "them",
+        contents: "Haha Wraith King is chill. I main mid tho. Queen of Pain all the way.",
+        time: "12:36"
+    },
+    {
+        sender: "me",
+        contents: "QoP mains are scary",
+        time: "12:36"
+    },
+    {
+        sender: "them",
+        contents: "We just blink in and scream",
+        time: "12:37"
+    },
+    {
+        sender: "me",
+        contents: "Sounds like real life tbh",
+        time: "12:37"
+    }
+];
+
     // {
     //     id: 1,
     //     content: 'Привет, как дела?',
@@ -36,5 +73,3 @@ export const mockMessages = [
     //         role: "admin",
     //     }
     // }
-
-];

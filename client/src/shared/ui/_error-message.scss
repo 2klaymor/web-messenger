@@ -2,7 +2,8 @@
 
 // сообщение об ошибке
 .error-message {
-  margin: 0.3rem 0;
   font-size: $font-size-error;
   color: var(--danger);
+
+  &_success { color: var(--success); }
 }

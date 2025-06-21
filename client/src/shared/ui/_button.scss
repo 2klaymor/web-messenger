@@ -14,6 +14,26 @@
     background-color: var(--bg-3) !important;
   }
 
+  &_danger {
+    color: white;
+    background-color: var(--danger);
+
+    &:hover {
+      background-color: var(--danger);
+      filter: brightness(0.8) !important;
+    }
+  }
+
+  &_success {
+    border: none;
+    color: white;
+    background-color: var(--success) !important;
+
+    &:hover {
+      filter: brightness(0.8) !important;
+    }
+  }
+
   &_no-style {
     padding: 0;
     border: none;

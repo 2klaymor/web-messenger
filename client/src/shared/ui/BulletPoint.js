@@ -2,12 +2,12 @@ import {useContext} from "react";
 import {Link} from "react-router-dom";
 import {images, ThemeContext} from "../../app/contexts/themeContext";
 
-
 export default function BulletPoint({
                                             wrap, to,
                                             onClick,
                                             imageKey,
-                                            children
+                                            userClassName,
+                                            children,
                                         }) {
     const {theme} = useContext(ThemeContext);
     const src = images[theme][imageKey];
@@ -21,19 +21,25 @@ export default function BulletPoint({
 
     if (wrap === "link") {
         return (
-            <li>
-                <Link className="bullet-point" to={to}>
-                    {content}
-                </Link>
-            </li>
-        )
-    } else {
-        return (
-            <li>
-                <div className="bullet-point" onClick={onClick}>
-                    {content}
-                </div>
-            </li>
+            <Link className={`bullet-point ${userClassName}`} to={to}>
+                {content}
+            </Link>
         )
     }
+    if (wrap === "div") {
+        return (
+            <div className={`bullet-point ${userClassName}`} onClick={onClick}>
+                {content}
+            </div>
+        )
+    }
+    // else {
+    //     return (
+    //         <li>
+    //             <div className="bullet-point" onClick={onClick}>
+    //                 {content}
+    //             </div>
+    //         </li>
+    //     )
+    // }
 }

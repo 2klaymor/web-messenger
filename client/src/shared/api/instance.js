@@ -39,8 +39,11 @@ api.interceptors.response.use(
             return Promise.reject(error);
         }
 
+
+
         // если accessToken истёк, пробуем рефреш
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        const token = localStorage.getItem("accessToken");
+        if (error.response?.status === 401 && !originalRequest._retry && token) {
             originalRequest._retry = true;
 
             try {

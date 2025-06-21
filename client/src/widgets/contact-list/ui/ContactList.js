@@ -1,9 +1,13 @@
 import {mockContacts} from "../../../mocks/mockData";
+import SearchField from "../../search-field/SearchField";
 import Contact from "./Contact";
 
 const ContactList = () => {
     return (
-        <ul className="contacts">
+        <div className="contacts">
+
+            <SearchField/>
+
             {mockContacts.map((contact, index) => (
                 <Contact key={index}
                          path={"/pfp.png"}
@@ -13,7 +17,7 @@ const ContactList = () => {
                          lastMessageReadStatus={contact.seen}
                 />
             ))}
-        </ul>
+        </div>
     )
 }
 

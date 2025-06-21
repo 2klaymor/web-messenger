@@ -13,28 +13,35 @@
 @use '../layout/ui/footer'
 
 // /ui
-@use '../ui/error-message'
 @use '../ui/button'
-@use '../../features/set-pfp/set-pfp'
-@use '../ui/bullet-point'
+@use '../ui/rotating-arrow'
 @use '../ui/form'
+@use '../ui/bullet-point'
+@use '../ui/error-message'
 
 // widgets
 @use '../../widgets/dropdown/dropdown'
-@use '../../widgets/switch-language/switch-language'
 @use '../../widgets/password-toggle/toggle-visibility'
+@use '../../widgets/switch-language/switch-language'
+@use '../../widgets/chat-window/ui/chat-window'
+@use '../../widgets/contact-list/ui/contact-list'
+@use '../../widgets/search-field/search-field'
+@use '../../widgets/modal/modal'
+@use '../../widgets/profile-modal/profile-modal'
 
 
 // auth
 @use '../../pages/sign-in/ui/sign-in'
-@use '../../pages/sign-up/sign-up'
+@use '../../pages/sign-up/ui/sign-up'
 @use '../../features/sign-up/ui/email-verification-modal'
 @use '../../pages/profile-setup/ui/profile-setup-page'
 
 // home
 @use '../../pages/home/ui/HomePage'
+@use '../../pages/settings/ui/settings'
 @use '../../widgets/contact-list/ui/contact'
 @use '../../widgets/chat-window/ui/message'
+@use '../../features/set-pfp/set-pfp'
 
 // start
 @use '../../pages/start-page/ui/StartPage'

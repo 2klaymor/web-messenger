@@ -1,13 +1,14 @@
 import {useEffect, useState} from "react";
 
 export default function useHeaderUser() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
     useEffect(() => {
         function handleClickOutside(e) {
             // если клик был не по контейнеру, закрываем
             if (!e.target.closest('.header-user__dropdown')) {
-                setIsOpen(false);
+                setIsMenuOpen(false);
             }
         }
 
@@ -15,5 +16,5 @@ export default function useHeaderUser() {
         return () => document.removeEventListener('click', handleClickOutside);
     }, []);
 
-    return {isOpen, setIsOpen};
+    return {isMenuOpen, setIsMenuOpen, isProfileModalOpen, setIsProfileModalOpen};
 }

@@ -1,7 +1,7 @@
 import {useState, useContext} from 'react'
 import {translations, LanguageContext} from "../../../app/contexts/languageContext";
 import {useAuth} from '../../../app/contexts/authContext'
-import {useProfileSetupPage} from "../modal/useProfileSetupPage";
+import {useProfileSetupPage} from "../model/useProfileSetupPage";
 import Button from '../../../shared/ui/Button'
 import SetPfp from "../../../features/set-pfp/SetPfp";
 import ErrorMessage from "../../../shared/ui/ErrorMessage";
@@ -26,22 +26,20 @@ const ProfileSetupPage = () => {
                     <p>@{user.name}</p>
                 </div>
 
-                <div>
-                    <label htmlFor="inputDisplayName">{t.setup.name}</label>
+                <label htmlFor="inputDisplayName">{t.fields.display_name}
                     <input type="text"
                            id="inputDisplayName"
                            ref={displayNameRef}
+                           placeholder={user.name}
                     />
-                </div>
+                </label>
                 <ErrorMessage errorKey={errorKey}></ErrorMessage>
 
-                <div className="d-column">
-                    <label htmlFor="inputAbout">{t.setup.about_me}</label>
+                <label className="d-column" htmlFor="inputAbout">{t.fields.about_me}
                     <textarea id="inputAbout" placeholder=""></textarea>
-                </div>
+                </label>
 
-                <div className="d-column">
-                    <label htmlFor="selectDotaRank">{t.setup.dota_rank}</label>
+                <label className="d-column" htmlFor="selectDotaRank">{t.setup.dota_rank}
                     <select id="selectDotaRank"
                             value={selectedRank}
                             onChange={(e) =>
@@ -50,11 +48,10 @@ const ProfileSetupPage = () => {
                         {Object.entries(ranks).map(([translationKey, translation], index) => (
                             <option key={index} value={translationKey}>{translation}</option>
                         ))}
-
                     </select>
-                </div>
+                </label>
 
-                <Button onClick={handleSubmit}>{t.setup.finish}</Button>
+                <Button onClick={handleSubmit}>{t.buttons.finish}</Button>
             </div>
         </div>
     );

@@ -7,10 +7,13 @@ export function AuthProvider({children}) {
     const [isLoading, setIsLoading] = useState(true);
 
     const signOut = (shouldRedirect = true) => {
+        setIsLoading(true);
         localStorage.removeItem("accessToken");
         setUser(null);
         if (shouldRedirect) {
             window.location.href = "/signin";
+        } else {
+            setIsLoading(false);
         }
     }
 

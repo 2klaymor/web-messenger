@@ -1,0 +1,23 @@
+.start-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+
+  .logo-wrapper {
+    position: relative;
+    transition: transform 0.2s ease-out;
+
+    &__img {
+      max-height: 100%;
+      max-width: 100%;
+
+      @media (max-width: 1024px) {
+        padding: 0 2rem;
+      }
+    }
+  }
+}
+
+

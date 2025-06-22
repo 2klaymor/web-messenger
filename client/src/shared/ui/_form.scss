@@ -1,0 +1,31 @@
+@use '../styles/variables' as  *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: fit-content;
+
+  padding: 1rem;
+  border: 1px solid var(--bg-2);
+  border-radius: 10px;
+  background-color: var(--bg-3);
+  font-size: $font-size-s;
+  box-shadow: 0 0 30px rgba(37, 38, 38, 0.3);
+
+  input, textarea, select {
+    margin-top: 0.3rem;
+  }
+
+  .button {
+    background-color: var(--bg);
+
+    &:hover {
+      background-color: var(--bg-2);
+    }
+  }
+
+  &__auth-link {
+    margin-bottom: 1rem;
+  }
+}

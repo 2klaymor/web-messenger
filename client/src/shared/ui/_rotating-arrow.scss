@@ -1,0 +1,16 @@
+.arrow {
+  height: 0.7rem;
+  margin-left: 0.5em;
+  filter: opacity(50%);
+  transition: transform 0.2s ease-out;
+
+  &_rotated {
+    transform: rotate(180deg);
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+}

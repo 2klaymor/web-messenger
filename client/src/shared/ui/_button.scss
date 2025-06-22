@@ -1,0 +1,43 @@
+.button {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid var(--bg-2);
+  border-radius: 0.375rem;
+  color: var(--text);
+  background-color: var(--bg-3);
+  cursor: pointer;
+
+  &:focus { outline: none; }
+  &:hover { background-color: var(--bg-2); }
+
+  &_disabled {
+    cursor: default;
+    background-color: var(--bg-3) !important;
+  }
+
+  &_danger {
+    color: white;
+    background-color: var(--danger);
+
+    &:hover {
+      background-color: var(--danger);
+      filter: brightness(0.8) !important;
+    }
+  }
+
+  &_success {
+    border: none;
+    color: white;
+    background-color: var(--success) !important;
+
+    &:hover {
+      filter: brightness(0.8) !important;
+    }
+  }
+
+  &_no-style {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    &:hover { background-color: transparent; }
+  }
+}

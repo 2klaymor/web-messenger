@@ -1,0 +1,27 @@
+@use '../../shared/styles/variables' as  *;
+
+// выпадающее меню
+.dropdown {
+  position: relative;
+
+  &__menu {
+    position: absolute;
+    display: none;
+    border: 1px solid var(--bg-2);
+    background-color: var(--bg);
+    font-size: $font-size-base;
+    list-style: none;
+    z-index: 2;
+
+    li a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    &_show {
+      display: block;
+    }
+  }
+}
+
+

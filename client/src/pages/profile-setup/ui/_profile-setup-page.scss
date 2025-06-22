@@ -1,0 +1,27 @@
+@use '../../../shared/styles/variables' as  *;
+
+.setup-page {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--modal);
+
+  &__pfp-wrapper {
+    align-self: center;
+    text-align: center;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 500px;
+    height: fit-content;
+    gap: 0.5rem;
+
+    textarea {
+      height: 7rem;
+    }
+  }
+}

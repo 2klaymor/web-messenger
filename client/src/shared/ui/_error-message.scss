@@ -1,0 +1,9 @@
+@use '../styles/variables' as  *;
+
+// сообщение об ошибке
+.error-message {
+  font-size: $font-size-error;
+  color: var(--danger);
+
+  &_success { color: var(--success); }
+}

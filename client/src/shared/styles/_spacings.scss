@@ -1,0 +1,139 @@
+$spacer: 1rem !default; // базовый шаг (1rem)
+$spacer-scale: 0.6 !default; // масштаб (каждый шаг — 0.25rem)
+
+// margin
+@for $i from 0 through 5 {
+  .m-#{$i} {
+    margin: $i * $spacer * $spacer-scale;
+  }
+  .mt-#{$i} {
+    margin-top: $i * $spacer * $spacer-scale;
+  }
+  .mb-#{$i} {
+    margin-bottom: $i * $spacer * $spacer-scale;
+  }
+  .ml-#{$i} {
+    margin-left: $i * $spacer * $spacer-scale;
+  }
+  .mr-#{$i} {
+    margin-right: $i * $spacer * $spacer-scale;
+  }
+  .mx-#{$i} {
+    margin-left: $i * $spacer * $spacer-scale;
+    margin-right: $i * $spacer * $spacer-scale;
+  }
+  .my-#{$i} {
+    margin-top: $i * $spacer * $spacer-scale;
+    margin-bottom: $i * $spacer * $spacer-scale;
+  }
+}
+
+// padding
+@for $i from 0 through 5 {
+  .p-#{$i} {
+    padding: $i * $spacer * $spacer-scale;
+  }
+  .pt-#{$i} {
+    padding-top: $i * $spacer * $spacer-scale;
+  }
+  .pb-#{$i} {
+    padding-bottom: $i * $spacer * $spacer-scale;
+  }
+  .pl-#{$i} {
+    padding-left: $i * $spacer * $spacer-scale;
+  }
+  .pr-#{$i} {
+    padding-right: $i * $spacer * $spacer-scale;
+  }
+  .px-#{$i} {
+    padding-left: $i * $spacer * $spacer-scale;
+    padding-right: $i * $spacer * $spacer-scale;
+  }
+  .py-#{$i} {
+    padding-top: $i * $spacer * $spacer-scale;
+    padding-bottom: $i * $spacer * $spacer-scale;
+  }
+}
+
+// Например, me-auto (margin-end auto)
+.mr-auto {
+  margin-right: auto !important;
+}
+
+.ml-auto {
+  margin-left: auto !important;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+//// Position helpers
+//.position-relative {
+//  position: relative !important;
+//}
+//
+//.position-absolute {
+//  position: absolute !important;
+//}
+//
+//.position-fixed {
+//  position: fixed !important;
+//}
+
+// Positional offsets (только для absolute/fixed элементов)
+//@for $i from 0 through 5 {
+//  .top-#{$i} {
+//    top: $i * $spacer * $spacer-scale !important;
+//  }
+//  .bottom-#{$i} {
+//    bottom: $i * $spacer * $spacer-scale !important;
+//  }
+//  .left-#{$i} {
+//    left: $i * $spacer * $spacer-scale !important;
+//  }
+//  .right-#{$i} {
+//    right: $i * $spacer * $spacer-scale !important;
+//  }
+//}
+
+
+// Отрицательные отступы
+//@for $i from 1 through 5 {
+//  .m-n#{$i} {
+//    margin: -$i * $spacer * $spacer-scale;
+//  }
+//  .mt-n#{$i} {
+//    margin-top: -$i * $spacer * $spacer-scale;
+//  }
+//  .mb-n#{$i} {
+//    margin-bottom: -$i * $spacer * $spacer-scale;
+//  }
+//  .ml-n#{$i} {
+//    margin-left: -$i * $spacer * $spacer-scale;
+//  }
+//  .mr-n#{$i} {
+//    margin-right: -$i * $spacer * $spacer-scale;
+//  }
+//  .mx-n#{$i} {
+//    margin-left: -$i * $spacer * $spacer-scale;
+//    margin-right: -$i * $spacer * $spacer-scale;
+//  }
+//  .my-n#{$i} {
+//    margin-top: -$i * $spacer * $spacer-scale;
+//    margin-bottom: -$i * $spacer * $spacer-scale;
+//  }
+//}

@@ -1,0 +1,45 @@
+@use '../../../shared/styles/variables' as *;
+
+.message {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  max-width: 60%;
+  min-width: 50px;
+
+  margin: 0 0 0.5rem 0.5rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border-bottom-left-radius: 0;
+  font-size: $font-size-s;
+
+  &-sent {
+    background-color: white;
+    color: black;
+
+    @media (max-width: 768px) {
+
+      margin-right: 0.5rem;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 10px;
+      align-self: end;
+    }
+    //
+    //@media (max-width: 768px) {
+    //
+    //
+    //
+    //
+    //
+    //}
+  }
+
+  &-received {
+    background-color: var(--bg-1);
+    color: var(--primary-text);
+  }
+
+  &__time {
+    font-size: $font-size-xs;
+  }
+}

@@ -1,0 +1,47 @@
+// contains all of the stylesheets
+
+// shared
+// /styles
+@use 'variables'
+@use 'spacings'
+@use 'global'
+
+// /layout
+@use '../layout/ui/loading-screen'
+@use '../layout/ui/error-page'
+@use '../layout/ui/header'
+@use '../layout/ui/footer'
+
+// /ui
+@use '../ui/button'
+@use '../ui/rotating-arrow'
+@use '../ui/form'
+@use '../ui/bullet-point'
+@use '../ui/error-message'
+
+// widgets
+@use '../../widgets/dropdown/dropdown'
+@use '../../widgets/password-toggle/toggle-visibility'
+@use '../../widgets/switch-language/switch-language'
+@use '../../widgets/chat-window/ui/chat-window'
+@use '../../widgets/contact-list/ui/contact-list'
+@use '../../widgets/search-field/search-field'
+@use '../../widgets/modal/modal'
+@use '../../widgets/profile-modal/profile-modal'
+
+
+// auth
+@use '../../pages/sign-in/ui/sign-in'
+@use '../../pages/sign-up/ui/sign-up'
+@use '../../features/sign-up/ui/email-verification-modal'
+@use '../../pages/profile-setup/ui/profile-setup-page'
+
+// home
+@use '../../pages/home/ui/HomePage'
+@use '../../pages/settings/ui/settings'
+@use '../../widgets/contact-list/ui/contact'
+@use '../../widgets/chat-window/ui/message'
+@use '../../features/set-pfp/set-pfp'
+
+// start
+@use '../../pages/start-page/ui/StartPage'

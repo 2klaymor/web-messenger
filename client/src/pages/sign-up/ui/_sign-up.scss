@@ -1,0 +1,25 @@
+@import '../../../shared/styles/variables';
+
+.signup {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100%;
+        z-index: 100;
+
+        &__auth-link {
+            margin-top: 0.5rem;
+        }
+    }
+
+    @media(max-width: 800px) {
+        &__logo {
+            display: none;
+        }
+    }
+}

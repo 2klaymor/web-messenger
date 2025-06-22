@@ -202,7 +202,7 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/react,node,visualstudiocode,windows
 
-/client/.idea/
+.idea/
 
 # Design
 /client/design
@@ -211,15 +211,24 @@ $RECYCLE.BIN/
 /client/api-test
 
 # Database
-/server/data/
-/server/data/*
-/server/data/**/*
+data/
 
 # Old Prisma schemas
 *.old.prisma
+
 
 # Future Prisma schemas
 *.futureproto.prisma
 
 # Draft files
 *.draft.ts
+
+# Client
+/client/build/
+api-test/
+design/
+*.js~
+*.scss~
+**/*~
+*~
+client/*.bat

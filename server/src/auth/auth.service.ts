@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { hash, compare } from 'bcryptjs';
+import { hash, compare, genSalt } from 'bcryptjs';
 import { Response } from 'express';
 
 import { UsersService } from '../users/users.service';
@@ -26,7 +26,7 @@ export class AuthService {
 
     const createdUser = await this.usersService.createUser(
       name, 
-      await hash(password, 10)
+      await hash(password, await genSalt())
     );
 
     return await this.generateTokens(res, createdUser.name);

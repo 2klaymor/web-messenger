@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { genSalt, hash } from 'bcryptjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 // import { UserEntity } from './users.entity';
@@ -42,7 +43,9 @@ export class UsersService {
 
 
   // Обновление ПАРОЛЯ пользователя
-  async updatePassword(name: string, passwordHash: string) {
+  async updatePassword(name: string, password: string) {
+    const passwordHash = await hash(password, await genSalt());
+
     const updatedUser = await this.prisma.user.update({
       where: {
         name: name

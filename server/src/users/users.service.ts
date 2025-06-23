@@ -17,9 +17,9 @@ export class UsersService {
       where: {
         name: name
       },
-      omit: {
-        passwordHash: true
-      }
+      // omit: {
+      //   passwordHash: true
+      // }
     });
 
     return foundUser;
@@ -34,11 +34,11 @@ export class UsersService {
 
     const normalizedQuery = `%${query.toLowerCase()}%`;
 
-    return this.prisma.$queryRawUnsafe<
+    const foundUsers = await this.prisma.$queryRawUnsafe<
       Array<{ id: number; name: string; displayName: string | null, lastSeen: Date | null }>
     >(
       `
-      SELECT id, name, displayName
+      SELECT id, name, displayName, lastSeen
       FROM users
       WHERE name != ? AND LOWER(name) LIKE ?
       ORDER BY name ASC
@@ -46,6 +46,8 @@ export class UsersService {
       currentUserName,
       normalizedQuery
     );
+
+    return foundUsers;
   }
 
 
@@ -127,6 +129,17 @@ export class UsersService {
 
 
   // Получение пользователя с паролем (ТОЛЬКО НА СТОРОНЕ СЕРВЕРА)
+  async getUserWithPassword(name: string) {
+    const foundUser = await this.prisma.user.findUnique({
+      where: {
+        name: name
+      }
+    });
+
+    return foundUser;
+  }
+
+
   async getUserPassword(name: string) {
     const foundUserPassword = await this.prisma.user.findUnique({
       where: {

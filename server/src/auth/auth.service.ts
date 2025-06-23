@@ -36,7 +36,7 @@ export class AuthService {
   // Валидация пользователя (проверка логина и пароля)
   // Применяется в локальной стратегии аутентификации
   async validateUser(name: string, password: string) {
-    const user = await this.usersService.getUserPassword(name);
+    const user = await this.usersService.getUserWithPassword(name);
 
     if (!user) {
       return null;

@@ -21,9 +21,6 @@ export class JwtAccessStrategy extends PassportStrategy(Strategy, 'jwt-access') 
     }
 
   validate(payload: JwtPayload) {
-      console.log(payload);
-      console.log(payload.name);
-
       const user = this.usersService.getByUsername(payload.name);
   
       if (!user) {

@@ -10,6 +10,16 @@ import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  
+  // Получение пользователей по запросу
+  @UseGuards(JwtAccessGuard)
+  @Get('search')
+  async findUsersByQuery(@Query('query') query: string, @CurrentUser('name') currentUserName: string) {
+    const foundUsers = this.usersService.findUsersByQuery(query, currentUserName);
+
+    return foundUsers;
+  }
+
 
   // Получение конкретного пользователя по УНИКАЛЬНОМУ ИМЕНИ
   @Get(':name')
@@ -24,16 +34,6 @@ export class UsersController {
     const lastSeen = await this.usersService.lastSeen(name);
 
     return lastSeen;
-  }
-
-
-  // Получение пользователей по запросу
-  @UseGuards(JwtAccessGuard)
-  @Get('search')
-  async findUsersByQuery(@Query('query') query: string, @CurrentUser('name') currentUserName: string) {
-    const foundUsers = this.usersService.findUsersByQuery(query, currentUserName);
-
-    return foundUsers;
   }
   
 

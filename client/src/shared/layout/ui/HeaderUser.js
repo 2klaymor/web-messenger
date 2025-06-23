@@ -4,7 +4,6 @@ import {LanguageContext, translations} from '../../../app/contexts/languageConte
 import {ThemeContext, images} from '../../../app/contexts/themeContext';
 import {useAuth} from "../../../app/contexts/authContext";
 import useHeaderUser from "../model/useHeaderUser";
-import {Modal} from "../../../widgets/modal/Modal";
 import ProfileModal from "../../../widgets/profile-modal/ProfileModal";
 import SwitchLanguage from "../../../widgets/switch-language/SwitchLanguage";
 import BulletPoint from "../../ui/BulletPoint";
@@ -21,9 +20,9 @@ const HeaderUser = () => {
         isProfileModalOpen, setIsProfileModalOpen,
     } = useHeaderUser();
 
-    const userInfo = {
-        username: user.name, displayName: user.displayName,
-        about: localStorage.getItem('about')};
+    // const userInfo = {
+    //     username: user.name, displayName: user.displayName,
+    //     about: localStorage.getItem('about')};
 
     return (
         <nav className="header header-user">
@@ -70,6 +69,12 @@ const HeaderUser = () => {
                             {t.home.profile.my_profile}
                         </BulletPoint>
                         <BulletPoint wrap="link"
+                                     to="/home"
+                                     imageKey="chat"
+                        >
+                            {t.buttons.chat}
+                        </BulletPoint>
+                        <BulletPoint wrap="link"
                                      to="/settings"
                                      imageKey="settings"
                         >
@@ -81,17 +86,14 @@ const HeaderUser = () => {
                         >
                             {t.home.profile.log_out}
                         </BulletPoint>
-
-                        <SwitchLanguage/>
                     </div>
                 </div>
 
                 {isProfileModalOpen && (
-                    <Modal onClose={() => setIsProfileModalOpen(false)}>
-                        <ProfileModal
-                            userInfo={userInfo}
-                            onClose={() => setIsProfileModalOpen(false)}/>
-                    </Modal>
+                    <ProfileModal
+                        userType = 'me'
+                        userInfo={user}
+                        onClose={() => setIsProfileModalOpen(false)}/>
                 )}
 
             </div>

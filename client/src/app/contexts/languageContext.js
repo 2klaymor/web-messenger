@@ -9,17 +9,19 @@ export const translations = {
             email: "email",
             password: "password",
             about_me: "bio",
+            search: "search",
         },
 
         buttons: {
             sign_in: "sign in",
             sign_up: "sign up",
+            chat: "chat",
             continue: "continue",
-            search: "search",
             next: "next",
             finish: "finish",
             save: "save",
             cancel: "cancel",
+            edit: 'edit',
         },
 
         status: {
@@ -39,7 +41,8 @@ export const translations = {
             access_denied: "it seems you don't have access to this page",
             not_found: "this page doesnt exist",
 
-            success: "✓ saved",
+            success: "✓ success",
+            loading: "loading...",
         },
 
         sign_in: {
@@ -98,9 +101,9 @@ export const translations = {
             },
 
             contacts: {
-                add: "add to contacts",
-                remove: "remove from contacts",
-                in_contacts: "in contacts",
+                add: "add to contactsStore",
+                remove: "remove from contactsStore",
+                in_contacts: "in contactsStore",
                 block: "block",
                 unblock: "unblock",
             },
@@ -120,18 +123,19 @@ export const translations = {
             email: "email",
             password: "пароль",
             about_me: "био",
+            search: "поиск",
         },
 
         buttons: {
             sign_in: "войти",
             sign_up: "зарегистрироваться",
+            chat: "чат",
             continue: "продолжить",
-            search: "поиск",
             next: "далее",
             finish: "завершить",
             save: "сохранить",
             cancel: "отмена",
-            add_to_contacts: "добавить в контакты",
+            edit: "редактировать",
         },
 
         status: {
@@ -151,7 +155,8 @@ export const translations = {
             access_denied: "кажется, у вас нет доступа к этой странице",
             not_found: "такая страница не найдена",
 
-            success: "✓ сохранено",
+            success: "✓ успешно",
+            loading: "загрузка...",
         },
 
         sign_in: {
@@ -211,7 +216,7 @@ export const translations = {
 
             contacts: {
                 add: "добавить в контакты",
-                removes: "удалить из контактов",
+                remove: "удалить из контактов",
                 in_contacts: "в контактах",
                 block: "заблокировать",
                 unblock: "разблокировать",

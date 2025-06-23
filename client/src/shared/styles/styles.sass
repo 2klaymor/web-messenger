@@ -23,9 +23,8 @@
 @use '../../widgets/dropdown/dropdown'
 @use '../../widgets/password-toggle/toggle-visibility'
 @use '../../widgets/switch-language/switch-language'
-@use '../../widgets/chat-window/ui/chat-window'
-@use '../../widgets/contact-list/ui/contact-list'
-@use '../../widgets/search-field/search-field'
+@use '../../pages/home/ui/chat-window/chat-window'
+@use '../../features/contacts/ui/contact-list'
 @use '../../widgets/modal/modal'
 @use '../../widgets/profile-modal/profile-modal'
 
@@ -39,9 +38,19 @@
 // home
 @use '../../pages/home/ui/HomePage'
 @use '../../pages/settings/ui/settings'
-@use '../../widgets/contact-list/ui/contact'
-@use '../../widgets/chat-window/ui/message'
 @use '../../features/set-pfp/set-pfp'
+
+
+@use '../../features/search-users/ui/search-field'
+@use '../../features/search-users/ui/search-result'
+@use '../../features/contacts/ui/contact'
+
+
+@use '../../pages/home/ui/chat-window/chat-header'
+@use '../../features/chat-history/ui/chat-history'
+@use '../../features/send-message/ui/chat-input'
+@use '../../features/chat-history/ui/message'
+
 
 // start
 @use '../../pages/start-page/ui/StartPage'

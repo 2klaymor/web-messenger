@@ -1,17 +1,19 @@
-import { Controller, Post, Body, Res, UseGuards} from '@nestjs/common';
+import { Controller, Post, Body, Res, UseGuards, Get} from '@nestjs/common';
 import { Response } from 'express';
 
 import { AuthService } from './auth.service';
+import { UsersService } from 'src/users/users.service';
 import { RegisterUserDto } from './auth.dto';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { JwtRefreshGuard } from './guards/jwt-refresh.guard';
 import { LocalGuard } from './guards/local.guard';
+import { JwtAccessGuard } from './guards/jwt-access.guard';
 
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
-
+  constructor(private authService: AuthService, private usersService: UsersService) {}
+  
 
   // Регистрация
   @Post('register')
@@ -24,6 +26,14 @@ export class AuthController {
       registerUserDto.name, 
       registerUserDto.password
     );
+  }
+
+
+  // Получение информации о текущем пользователе
+  @UseGuards(JwtAccessGuard)
+  @Get('me')
+  async me(@CurrentUser('name') name: string) {
+    return this.usersService.getByUsername(name);
   }
 
 

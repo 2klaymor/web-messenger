@@ -12,3 +12,7 @@ export class UpdateUserDisplayNameDto {
 export class CheckUserPasswordDto {
     password: string;
 }
+
+export class UpdateUserBioDto {
+    bio: string;
+}

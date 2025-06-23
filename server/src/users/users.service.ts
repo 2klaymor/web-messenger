@@ -17,9 +17,9 @@ export class UsersService {
       where: {
         name: name
       },
-      // omit: {
-      //   passwordHash: true
-      // }
+      omit: {
+        passwordHash: true
+      }
     });
 
     return foundUser;
@@ -38,7 +38,7 @@ export class UsersService {
       Array<{ id: number; name: string; displayName: string | null, lastSeen: Date | null }>
     >(
       `
-      SELECT id, name, displayName, lastSeen
+      SELECT id, name, displayName, bio, lastSeen
       FROM users
       WHERE name != ? AND LOWER(name) LIKE ?
       ORDER BY name ASC
@@ -102,6 +102,21 @@ export class UsersService {
   }
 
 
+  // Обновление БИОГРАФИИ пользователя
+  async updateBio(name: string, bio: string) {
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        name: name
+      },
+      data: {
+        bio: bio
+      }
+    });
+
+    return !!updatedUser;
+  }
+
+
   // Проверка существования пользователя по имени / проверка того, не занято ли УНИКАЛЬНОЕ ИМЯ (для регистрации)
   async checkUserExistence(name: string) {
     const user = await this.prisma.user.findUnique({
@@ -140,6 +155,7 @@ export class UsersService {
   }
 
 
+  // Получение пароля пользователя
   async getUserPassword(name: string) {
     const foundUserPassword = await this.prisma.user.findUnique({
       where: {

@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
 
 import { UsersService } from './users.service';
-import { CheckUserPasswordDto, UpdateUserDisplayNameDto } from './users.dto';
+import { CheckUserPasswordDto, UpdateUserBioDto, UpdateUserDisplayNameDto } from './users.dto';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
 
@@ -66,5 +66,19 @@ export class UsersController {
     );
 
     return displayNameUpdated;
+  }
+
+  
+  // Обновление БИОГРАФИИ пользователя
+  @UseGuards(JwtAccessGuard)
+  @Patch('bio')
+  async updateBio(
+    @CurrentUser('name') name: string, 
+    @Body('bio') updateUserBioDto: UpdateUserBioDto
+  ) {
+    const bioUpdated = await this.usersService.updateBio(
+      name, 
+      updateUserBioDto.bio
+    );
   }
 }

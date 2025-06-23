@@ -15,7 +15,7 @@ export default function SecuritySection() {
 
     const {
         showPasswordForm, setShowPasswordForm,
-        passwordRef,
+        oldPasswordRef, newPasswordRef,
         handleUpdatePassword, handleDeleteAccount,
         errorKey, success, handleClosePasswordForm,
         } = useSecuritySection();
@@ -38,10 +38,14 @@ export default function SecuritySection() {
                 {/* ФОРМА ИЗМЕНЕНИЯ ПАРОЛЯ*/}
                 {showPasswordForm && (
                     <div className="update-form">
+                        <input type="password"
+                               ref={oldPasswordRef}
+                               placeholder={t.settings.old_password}/>
+
                         <div className="toggle-visibility-wrapper">
                             <input type={`${show ? 'text' : 'password'}`}
-                                     ref={passwordRef}
-                                     placeholder={t.settings.new_password}/>
+                                   ref={newPasswordRef}
+                                   placeholder={t.settings.new_password}/>
 
                             <ToggleVisibilityIcon show={show} onClick={toggle}/>
                         </div>
@@ -60,13 +64,12 @@ export default function SecuritySection() {
                 )}
             </div>
 
-            {/* DELETE ACCOUNT */}
-            {/*<Button*/}
-            {/*    className="button_danger"*/}
-            {/*    onClick={handleDeleteAccount}*/}
-            {/*>*/}
-            {/*    {t.settings.delete_account}*/}
-            {/*</Button>*/}
+            <Button
+                className="button_danger"
+                onClick={handleDeleteAccount}
+            >
+                {t.settings.delete_account}
+            </Button>
         </div>
     )
 }

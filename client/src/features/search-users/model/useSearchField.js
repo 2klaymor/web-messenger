@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import {searchUsers} from '../api-search-users'
+import {getUserPublicData} from "../../../entities/user/api-get-user-public-data";
 import {useAuth} from "../../../app/contexts/authContext";
 
 export const useSearchField = () => {
@@ -31,10 +32,16 @@ export const useSearchField = () => {
         setSearchResults([]);
     };
 
+    const handleResultClick = async (user) => {
+        const fullUser = await getUserPublicData(user.name);
+        setSelectedUser(fullUser);
+        console.log(fullUser);
+    }
+
     return {
         query, setQuery,
         searchResults, handleErase,
-        currentUser, selectedUser, setSelectedUser,
+        selectedUser, setSelectedUser, handleResultClick,
     };
 }
 

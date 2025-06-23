@@ -4,22 +4,31 @@ import {deleteAccount} from "../../../features/delete-account/api-delete-account
 
 export const useSecuritySection = () => {
     const [showPasswordForm, setShowPasswordForm] = useState(false);
-    const passwordRef = useRef(null);
+    const oldPasswordRef = useRef(null);
+    const newPasswordRef = useRef(null);
     const [errorKey, setErrorKey] = useState('');
     const [success, setSuccess] = useState(false);
 
     const handleUpdatePassword = async () => {
         setErrorKey('');
-        if (passwordRef.current?.value.length < 8) {
-            setSuccess(false);
+        setSuccess(false);
+        if (newPasswordRef.current?.value.length < 8) {
             setErrorKey('password_too_short');
             return;
         }
 
         try {
-            patchPassword(passwordRef.current?.value);
-            setSuccess(true);
-            setErrorKey('success');
+            const oldPassword = oldPasswordRef.current?.value;
+            const newPassword = newPasswordRef.current?.value;
+
+            const updated = await patchPassword(oldPassword, newPassword);
+            if (updated === false) {
+                setErrorKey('wrong_password')
+            } else {
+                setSuccess(true);
+                setErrorKey('success');
+            }
+
         } catch (e) {
             console.error(e);
         }
@@ -45,7 +54,7 @@ export const useSecuritySection = () => {
 
     return {
         showPasswordForm, setShowPasswordForm,
-        passwordRef,
+        oldPasswordRef, newPasswordRef,
         handleUpdatePassword, handleDeleteAccount,
         handleClosePasswordForm, errorKey, success, setErrorKey,
     };

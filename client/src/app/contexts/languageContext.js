@@ -28,7 +28,7 @@ export const translations = {
         status: {
             online: "online",
             offline: "offline",
-            last_seen: "last seen at "
+            last_seen: "last seen "
         },
 
         errors: {
@@ -39,6 +39,7 @@ export const translations = {
             email_taken: "this email is already taken",
             passwords_do_not_match: "passwords do not match",
             password_too_short: "password must contain at least 8 characters",
+            wrong_password: "wrong password",
             all_fields_required: "please fill in all fields",
             fill_display_name: "name cannot be empty",
             access_denied: "it seems you don't have access to this page",
@@ -91,6 +92,7 @@ export const translations = {
             blocked_users: "blocked users",
             appearance: "appearance",
             change_password: "change password",
+            old_password: "old password",
             new_password: "new password",
             delete_account: "delete account",
             language: "language",
@@ -145,7 +147,7 @@ export const translations = {
         status: {
             online: "онлайн",
             offline: "оффлайн",
-            last_seen: "был(а) в сети в ",
+            last_seen: "был(а) в сети ",
         },
 
         errors: {
@@ -156,6 +158,7 @@ export const translations = {
             email_taken: "этот e-mail уже занят",
             password_too_short: "пароль должен содержать минимум 8 символов",
             passwords_do_not_match: "пароли не совпадают",
+            wrong_password: "неправильный пароль",
             all_fields_required: "пожалуйста, заполните все поля",
             fill_display_name: "имя не может быть пустым",
             access_denied: "кажется, у вас нет доступа к этой странице",
@@ -208,6 +211,7 @@ export const translations = {
             blocked_users: "заблокированные",
             appearance: "внешний вид",
             change_password: "изменить пароль",
+            old_password: "старый пароль",
             new_password: "новый пароль",
             delete_account: "удалить аккаунт",
             language: "язык",

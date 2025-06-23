@@ -1,10 +1,11 @@
 import {useState, useRef, useEffect} from "react";
-import {useAuth} from "../../../app/contexts/authContext";
+import {useAuth, } from "../../../app/contexts/authContext";
 import {useSetDisplayName} from "../../../features/set-display-name/useSetDisplayName";
 import {useSetBio} from "../../../features/set-bio/useSetBio";
+import {getMe} from "../../../entities/user/api-get-current-user";
 
 const useAccountSection = () => {
-    const {user} = useAuth();
+    const {user, setUser} = useAuth();
     const displayNameRef = useRef(null);
     const aboutRef = useRef(null);
 
@@ -40,6 +41,8 @@ const useAccountSection = () => {
             await setBio(newBio);
             setSuccess(true);
             setErrorKeys({displayName: '', submit: 'success'});
+            const newUser = await getMe();
+            setUser(newUser);
         } catch (err) {
             console.error(err);
             setErrorKeys({displayName: '', submit: ''});

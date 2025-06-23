@@ -1,7 +1,6 @@
 import {api} from "../../shared/api/instance";
 
-export async function patchPassword(newPassword) {
-    await api.patch('/users/password', {
-        password: newPassword
-    });
+export async function patchPassword(oldPassword, password) {
+    const response = await api.patch('/users/password', { oldPassword, password });
+    return response.data;
 }

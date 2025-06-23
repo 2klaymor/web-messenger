@@ -30,13 +30,19 @@ export default function ProfileModal({userType, user, onClose}) {
 
             {/* пфп и имя */}
             <div className="profile-modal__header">
-                <img className="profile-modal__pfp" src={user.pfp}/>
+                <img className="profile-modal__pfp" src={user.pfp || images.static.pfp_placeholder}/>
                 <div className="d-column">
                     <p className="profile-modal__display-name">{user.displayName}</p>
                     <p className="profile-modal__username">@{user.name}</p>
 
                     {userType === 'other' && (
-                        <p className="profile-modal__last-seen">{t.status.last_seen}{user.lastSeen}</p>
+                        <p className="profile-modal__last-seen">
+                            {user.lastSeen === "online"
+                                ? t.status.online
+                                : user.lastSeen === "offline"
+                                    ? t.status.offline
+                                    : `${t.status.last_seen}${user.lastSeen}`}
+                        </p>
                     )}
                 </div>
             </div>

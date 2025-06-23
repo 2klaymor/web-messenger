@@ -9,36 +9,7 @@ export const useProfileModal = (userType, user, onClose) => {
     const navigate = useNavigate();
     const {contacts, refreshContacts} = contactsStore();
     const [isLoading, setIsLoading] = useState(false);
-    const isContact = userType === 'other' && contacts.some(contact => contact.name === user.name);
-
-
-    // check if contact
-    // useEffect(() => {
-    //     if (userType === 'other') {
-    //         // проверка в сохраненном списке
-    //         const exists = contacts.some(contact => contact.name === user.name);
-    //         setIsContact(exists);
-    //     }
-    //     setIsLoading(false);
-    // }, [userType, user.name, contacts]);
-
-        // const checkIfContact = async () => {
-        //     try {
-        //         const exists = await contactExists(user.name);
-        //         setIsContact(exists);
-        //     } catch (error) {
-        //         console.error("error checking if contact:", error);
-        //     } finally {
-        //         setIsLoading(false);
-        //     }
-        // };
-
-    //     if (userType === 'other') {
-    //         checkIfContact();
-    //     } else {
-    //         setIsLoading(false);
-    //     }
-    // }, [userType, user.name]);
+    const isContact = contacts.some(contact => contact.name === user.name);
 
     const handleInsideClick = (e) => e.stopPropagation();
 
@@ -50,8 +21,8 @@ export const useProfileModal = (userType, user, onClose) => {
     const handleAdd = async () => {
         setIsLoading(true);
         try {
-            await addContact('inktel');
-            // await addContact(user.name, user.displayName || user.name);
+            // await addContact('inktel');
+            await addContact(user.name, user.displayName || user.name);
             await refreshContacts();
         } catch (error) {
             console.error("error adding to contactsStore", error);

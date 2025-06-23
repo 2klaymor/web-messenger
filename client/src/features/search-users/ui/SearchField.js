@@ -14,13 +14,8 @@ export default function SearchField() {
     const {
         query, setQuery,
         searchResults, handleErase,
-        selectedUser, setSelectedUser, currentUser,
+        selectedUser, setSelectedUser, handleResultClick,
     } = useSearchField();
-
-    const handleResultClick = (user) => {
-        const type = user.name === currentUser.name ? "self" : "other";
-        setSelectedUser({user, type});
-    };
 
     return (
         <div className="search-field">
@@ -55,8 +50,8 @@ export default function SearchField() {
             {/* profile modal */}
             {selectedUser && (
                 <ProfileModal
-                    userType={selectedUser.type}
-                    user={selectedUser.user}
+                    userType="other"
+                    user={selectedUser}
                     onClose={() => setSelectedUser(null)}
                 />
             )}

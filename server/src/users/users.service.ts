@@ -38,7 +38,7 @@ export class UsersService {
       Array<{ id: number; name: string; displayName: string | null, lastSeen: Date | null }>
     >(
       `
-      SELECT id, name, displayName, bio, lastSeen
+      SELECT id, name, displayName, bio, avatar, lastSeen
       FROM users
       WHERE name != ? AND LOWER(name) LIKE ?
       ORDER BY name ASC

@@ -16,10 +16,36 @@ export class UsersService {
     const foundUser = await this.prisma.user.findUnique({
       where: {
         name: name
+      },
+      omit: {
+        passwordHash: true
       }
     });
 
     return foundUser;
+  }
+
+
+  // Поиск пользователя по частичному имени
+  async findUsersByQuery(query: string, currentUserName: string) {
+    if (!query) {
+      return [];
+    }
+
+    const normalizedQuery = `%${query.toLowerCase()}%`;
+
+    return this.prisma.$queryRawUnsafe<
+      Array<{ id: number; name: string; displayName: string | null, lastSeen: Date | null }>
+    >(
+      `
+      SELECT id, name, displayName
+      FROM users
+      WHERE name != ? AND LOWER(name) LIKE ?
+      ORDER BY name ASC
+      `,
+      currentUserName,
+      normalizedQuery
+    );
   }
 
 
@@ -105,6 +131,9 @@ export class UsersService {
     const removedUser = await this.prisma.user.delete({
       where: {
         name: name
+      },
+      omit: {
+        passwordHash: true
       }
     });
 

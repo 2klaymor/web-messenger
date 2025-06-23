@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
 
 import { UsersService } from './users.service';
 import { CheckUserPasswordDto, UpdateUserDisplayNameDto } from './users.dto';
@@ -24,6 +24,16 @@ export class UsersController {
     const lastSeen = await this.usersService.lastSeen(name);
 
     return lastSeen;
+  }
+
+
+  // Получение пользователей по запросу
+  @UseGuards(JwtAccessGuard)
+  @Get('search')
+  async findUsersByQuery(@Query('query') query: string, @CurrentUser('name') currentUserName: string) {
+    const foundUsers = this.usersService.findUsersByQuery(query, currentUserName);
+
+    return foundUsers;
   }
   
 

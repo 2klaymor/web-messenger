@@ -8,6 +8,7 @@ export const translations = {
             display_name: "name",
             email: "email",
             password: "password",
+            confirm_password: "confirm password",
             about_me: "bio",
             search: "search",
         },
@@ -27,6 +28,7 @@ export const translations = {
         status: {
             online: "online",
             offline: "offline",
+            last_seen: "last seen at "
         },
 
         errors: {
@@ -35,6 +37,7 @@ export const translations = {
             username_taken: "this username is already taken",
             invalid_email: "please enter a valid email",
             email_taken: "this email is already taken",
+            passwords_do_not_match: "passwords do not match",
             password_too_short: "password must contain at least 8 characters",
             all_fields_required: "please fill in all fields",
             fill_display_name: "name cannot be empty",
@@ -101,9 +104,9 @@ export const translations = {
             },
 
             contacts: {
-                add: "add to contactsStore",
-                remove: "remove from contactsStore",
-                in_contacts: "in contactsStore",
+                add: "add to contacts",
+                remove: "remove from contacts",
+                in_contacts: "in contacts",
                 block: "block",
                 unblock: "unblock",
             },
@@ -122,6 +125,7 @@ export const translations = {
             display_name: "имя",
             email: "email",
             password: "пароль",
+            confirm_password: "повторите пароль",
             about_me: "био",
             search: "поиск",
         },
@@ -141,6 +145,7 @@ export const translations = {
         status: {
             online: "онлайн",
             offline: "оффлайн",
+            last_seen: "был(а) в сети в ",
         },
 
         errors: {
@@ -150,6 +155,7 @@ export const translations = {
             invalid_email: "некорректный e-mail",
             email_taken: "этот e-mail уже занят",
             password_too_short: "пароль должен содержать минимум 8 символов",
+            passwords_do_not_match: "пароли не совпадают",
             all_fields_required: "пожалуйста, заполните все поля",
             fill_display_name: "имя не может быть пустым",
             access_denied: "кажется, у вас нет доступа к этой странице",

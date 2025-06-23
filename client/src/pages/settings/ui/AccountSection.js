@@ -12,7 +12,7 @@ export default function AccountSection() {
     const {user} = useAuth();
 
     const {
-        usernameRef, displayNameRef, aboutRef,
+        displayNameRef, aboutRef,
         handleSubmit, errorKeys, success,
     } = useAccountSection(user);
 
@@ -20,14 +20,6 @@ export default function AccountSection() {
         <div className={`settings__content form `}>
             <h1>{t.settings.account}</h1>
             <SetPfp/>
-
-            <label htmlFor="inputUsername">{t.fields.username}
-                <input id="inputUsername"
-                       type="text"
-                       ref={usernameRef}
-                />
-            </label>
-            <ErrorMessage errorKey={errorKeys.username}/>
 
             <label htmlFor="inputDisplayName">{t.fields.display_name}
                 <input id="inputDisplayName"

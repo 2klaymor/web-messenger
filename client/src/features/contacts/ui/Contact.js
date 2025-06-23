@@ -1,25 +1,26 @@
+import {useContext} from "react";
 import {images} from "../../../app/contexts/themeContext";
-import {useSelectedContact} from "../../../entities/contacts/useSelectedContact";
+import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
 
-const Contact = ({ contact, pfp_path }) => {
-    const {setSelectedContact} = useSelectedContact();
+const Contact = ({ user }) => {
+    const {setSelectedContact} = selectedContactStore();
 
     const handleClick = () => {
-        setSelectedContact(contact);
+        setSelectedContact(user);
     };
 
     return (
         <div className="contact" onClick={handleClick}>
-            <img className="contact__pfp" alt="pfp" src={pfp_path}/>
+            {/* TODO : contact.pfp_path */}
+            <img className="contact__pfp" src={user.pfp} alt="pfp" />
 
             <div className="contact__info">
-                <p className="contact__name">{contact.displayName}</p>
-
+                <p className="contact__name">{user.displayName}</p>
                 {/* TODO */}
-                <p className="contact__last-message">мямумэ</p>
-                <p className="contact__time">12:30</p>
+                <p className="contact__last-message">{user.bio}</p>
+                <p className="contact__created-at">{user.lastSeen}</p>
                 <img className="contact__read-status"
-                     src={contact.isRead ? images.static.read : images.static.unread}
+                     src={user.isRead ? images.static.read : images.static.unread}
                      alt="read status"
                 />
             </div>

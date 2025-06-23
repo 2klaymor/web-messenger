@@ -1,7 +1,7 @@
 import {useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import {postSignUp} from "../api/api-sign-up";
-import {getUserMe} from "../../../entities/user/api-user-entity";
+import {getMe} from "../../../entities/user/api-get-current-user";
 import {useAuth} from "../../../app/contexts/authContext";
 
 export const useSignUp = () => {
@@ -11,39 +11,40 @@ export const useSignUp = () => {
 
     const [userData, setUserData] = useState({
         username: '',
-        email: '',
-        password: ''
+        password: '',
+        confirmPassword: '',
     });
 
     const [errorKeys, setErrorKeys] = useState({
         username: '',
-        email: '',
         password: '',
+        confirmPassword: '',
         submit: ''
     });
 
     const [isDisabled, setIsDisabled] = useState(false);
-
     // const [showVerification, setShowVerification] = useState(false);
 
     // валидация полей
     useEffect(() => {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+       const passwordError = userData.password && userData.password.length < 8 ? 'password_too_short' : '';
+       const confirmError =
+           userData.confirmPassword &&
+           userData.password &&
+           userData.password !== userData.confirmPassword
+               ? 'passwords_do_not_match'
+               : '';
 
-        const emailError = userData.email && !emailRegex.test(userData.email) ? 'invalid_email' : '';
-        const passwordError = userData.password && userData.password.length < 8 ? 'password_too_short' : '';
+            setErrorKeys(prev => ({
+                ...prev,
+                password: passwordError,
+                confirmPassword: confirmError,
+            }));
 
-
-        setErrorKeys(prev => ({
-            ...prev,
-            email: emailError,
-            password: passwordError,
-        }));
-
-        const isInvalid = !userData.username || !userData.email || !userData.password || emailError || passwordError;
+        const isInvalid = !userData.username || !userData.password || !userData.confirmPassword || passwordError || confirmError;
         setIsDisabled(isInvalid);
 
-    }, [userData.username, userData.email, userData.password]);
+    }, [userData.username, userData.password, userData.confirmPassword]);
 
     // сброс ошибки в username после сабмита
     useEffect(() => {
@@ -52,18 +53,17 @@ export const useSignUp = () => {
         }
     }, [userData.username]);
 
-
     const handleSubmit = async () => {
-        const {username, email, password} = userData;
+        const {username, password, confirmPassword} = userData;
 
         // есть ошибки - не отправляем запрос
         // ПЛОХО т.к. пользователь может переопределить errorKeys в консоли. нужна доп. проверка на сервере
-        if (!username || !email || !password) {
+        if (!username || !password || !confirmPassword) {
             setErrorKeys(prev => ({...prev, submit: 'fill_all_fields'}));
             return;
         }
 
-        if (errorKeys.email || errorKeys.password) {
+        if (errorKeys.password || errorKeys.confirmPassword) {
             setErrorKeys(prev => ({...prev, submit: ''}));
             return;
         }
@@ -86,7 +86,7 @@ export const useSignUp = () => {
             }
 
             // регистрация удалась
-            const me = await getUserMe();
+            const me = await getMe();
             setUser(me);
             navigate('/setup');
             // setShowVerification(true);

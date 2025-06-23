@@ -1,54 +1,52 @@
 import {useState, useRef, useEffect} from "react";
 import {useAuth} from "../../../app/contexts/authContext";
 import {useSetDisplayName} from "../../../features/set-display-name/useSetDisplayName";
+import {useSetBio} from "../../../features/set-bio/useSetBio";
 
 const useAccountSection = () => {
     const {user} = useAuth();
-    const usernameRef = useRef(null);
     const displayNameRef = useRef(null);
     const aboutRef = useRef(null);
 
-    useEffect(() => {
-        if (user) {
-            usernameRef.current.value = user.name;
-            displayNameRef.current.value = user.displayName;
-            aboutRef.current.value = localStorage.getItem('about'); // плейсхолдер
-        }
-    }, [user]);
-
     const {setDisplayName} = useSetDisplayName();
+    const {setBio} = useSetBio();
     const [errorKeys, setErrorKeys] = useState({
-        username: '',
         displayName: '',
         submit: '',
     });
     const [success, setSuccess] = useState(false);
 
+    useEffect(() => {
+        if (user) {
+            displayNameRef.current.value = user.displayName || '';
+            aboutRef.current.value = user.bio || '';
+        }
+    }, [user]);
+
     const handleSubmit = async () => {
+        setSuccess(false);
+        setErrorKeys({displayName: '', submit: ''});
+
+        const newDisplayName = displayNameRef.current?.value.trim();
+        const newBio = aboutRef.current?.value ?? '';
+
+        if (!newDisplayName) {
+            setErrorKeys({displayName: 'fill_display_name', submit: ''});
+            return;
+        }
+
         try {
-            const newDisplayName = displayNameRef.current?.value;
-            const newAbout = aboutRef.current?.value;
-
             await setDisplayName(newDisplayName);
-            localStorage.setItem('about', newAbout); // плейсхолдер
-
+            await setBio(newBio);
             setSuccess(true);
-            setErrorKeys(prevState => ({
-                ...prevState,
-                displayName: '',
-                submit: 'success',
-            }))
-        } catch (error) {
-            console.error(error);
-            setErrorKeys(prevState => ({
-                ...prevState,
-                displayName: 'fill_display_name',
-                submit: '',
-            }));
+            setErrorKeys({displayName: '', submit: 'success'});
+        } catch (err) {
+            console.error(err);
+            setErrorKeys({displayName: '', submit: ''});
         }
     };
 
-    return {success, errorKeys, usernameRef, displayNameRef, aboutRef, handleSubmit};
+    return {success, errorKeys, displayNameRef, aboutRef, handleSubmit};
 };
 
 export {useAccountSection};

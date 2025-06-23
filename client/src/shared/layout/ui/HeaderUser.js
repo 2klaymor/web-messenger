@@ -44,7 +44,7 @@ const HeaderUser = () => {
                      onClick={() => setIsMenuOpen(prev => !prev)}
                 >
                     <img className="header-user__pfp"
-                         src="/pfp.png"
+                         src={user.pfp}
                          alt="pfp"/>
                     <RotatingArrow state={isMenuOpen}/>
                 </div>
@@ -53,7 +53,7 @@ const HeaderUser = () => {
 
                     <li>
                         <Link to="/home">
-                            <img className="header-user__dropdown-menu-pfp" src="/pfp.png" alt="pfp"></img>
+                            <img className="header-user__dropdown-menu-pfp" src={user.pfp} alt="pfp"></img>
                             <p className="header-user__username">{user.displayName}</p>
                             <p className="header-user__handle">@{user.name}</p>
                         </Link>
@@ -91,8 +91,8 @@ const HeaderUser = () => {
 
                 {isProfileModalOpen && (
                     <ProfileModal
-                        userType = 'me'
-                        userInfo={user}
+                        userType = 'self'
+                        user={user}
                         onClose={() => setIsProfileModalOpen(false)}/>
                 )}
 

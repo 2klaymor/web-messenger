@@ -5,58 +5,54 @@ import {useProfileModal} from "./useProfileModal";
 import {Modal} from "../modal/Modal";
 import Button from "../../shared/ui/Button";
 
-export default function ProfileModal({userType, userInfo, onClose}) {
+export default function ProfileModal({userType, user, onClose}) {
     const {language} = useContext(LanguageContext);
     const t = translations[language];
     const {theme} = useContext(ThemeContext);
-
-    const {name, displayName, lastSeen} = userInfo;
-    const about = localStorage.getItem('about');
 
     const {
         handleInsideClick, handleEdit,
         handleAdd, handleRemove,
         isContact, isLoading,
-    } = useProfileModal(userType, userInfo);
+    } = useProfileModal(userType, user, onClose);
 
     return (
         <Modal onClose={onClose}>
         <div className="profile-modal form" onClick={handleInsideClick}>
-            {/* меню с кнопками сверху */}
 
+            {/* кнопки сверху */}
             <div className="profile-modal__menu">
-                {userType === 'contact' &&
-                    <img src={images[theme].block}
-                         alt="block"
-                    />
-                }
-
-                <img src={images[theme].close}
-                     onClick={onClose}
-                     alt="close"
-                />
+                {userType === 'other' && (
+                    <img src={images[theme].block} alt="block"/>
+                )}
+                <img src={images[theme].close} onClick={onClose} alt="close"/>
             </div>
 
             {/* пфп и имя */}
             <div className="profile-modal__header">
-                <img className="profile-modal__pfp" src="/pfp.png"/>
+                <img className="profile-modal__pfp" src={user.pfp}/>
                 <div className="d-column">
-                    <p className="profile-modal__display-name">{displayName}</p>
-                    <p className="profile-modal__username">@{name}</p>
-                    <p>{lastSeen}</p>
+                    <p className="profile-modal__display-name">{user.displayName}</p>
+                    <p className="profile-modal__username">@{user.name}</p>
+
+                    {userType === 'other' && (
+                        <p className="profile-modal__last-seen">{t.status.last_seen}{user.lastSeen}</p>
+                    )}
                 </div>
             </div>
 
-            {userType === 'me' &&
-                <Button onClick={() => handleEdit(onClose)}>{t.buttons.edit}</Button>
-            }
-            {userType !== 'me' && !isLoading && (
-                <Button onClick={isContact ? handleRemove : handleAdd}>
-                    {isContact ? t.home.contacts.remove : t.home.contacts.add}
-                </Button>
+            {userType === 'self' && (
+                <Button onClick={handleEdit}>{t.buttons.edit}</Button>
             )}
-            {userType !== 'me' && isLoading && (
-                <Button disabled>{t.errors.loading}</Button>
+            {userType === 'other' && (
+                <Button
+                    disabled={isLoading}
+                    onClick={isContact ? handleRemove : handleAdd}
+                >
+                    {isContact
+                        ? t.home.contacts.remove
+                        : t.home.contacts.add}
+                </Button>
             )}
 
             <hr/>
@@ -64,7 +60,7 @@ export default function ProfileModal({userType, userInfo, onClose}) {
             {/* доп. информация */}
             <div>
                 <p className="profile-modal__label">{t.fields.about_me}</p>
-                <p className="profile-modal__about">{about}</p>
+                <p className="profile-modal__about">{user.bio}</p>
             </div>
         </div>
         </Modal>

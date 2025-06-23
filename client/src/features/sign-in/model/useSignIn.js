@@ -2,7 +2,7 @@ import {useState, useRef} from "react";
 import {useNavigate} from 'react-router-dom';
 import {useAuth} from "../../../app/contexts/authContext";
 import {postSignIn} from '../api-sign-in';
-import {getUserMe} from "../../../entities/user/api-user-entity";
+import {getMe} from "../../../entities/user/api-get-current-user";
 
 export default function useSignIn() {
     const {setUser} = useAuth();
@@ -24,14 +24,18 @@ export default function useSignIn() {
         }
 
         try {
-            localStorage.removeItem("accessToken");
-            await postSignIn({name, password});
+            const success = await postSignIn({name, password});
+            if (!success) {
+                setErrorKey('invalid_credentials');
+                return;
+            }
 
-            const userData = await getUserMe();
+            const userData = await getMe();
             setUser(userData);
 
             navigate('/home');
         } catch (err) {
+            console.error("sign in error", err);
             setErrorKey('invalid_credentials');
         }
     };

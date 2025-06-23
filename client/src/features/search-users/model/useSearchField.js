@@ -4,35 +4,36 @@ import {useAuth} from "../../../app/contexts/authContext";
 
 export const useSearchField = () => {
     const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
+    const [searchResults, setSearchResults] = useState([]);
     const {user: currentUser} = useAuth();
+    const [selectedUser, setSelectedUser] = useState(null);
 
     useEffect(() => {
+        if (!query.trim()) {
+            setSearchResults([]);
+            return;
+        }
+
         const delay = setTimeout(() => {
-            if (query.trim()) {
-                searchUsers(query.trim())
-                    .then(users => setResults(users))
-                    .catch(error => {
-                        console.error("Ошибка при поиске пользователей:", error);
-                        setResults([]);
-                    });
-            } else {
-                setResults([]);
-            }
+            searchUsers(query.trim())
+                .then(setSearchResults)
+                .catch((err) => {
+                    console.error("error searching users", err);
+                    setSearchResults([]);
+                });
         }, 300);
+
         return () => clearTimeout(delay);
     }, [query]);
 
     const handleErase = () => {
         setQuery('');
-        setResults([]);
+        setSearchResults([]);
     };
 
-    const [selectedUser, setSelectedUser] = useState(null);
-
     return {
-        query, results, setQuery,
-        handleErase,
+        query, setQuery,
+        searchResults, handleErase,
         currentUser, selectedUser, setSelectedUser,
     };
 }

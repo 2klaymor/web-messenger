@@ -1,15 +1,10 @@
-import {useState, useRef} from "react";
 import {images} from "../../app/contexts/themeContext";
+import {useSetPfp} from "./useSetPfp";
 
 export default function SetPfp({imgClassName}) {
-    const fileInputRef = useRef(null);
-    const [pfpPreview, setPfpPreview] = useState(null);
-    const handleFileChange = (e) => {
-        const file = e.target.files?.[0];
-        if (file) {
-            setPfpPreview(URL.createObjectURL(file));
-        }
-    };
+    const {
+        fileInputRef, pfpPreview, handleFileChange,
+    } = useSetPfp();
 
     return (
         <label className="set-pfp">

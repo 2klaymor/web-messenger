@@ -1,4 +1,4 @@
-@use '../../../../shared/styles/variables' as *;
+@use '../../../shared/styles/variables' as *;
 
 .chat {
   position: relative;
@@ -17,7 +17,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url('../../../../assets/bg1.png');
+    background-image: url('../../../assets/bg1.png');
     background-size: cover;
     z-index: -2; // ниже svg
   }

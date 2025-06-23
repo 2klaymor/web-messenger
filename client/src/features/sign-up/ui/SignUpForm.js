@@ -37,16 +37,16 @@ const SignUpForm = () => {
             <ErrorMessage errorKey={errorKeys.username}/>
 
             {/* email */}
-            <label htmlFor="inputEmail">{t.fields.email}
-                <input id="inputEmail"
-                       type="email"
-                       placeholder="example@example.com"
-                       value={userData.email}
-                       onChange={(e) =>
-                           setUserData(prev => ({...prev, email: e.target.value}))}
-                />
-            </label>
-            <ErrorMessage errorKey={errorKeys.email}/>
+            {/*<label htmlFor="inputEmail">{t.fields.email}*/}
+            {/*    <input id="inputEmail"*/}
+            {/*           type="email"*/}
+            {/*           placeholder="example@example.com"*/}
+            {/*           value={userData.email}*/}
+            {/*           onChange={(e) =>*/}
+            {/*               setUserData(prev => ({...prev, email: e.target.value}))}*/}
+            {/*    />*/}
+            {/*</label>*/}
+            {/*<ErrorMessage errorKey={errorKeys.email}/>*/}
 
             {/* password */}
             <label htmlFor="inputPassword">{t.fields.password}
@@ -65,6 +65,22 @@ const SignUpForm = () => {
                 </div>
             </label>
             <ErrorMessage errorKey={errorKeys.password}/>
+
+            <label htmlFor="inputConfirmPassword">{t.fields.confirm_password}
+                <div className="toggle-visibility-wrapper">
+                    <input id="inputConfirmPassword"
+                           type={show ? 'text' : 'password'}
+                           value={userData.confirmPassword}
+                           onChange={(e) =>
+                               setUserData(prev => ({...prev, confirmPassword: e.target.value}))}
+                    />
+                    <ToggleVisibilityIcon
+                        show={show}
+                        onClick={toggle}
+                    />
+                </div>
+            </label>
+            <ErrorMessage errorKey={errorKeys.confirmPassword}/>
 
             <Button disabled={isDisabled} onClick={handleSubmit}>{t.buttons.continue}</Button>
             <ErrorMessage errorKey={errorKeys.submit}/>

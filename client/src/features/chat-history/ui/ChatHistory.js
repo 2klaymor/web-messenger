@@ -1,10 +1,10 @@
 import {useChatHistory} from "../model/useChatHistory";
-import {useSelectedContact} from "../../../entities/contacts/useSelectedContact";
+import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
 import Message from "./Message";
 
 export const ChatHistory = () => {
     const {chatHistoryRef, messages} = useChatHistory();
-    const {selectedContact} = useSelectedContact();
+    const {selectedContact} = selectedContactStore();
 
     return (
         <div className="chat__history" ref={chatHistoryRef}>

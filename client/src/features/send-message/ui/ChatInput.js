@@ -1,7 +1,7 @@
 import {useContext} from "react";
 import {translations, LanguageContext} from "../../../app/contexts/languageContext";
 import {images, ThemeContext} from "../../../app/contexts/themeContext";
-import {useSelectedContact} from "../../../entities/contacts/useSelectedContact";
+import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
 import {useChatInput} from "../model/useChatInput";
 import TextareaAutosize from "react-textarea-autosize";
 
@@ -9,7 +9,7 @@ export const ChatInput= () => {
     const {language} = useContext(LanguageContext);
     const t = translations[language];
     const {theme} = useContext(ThemeContext);
-    const {selectedContact} = useSelectedContact();
+    const {selectedContact} = selectedContactStore();
     const {text, setText, handleKeyDown, sendMessage} = useChatInput();
 
     return (

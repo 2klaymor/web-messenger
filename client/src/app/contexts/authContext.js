@@ -1,5 +1,5 @@
 import {createContext, useContext, useState, useEffect} from 'react';
-import {getUserMe} from '../../entities/user/api-user-entity';
+import {getMe} from '../../entities/user/api-get-current-user';
 const AuthContext = createContext(null);
 
 export function AuthProvider({children}) {
@@ -20,7 +20,7 @@ export function AuthProvider({children}) {
     useEffect(() => {
         const loadUser = async () => {
             try {
-                const data = await getUserMe();
+                const data = await getMe();
                 setUser(data);
             } catch (e) {
                 signOut(false);

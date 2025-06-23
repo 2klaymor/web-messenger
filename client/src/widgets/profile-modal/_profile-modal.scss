@@ -46,6 +46,10 @@
     font-size: $font-size-m;
   }
 
+  &__last-seen {
+    color: var(--bg-1);
+  }
+
   &__label {
     margin-left: 0.375rem;
   }

@@ -33,14 +33,14 @@ export default function SettingsPage() {
                         {t.settings.security}
                     </BulletPoint>
 
-                    <BulletPoint userClassName={`settings__category 
-                    ${activeTab === 'blocked' ? 'settings__category_active' : ''}`}
-                                 wrap="div"
-                                 imageKey="block"
-                                 onClick={() => setActiveTab('blocked')}
-                    >
-                        {t.settings.blocked_users}
-                    </BulletPoint>
+                    {/*<BulletPoint userClassName={`settings__category */}
+                    {/*${activeTab === 'blocked' ? 'settings__category_active' : ''}`}*/}
+                    {/*             wrap="div"*/}
+                    {/*             imageKey="block"*/}
+                    {/*             onClick={() => setActiveTab('blocked')}*/}
+                    {/*>*/}
+                    {/*    {t.settings.blocked_users}*/}
+                    {/*</BulletPoint>*/}
 
                     <BulletPoint userClassName={`settings__category 
                     ${activeTab === 'appearance' ? 'settings__category_active' : ''}`}

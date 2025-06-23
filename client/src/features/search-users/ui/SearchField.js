@@ -12,48 +12,54 @@ export default function SearchField() {
     const {theme} = useContext(ThemeContext);
 
     const {
-        query, results, setQuery,
-        handleErase,
-        currentUser, selectedUser, setSelectedUser,
+        query, setQuery,
+        searchResults, handleErase,
+        selectedUser, setSelectedUser, currentUser,
     } = useSearchField();
+
+    const handleResultClick = (user) => {
+        const type = user.name === currentUser.name ? "self" : "other";
+        setSelectedUser({user, type});
+    };
 
     return (
         <div className="search-field">
+            {/* search field */}
             <div className="search-field__input-wrapper">
                 <input type="text"
                        value={query}
                        onChange={e => setQuery(e.target.value)}
-                       placeholder={`${t.fields.search}...`}/>
-
-                <Button className="search-field__close button_no-style" type="button">
-                    <img src={images[theme].close}
-                         onClick={handleErase}
-                         alt="close"/>
+                       placeholder={`${t.fields.search}...`}
+                />
+                <Button className="search-field__close button_no-style"
+                        type="button"
+                        onClick={handleErase}
+                >
+                    <img src={images[theme].close} alt="close"/>
                 </Button>
             </div>
 
-            {results.length > 0 && (
+            {/* search results */}
+            {searchResults.length > 0 && (
                 <div className="search-field__results">
-                    {results.map(user => (
+                    {searchResults.map(user => (
                         <SearchResult
                             key={user.id}
                             user={user}
-                            onSelect={() => {
-                                const type = user.name === currentUser.name ? "me" : "contact";
-                                setSelectedUser({userInfo: user, type});
-                            }}
+                            onSelect={() => handleResultClick(user)}
                         />
                     ))}
                 </div>
             )}
+
+            {/* profile modal */}
             {selectedUser && (
                 <ProfileModal
                     userType={selectedUser.type}
-                    userInfo={selectedUser.userInfo}
+                    user={selectedUser.user}
                     onClose={() => setSelectedUser(null)}
                 />
             )}
-
         </div>
     );
 }

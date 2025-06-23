@@ -3,7 +3,6 @@ import {api} from "../../../shared/api/instance";
 export async function postSignUp({displayName, name, password}) {
     try {
         const response = await api.post('/auth/register', {
-            // displayName,
             name,
             password
         });

@@ -24,11 +24,6 @@ export default function SecuritySection() {
         <div className="security settings__content form">
             <h1>{t.settings.security}</h1>
 
-            {/* UPDATE EMAIL*/}
-            <p className="security__update-email">email:
-                <span>123@gmail.com</span>
-            </p>
-
             {/* UPDATE PASSWORD */}
             <div className="security__update-password">
                 {/* КОНТЕЙНЕР СО СТРЕЛКОЙ */}
@@ -66,12 +61,12 @@ export default function SecuritySection() {
             </div>
 
             {/* DELETE ACCOUNT */}
-            <Button
-                className="button_danger"
-                onClick={handleDeleteAccount}
-            >
-                {t.settings.delete_account}
-            </Button>
+            {/*<Button*/}
+            {/*    className="button_danger"*/}
+            {/*    onClick={handleDeleteAccount}*/}
+            {/*>*/}
+            {/*    {t.settings.delete_account}*/}
+            {/*</Button>*/}
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import {useState} from "react";
 import dayjs from "dayjs";
 import {messagesStore} from "../../../entities/messages/messagesStore";
-import {useSelectedContact} from "../../../entities/contacts/useSelectedContact";
+import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
 
 //моки
 export const fakeMessages = [
@@ -18,7 +18,7 @@ export const fakeMessages = [
 
 
 export const useChatInput = () => {
-    const {selectedContact} = useSelectedContact();
+    const {selectedContact} = selectedContactStore();
     const {addMessage} = messagesStore();
     const [text, setText] = useState("");
 

@@ -19,7 +19,7 @@ const SignInForm = () => {
     return (
         <div className="form">
 
-            <label htmlFor="inputName">{t.fields.login_label}
+            <label htmlFor="inputName">{t.fields.username}
                 <input
                     id="inputName"
                     name="name"
@@ -31,7 +31,7 @@ const SignInForm = () => {
             </label>
 
             <label htmlFor="inputPassword">{t.fields.password}
-                <Link to="#" className="signin__forgot-password-link">{t.sign_in.forgot_password}</Link>
+                {/*<Link to="#" className="signin__forgot-password-link">{t.sign_in.forgot_password}</Link>*/}
 
                 <div className="toggle-visibility-wrapper">
                     <input

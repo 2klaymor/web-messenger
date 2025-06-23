@@ -1,8 +1,7 @@
 import {create} from "zustand";
 
-export const useSelectedContact = create((set) => ({
+export const selectedContactStore = create((set) => ({
     selectedContact: null,
-
-    setSelectedContact: (contact) => set({selectedContact: contact}),
+    setSelectedContact: (user) => set({selectedContact: user}),
     clearSelectedContact: () => set({selectedContact: null}),
 }));

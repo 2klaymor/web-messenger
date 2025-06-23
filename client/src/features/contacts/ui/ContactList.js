@@ -7,25 +7,19 @@ const ContactList = () => {
 
     return (
         <div className="contacts">
-
             <SearchField/>
             {isLoading ? (
-                <p>загрузка</p>
-                ) : (
+                <p></p>
+            ) : (
                 contacts.map((contact, index) => (
                     <Contact
                         key={index}
-                        contact={contact}
-                        pfp_path={"/pfp.png"}
-                        // time={contact.lastMessage?.time || ""}
-                        // lastMessage={contact.lastMessage?.text || ""}
-                        // lastMessageReadStatus={contact.lastMessage?.seen || false}
+                        user={contact}
                     />
                 ))
-                )
-            }
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default ContactList;

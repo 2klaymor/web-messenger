@@ -1,4 +1,4 @@
-@use '../../../../shared/styles/variables' as *;
+@use '../../../shared/styles/variables' as *;
 
 .chat {
   &__header {
@@ -29,6 +29,5 @@
 
   &__contact-status {
     font-size: $font-size-xs;
-    color: var(--bg-1);
   }
 }

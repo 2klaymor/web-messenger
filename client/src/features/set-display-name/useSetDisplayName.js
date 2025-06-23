@@ -1,5 +1,5 @@
 import {patchDisplayName} from "./api-set-display-name";
-import {getUserMe} from "../../entities/user/api-user-entity";
+import {getMe} from "../../entities/user/api-get-current-user";
 import {useAuth} from "../../app/contexts/authContext";
 
 export function useSetDisplayName() {
@@ -12,7 +12,7 @@ export function useSetDisplayName() {
         }
 
         await patchDisplayName(newDisplayName);
-        const updatedUser = await getUserMe();
+        const updatedUser = await getMe();
         setUser(updatedUser);
     }
 

@@ -1,4 +1,4 @@
-export default function SvgHeader() {
+export default function SvgChatHeader() {
     return (
         <svg
             className="svg-header"

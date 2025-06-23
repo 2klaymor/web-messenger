@@ -1,5 +1,5 @@
-import ChatWindow from "../../../widgets/chat-window/ui/ChatWindow";
-import ContactList from "../../../widgets/contact-list/ui/ContactList";
+import ChatWindow from "./chat-window/ChatWindow";
+import ContactList from "../../../features/contacts/ui/ContactList";
 
 const HomePage = () => {
     return (

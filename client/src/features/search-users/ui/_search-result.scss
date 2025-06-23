@@ -1,0 +1,15 @@
+.search-result {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--bg-2);
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+  }
+}

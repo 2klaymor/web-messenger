@@ -7,6 +7,7 @@ import logo_blur_stretched_l from '../../assets/logos/logo-light-blur-stretched.
 import signup_bg_l from '../../assets/signup-bg-light.png'
 import theme_l from '../../assets/icons/theme-light.png';
 import menu_l from '../../assets/icons/menu-light.png'
+import chat_l from '../../assets/icons/chat-light.png'
 import profile_l from '../../assets/icons/profile-light.png'
 import settings_l from '../../assets/icons/settings-light.png'
 import security_l from '../../assets/icons/security-light.png'
@@ -26,6 +27,7 @@ import logo_blur_stretched_d from '../../assets/logos/logo-dark-blur-stretched.p
 import signup_bg_d from '../../assets/signup-bg-dark.png'
 import theme_d from '../../assets/icons/theme-dark.png';
 import menu_d from '../../assets/icons/menu-dark.png'
+import chat_d from '../../assets/icons/chat-dark.png'
 import profile_d from '../../assets/icons/profile-dark.png'
 import settings_d from '../../assets/icons/settings-dark.png'
 import security_d from '../../assets/icons/security-dark.png'
@@ -58,7 +60,8 @@ export const images = {
         logo: logo_l, logo_blur: logo_blur_l, logo_blur_stretched: logo_blur_stretched_l,
         signup_bg: signup_bg_l,
         theme: theme_l,
-        menu: menu_l, profile: profile_l, settings: settings_l, logout: logout_l,
+        menu: menu_l,
+        chat: chat_l, profile: profile_l, settings: settings_l, logout: logout_l,
         security: security_l, appearance: appearance_l,
         arrow: arrow_l, close: close_l, attach: attach_l, send: send_l, block: block_l,
     },
@@ -68,7 +71,8 @@ export const images = {
         logo: logo_d, logo_blur: logo_blur_d, logo_blur_stretched: logo_blur_stretched_d,
         signup_bg: signup_bg_d,
         theme: theme_d,
-        menu: menu_d, profile: profile_d, settings: settings_d, logout: logout_d,
+        menu: menu_d,
+        chat: chat_d, profile: profile_d, settings: settings_d, logout: logout_d,
         security: security_d, appearance: appearance_d,
         arrow: arrow_d, close: close_d, attach: attach_d, send: send_d, block: block_d,
     },

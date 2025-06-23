@@ -1,0 +1,14 @@
+@use '../../../shared/styles/variables' as *;
+
+.chat {
+  &__history {
+    display: flex;
+    flex-direction: column-reverse;
+    flex-grow: 1;
+    margin-top: -60px;
+    padding-top: 80px;
+    overflow-y: auto;
+    font-size: $font-size-s;
+    z-index: 0;
+  }
+}

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { genSalt, hash } from 'bcryptjs';
+import { compare, genSalt, hash } from 'bcryptjs';
 import { PrismaService } from 'src/prisma/prisma.service';
 
 // import { UserEntity } from './users.entity';
@@ -71,7 +71,14 @@ export class UsersService {
 
 
   // Обновление ПАРОЛЯ пользователя
-  async updatePassword(name: string, password: string) {
+  async updatePassword(name: string, oldPassword:string, password: string) {
+
+    const oldPasswordIsValid = await this.checkUserPassword(name, oldPassword);
+
+    if (!oldPasswordIsValid) {
+      return false; // <-- если старый пароль введен неверно, возвращаем false
+    }
+
     const passwordHash = await hash(password, await genSalt());
 
     const updatedUser = await this.prisma.user.update({
@@ -117,6 +124,21 @@ export class UsersService {
   }
 
 
+  // Обновление АВАТАРА пользователя
+  async updateAvatar(name: string, filename: string) {
+    const updatedUser = await this.prisma.user.update({
+      where: {
+        name: name
+      },
+      data: {
+        avatar: filename
+      }
+    });
+
+    return !!updatedUser;
+  }
+
+
   // Проверка существования пользователя по имени / проверка того, не занято ли УНИКАЛЬНОЕ ИМЯ (для регистрации)
   async checkUserExistence(name: string) {
     const user = await this.prisma.user.findUnique({
@@ -140,6 +162,27 @@ export class UsersService {
     });
 
     return createdUser;
+  }
+
+
+  // Проверка пароля пользователя
+  async checkUserPassword(name: string, password: string) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        name: name
+      },
+      select: {
+        passwordHash: true
+      }
+    });
+
+    if (!user) {
+      return false;
+    }
+
+    const isValidPassword = await compare(password, user.passwordHash);
+
+    return isValidPassword;
   }
 
 

@@ -9,7 +9,8 @@ export class UpdateUserDisplayNameDto {
     displayName: string;
 }
 
-export class CheckUserPasswordDto {
+export class UpdateUserPasswordDto {
+    oldPassword: string;
     password: string;
 }
 

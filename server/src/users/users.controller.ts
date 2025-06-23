@@ -1,14 +1,19 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards, Query, UseInterceptors, UploadedFile} from '@nestjs/common';
 
 import { UsersService } from './users.service';
-import { CheckUserPasswordDto, UpdateUserBioDto, UpdateUserDisplayNameDto } from './users.dto';
+import { UpdateUserBioDto, UpdateUserDisplayNameDto, UpdateUserPasswordDto } from './users.dto';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
 import { JwtAccessGuard } from 'src/auth/guards/jwt-access.guard';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ConfigService } from '@nestjs/config';
 
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private usersService: UsersService, 
+    private configService: ConfigService
+  ) {}
 
   
   // Получение пользователей по запросу
@@ -42,11 +47,12 @@ export class UsersController {
   @Patch('password')
   async updatePassword(
     @CurrentUser('name') name: string, 
-    @Body() checkUserPasswordDto: CheckUserPasswordDto
+    @Body() updateUserPasswordDto: UpdateUserPasswordDto
   ) {
     const passwordUpdated = await this.usersService.updatePassword(
       name, 
-      checkUserPasswordDto.password
+      updateUserPasswordDto.oldPassword,
+      updateUserPasswordDto.password
     );
 
     return passwordUpdated;
@@ -74,13 +80,30 @@ export class UsersController {
   @Patch('bio')
   async updateBio(
     @CurrentUser('name') name: string, 
-    @Body('bio') updateUserBioDto: UpdateUserBioDto
+    @Body() updateUserBioDto: UpdateUserBioDto
   ) {
     const bioUpdated = await this.usersService.updateBio(
       name, 
       updateUserBioDto.bio
     );
+
+    return bioUpdated;
   }
+
+
+  // Обновление аватара пользователя
+  @UseGuards(JwtAccessGuard)
+  @Patch('avatar')
+  @UseInterceptors(FileInterceptor('file'))
+  async updateAvatar(
+    @CurrentUser('name') name: string, 
+    @UploadedFile() file: Express.Multer.File
+  ) {
+    const avatarUpdated = await this.usersService.updateAvatar(name, file.filename);
+
+    return avatarUpdated;
+  }
+
 
   
   // Удаление пользователя

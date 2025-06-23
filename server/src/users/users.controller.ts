@@ -68,7 +68,7 @@ export class UsersController {
     return displayNameUpdated;
   }
 
-  
+
   // Обновление БИОГРАФИИ пользователя
   @UseGuards(JwtAccessGuard)
   @Patch('bio')
@@ -81,4 +81,17 @@ export class UsersController {
       updateUserBioDto.bio
     );
   }
+
+  
+  // Удаление пользователя
+  @UseGuards(JwtAccessGuard)
+  @Delete()
+  async removeUser(
+    @CurrentUser('name') name: string
+  ) {
+    const removedUser = await this.usersService.removeUser(name);
+
+    return removedUser;
+  }
+
 }

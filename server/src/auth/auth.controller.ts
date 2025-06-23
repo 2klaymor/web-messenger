@@ -28,15 +28,7 @@ export class AuthController {
     );
   }
 
-
-  // Получение информации о текущем пользователе
-  @UseGuards(JwtAccessGuard)
-  @Get('me')
-  async me(@CurrentUser('name') name: string) {
-    return this.usersService.getByUsername(name);
-  }
-
-
+  
   // Логин, генерирует токены если пользователь прошел аутентификацию,
   // иначе локальная стратегия сама кинет ошибку Unauthorized,
   // за аутентификацию отвечает стратегия а не AuthService.
@@ -44,6 +36,14 @@ export class AuthController {
   @Post('login')                                          // Тут с помощью специального декоратора можем вытащить user-а и его поля.
   async login(@Res({ passthrough: true }) res: Response,  @CurrentUser('name') name: string) {
     return await this.authService.generateTokens(res, name);
+  }
+
+
+  // Получение информации о текущем пользователе
+  @UseGuards(JwtAccessGuard)
+  @Get('me')
+  async me(@Res({ passthrough: true }) @CurrentUser('name') name: string) {
+    return this.usersService.getByUsername(name);
   }
 
 

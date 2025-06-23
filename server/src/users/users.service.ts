@@ -126,6 +126,21 @@ export class UsersService {
   }
 
 
+  // Получение пользователя с паролем (ТОЛЬКО НА СТОРОНЕ СЕРВЕРА)
+  async getUserPassword(name: string) {
+    const foundUserPassword = await this.prisma.user.findUnique({
+      where: {
+        name: name
+      },
+      select: {
+        passwordHash: true
+      }
+    });
+
+    return foundUserPassword;
+  }
+
+
   // Удаление пользователя
   async removeUser(name: string) {
     const removedUser = await this.prisma.user.delete({

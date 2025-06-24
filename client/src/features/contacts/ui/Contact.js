@@ -2,10 +2,11 @@ import {useContext} from "react";
 import {images} from "../../../app/contexts/themeContext";
 import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
 
-const Contact = ({ user }) => {
+const Contact = ({ user, onClick }) => {
     const {setSelectedContact} = selectedContactStore();
 
     const handleClick = () => {
+        onClick();
         setSelectedContact(user);
     };
 

@@ -1,8 +1,8 @@
-// import {useEffect} from "react";
+import {useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
-// import {socket} from "../shared/socket/socket";
-// import {socketListeners} from "../shared/socket/socketListeners";
-// import {useAuth} from "./contexts/authContext";
+import {socket} from "../shared/socket/socket";
+import {socketListeners} from "../shared/socket/socketListeners";
+import {useAuth} from "./contexts/authContext";
 import PublicRoute from "./routes/PublicRoute";
 import PrivateRoute from "./routes/PrivateRoute";
 import ProfileSetupRoute from "./routes/ProfileSetupRoute";
@@ -30,18 +30,15 @@ function App() {
     //     };
     //
 
-    // const {user} = useAuth();
-    // useEffect(() => {
-    //     if (!user?.name) return;
-    //
-    //     socketListeners(user.name);
-    //
-    //     return () => {
-    //         socket.off("message");
-    //         socket.off("connect");
-    //         socket.off("disconnect");
-    //     };
-    // }, [user?.name]);
+    useEffect(() => {
+        socketListeners();
+
+        return () => {
+            socket.off("message");
+            socket.off("connect");
+            socket.off("disconnect");
+        };
+    }, []);
 
 
     return (

@@ -13,7 +13,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.use(
-    '/api/v1/avatars',
+    '/avatars',
     cors({ origin: 'http://localhost:3000', credentials: true }),
     express.static(join(__dirname, '..', 'data', 'upload', 'avatars'))
   );

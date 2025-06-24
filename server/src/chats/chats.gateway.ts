@@ -62,33 +62,39 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
 
   // Обработка подключения к чату
-  @UseGuards(WsJwtAccessGuard)
+  // @UseGuards(WsJwtAccessGuard)
   @SubscribeMessage('join-chat')
   handleJoinChat(
-    @ConnectedSocket() client: AuthenticatedSocket, 
-    @MessageBody() chatId: number
+    @ConnectedSocket() client: Socket, 
+    @MessageBody('chatId') chatId: number
   ) {
-    const user = client.user;
+
+    // const user = client;
+
+    // console.log(user);
 
     client.join(`chat-${chatId}`);
 
-    console.log(`${user.name} присоединился к chat-${chatId}`);
+    console.log(`${client.id} присоединился к chat-${chatId}`);
+
+    // console.log(`${client} присоединился к chat-${chatId}`);
   }
 
 
   // Обработка отправки сообщения
-  @UseGuards(WsJwtAccessGuard)
+  // @UseGuards(WsJwtAccessGuard)
   @SubscribeMessage('send-message')
   async handleSendMessage(
-    @ConnectedSocket() client: AuthenticatedSocket,
-    @MessageBody() data: { chatId: number; content: string }
+    @ConnectedSocket() client: Socket,
+    @MessageBody() data: { chatId: number; content: string, senderName: string }
   ) {
-    const user = client.user;
+    // const user = client.user;
 
     const message = await this.messagesService.create(
       data.chatId,
       data.content,
-      user.name
+      // user.name
+      data.senderName
     );
 
     this.server.to(`chat-${data.chatId}`).emit('new-message', message);

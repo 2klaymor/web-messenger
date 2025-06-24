@@ -54,13 +54,13 @@ model Chat {
 
 // Участники чата (отношение между User и Chat)
 model ChatUser {
-  userId Int
-  chatId Int
+  userName  String
+  chatId    Int
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userName], references: [name], onDelete: Cascade)
   chat Chat @relation(fields: [chatId], references: [id], onDelete: Cascade)
 
-  @@id(name: "userChat", [userId, chatId])
+  @@id(name: "userChat", [userName, chatId])
   @@map("chat_users")
 }
 

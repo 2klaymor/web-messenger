@@ -8,6 +8,6 @@ import { UsersModule } from 'src/users/users.module';
 @Module({
   imports: [PrismaModule, UsersModule],
   controllers: [ContactsController],
-  providers: [ContactsService, UsersService],
+  providers: [ContactsService],
 })
 export class ContactsModule {}

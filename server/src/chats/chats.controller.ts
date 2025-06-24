@@ -27,7 +27,7 @@ export class ChatsController {
     @Body() createChatDto: CreateChatDto
   ) {
     const createdChat = await this.chatsService.createChat(name, createChatDto.targetName);
-
+ 
     return createdChat;
   }
 
@@ -35,9 +35,12 @@ export class ChatsController {
   // Удаление чата
   @UseGuards(JwtAccessGuard)
   @Delete()
-  async removeChat(@Body() removeChatDto: RemoveChatDto) {
+  async removeChat(
+    @CurrentUser('name') name: string,
+    @Body() removeChatDto: RemoveChatDto
+  ) {
     const removedChat = await this.chatsService.removeChat(
-      removeChatDto.name,
+      name,
       removeChatDto.targetName
     );
 

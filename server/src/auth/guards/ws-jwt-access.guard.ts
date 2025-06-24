@@ -4,7 +4,7 @@ import { Socket } from 'socket.io';
 
 
 @Injectable()
-export class WsJwtAccessGuard extends AuthGuard('jwt') {
+export class WsJwtAccessGuard extends AuthGuard('jwt-access') {
   getRequest(context: ExecutionContext) {
     const client: Socket = context.switchToWs().getClient<Socket>();
     const token = client.handshake.auth?.token;

@@ -24,7 +24,7 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
   @WebSocketServer()
   server: Server;
   private messagesService: MessagesService;
-  private onlineUsers = new Map<string, string>();
+  // private onlineUsers = new Map<string, string>();
 
   afterInit(server: Server) {
     console.log('WebSocket сервер инициализирован.');
@@ -32,32 +32,32 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
 
   // Обработка подключения сокета 
-  @UseGuards(WsJwtAccessGuard)
-  handleConnection(client: AuthenticatedSocket) {
-    const user = client.user
+  // @UseGuards(WsJwtAccessGuard)
+  handleConnection(client: Socket) {
+    // const user = client.user
 
-    this.onlineUsers.set(user.name, client.id);
+    // this.onlineUsers.set(user.name, client.id);
 
-    console.log(`Клиент подключился: ${user.name} -> ${client.id}`);
+    console.log(`Клиент подключился: ${client.id}`);
 
-    this.notifyContactOnlineStatus(user.name, true);
+    // this.notifyContactOnlineStatus(user.name, true);
   }
 
 
   // Обработка отключения сокета
-  @UseGuards(WsJwtAccessGuard)
-  handleDisconnect(client: AuthenticatedSocket) {
-    const disconnectedUser = [...this.onlineUsers.entries()]
-      .find(([_, socketId]) => socketId === client.id);
+  // @UseGuards(WsJwtAccessGuard)
+  handleDisconnect(client: Socket) {
+    // const disconnectedUser = [...this.onlineUsers.entries()]
+    //   .find(([_, socketId]) => socketId === client.id);
 
-    if (disconnectedUser) {
-      const [userName] = disconnectedUser;
-      this.onlineUsers.delete(userName);
-      console.log(`Клиент отключился: ${userName} -> ${client.id}`);
+    // if (disconnectedUser) {
+    //   const [userName] = disconnectedUser;
+    //   this.onlineUsers.delete(userName);
+    console.log(`Клиент отключился: ${client.id}`);
 
       // Уведомить контактов о оффлайне
-      this.notifyContactOnlineStatus(userName, false);
-    }
+      // this.notifyContactOnlineStatus(userName, false);
+    // }
   }
 
 
@@ -96,13 +96,13 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
 
 
   // Получение текущих онлайн пользователей
-  @UseGuards(WsJwtAccessGuard)
-  @SubscribeMessage('get-online-users')
-  handleGetOnlineUsers() {}
+  // @UseGuards(WsJwtAccessGuard)
+  // @SubscribeMessage('get-online-users')
+  // handleGetOnlineUsers() {}
   
 
   // Оповещение об изменении статуса контакта онлайн для всех пользователей
-  private notifyContactOnlineStatus(name: string, isOnline: boolean) {
-    this.server.emit('user-status-changed', { name, isOnline });
-  }
+  // private notifyContactOnlineStatus(name: string, isOnline: boolean) {
+  //   this.server.emit('user-status-changed', { name, isOnline });
+  // }
 }

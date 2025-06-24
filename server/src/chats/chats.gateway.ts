@@ -14,13 +14,11 @@ import { WsJwtAccessGuard } from '../auth/guards/ws-jwt-access.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthenticatedSocket } from 'src/common/types/authenticated-socket';
 
-@WebSocketGateway(
-  3002, 
-  { cors: { 
+@WebSocketGateway({ 
+  cors: { 
     origin: ['http://localhost:3000'],
     credentials: true,
-  },
-  namespace: '/'
+  }
 })
 export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
   @WebSocketServer()

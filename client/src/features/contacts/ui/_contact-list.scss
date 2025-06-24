@@ -7,8 +7,10 @@
   width: 20%;
   overflow-x: hidden;
   overflow-y: auto;
+  border-radius: 0.5rem;
 
   background-color: var(--bg-3);
+  box-shadow: 0 0 30px rgba(37, 38, 38, 0.3);
 
 
   //[data-theme='light'] & {

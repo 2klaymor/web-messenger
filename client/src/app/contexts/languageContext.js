@@ -28,7 +28,7 @@ export const translations = {
         status: {
             online: "online",
             offline: "offline",
-            last_seen: "last seen "
+            last_seen: "last seen: "
         },
 
         errors: {
@@ -147,7 +147,7 @@ export const translations = {
         status: {
             online: "онлайн",
             offline: "оффлайн",
-            last_seen: "был(а) в сети ",
+            last_seen: "был(а) в сети: ",
         },
 
         errors: {

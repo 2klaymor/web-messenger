@@ -1,27 +1,35 @@
 import {api} from "../../shared/api/instance";
 import {images} from "../../app/contexts/themeContext";
-import {format} from "date-fns";
+import { getPfpUrl } from "./api-get-pfp";
+import {format, isToday, isThisYear} from "date-fns";
+
+export const formatLastSeen = (lastSeen) => {
+    if (!lastSeen) return "offline";
+    if (lastSeen === "online") return "online";
+
+    const date = new Date(lastSeen);
+
+    if (isToday(date)) {
+        return `${format(date, "HH:mm")}`;
+    }
+
+    if (isThisYear(date)) {
+        return `${format(date, "dd.MM")}, ${format(date, "HH:mm")}`;
+    }
+
+    return format(date, "dd.MM.yy");
+};
 
 export const getUserPublicData = async (name) => {
     try {
         const {data} = await api.get(`/users/${name}`);
 
-        let lastSeenFormatted;
-
-        if (data.lastSeen === null) {
-            lastSeenFormatted = "offline";
-        } else if (data.lastSeen === "online") {
-            lastSeenFormatted = "online";
-        } else {
-            lastSeenFormatted = format(new Date(data.lastSeen), "dd.MM.yy HH:mm");
-        }
-
         return {
             name,
             displayName: data.displayName ?? name,
             bio: data.bio ?? '',
-            pfp: data.pfp ?? images.static.pfp_placeholder,
-            lastSeen: lastSeenFormatted
+            pfp: getPfpUrl(data),
+            lastSeen: formatLastSeen(data.lastSeen),
         };
     } catch (e) {
         // если пользователь не найден

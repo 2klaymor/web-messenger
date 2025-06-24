@@ -16,9 +16,14 @@ export class MessagesController {
   @UseGuards(JwtAccessGuard)
   @Get(':chatId')
   async getChatMessages(
-    @Param('chatId') chatId: number,
-    @CurrentUser('name') name: string
+      @Param('chatId') chatIdParam: string,
+      @CurrentUser('name') name: string
   ) {
+    const chatId = Number(chatIdParam);
+    if (isNaN(chatId)) {
+      throw new Error('Invalid chatId');
+    }
+
     const userInChat = await this.chatsService.isChatMember(name, chatId);
 
     if (!userInChat) {

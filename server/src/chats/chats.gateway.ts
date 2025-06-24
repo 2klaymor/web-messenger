@@ -14,17 +14,31 @@ import { WsJwtAccessGuard } from '../auth/guards/ws-jwt-access.guard';
 import { UseGuards } from '@nestjs/common';
 import { AuthenticatedSocket } from 'src/common/types/authenticated-socket';
 
-@WebSocketGateway({ 
-  cors: { 
+// @WebSocketGateway({
+//   cors: {
+//     origin: ['http://localhost:3000'],
+//     credentials: true,
+//   }
+// })
+// export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+//   @WebSocketServer()
+//   server: Server;
+//   private messagesService: MessagesService;
+//   // private onlineUsers = new Map<string, string>();
+//
+//
+
+@WebSocketGateway({
+  cors: {
     origin: ['http://localhost:3000'],
     credentials: true,
   }
 })
 export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
-  @WebSocketServer()
-  server: Server;
-  private messagesService: MessagesService;
-  // private onlineUsers = new Map<string, string>();
+  constructor(private readonly messagesService: MessagesService) {
+  }
+
+  @WebSocketServer() server: Server;
 
   afterInit(server: Server) {
     console.log('WebSocket сервер инициализирован.');
@@ -85,16 +99,15 @@ export class ChatsGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
   // @UseGuards(WsJwtAccessGuard)
   @SubscribeMessage('send-message')
   async handleSendMessage(
-    @ConnectedSocket() client: Socket,
-    @MessageBody() data: { chatId: number; content: string, senderName: string }
+      @ConnectedSocket() client: Socket,
+      @MessageBody() data: { chatId: number; content: string, senderName: string }
   ) {
-    // const user = client.user;
+    console.log("📩 получено от клиента:", data); // ← добавь это
 
     const message = await this.messagesService.create(
-      data.chatId,
-      data.content,
-      // user.name
-      data.senderName
+        data.chatId,
+        data.content,
+        data.senderName
     );
 
     this.server.to(`chat-${data.chatId}`).emit('new-message', message);

@@ -6,8 +6,17 @@ export function socketListeners() {
         console.log("connected:", socket.id);
     });
 
-    socket.on("message", () => {
+    // получаемое сообщение
+    socket.on("new-message", (message) => {
+        console.log("new-message:", message);
 
+        const {chatId} = message;
+
+        if (chatId) {
+            messagesStore.getState().addMessage(chatId, message);
+        } else {
+            console.warn("❗ new-message без chatId:", message);
+        }
     });
 
     socket.on("disconnect", () => {

@@ -1,6 +1,6 @@
 import {createChat} from "./api-create-chat"
 import {useSocket} from "../../shared/socket/useSocket";
-import {selectedContactStore} from "../../entities/contacts/selectedContactStore";
+import {selectedContactStore} from "../contacts/selectedContactStore";
 
 export const useCreateChat = () => {
     const socket = useSocket();
@@ -10,9 +10,8 @@ export const useCreateChat = () => {
         try {
             const {id: chatId} = await createChat(user.name);
             setSelectedContact(user, chatId);
-            
-            console.log("Чат создан, id:", chatId);
-            socket.emit("join-chat", chatId);
+
+            socket.emit("join-chat", {chatId});
 
             return chatId;
         } catch (error) {

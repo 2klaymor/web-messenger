@@ -2,37 +2,34 @@ import {useState} from "react";
 import dayjs from "dayjs";
 import {messagesStore} from "../../../entities/messages/messagesStore";
 import {selectedContactStore} from "../../../entities/contacts/selectedContactStore";
-
-//моки
-export const fakeMessages = [
-    "Привет, ты тут?",
-    "Я думаю об этом...",
-    "А если представить, что всё это сон?",
-    "звучит как план.",
-    "Го в доту",
-    "Пойду за чаем...",
-    "А ты слышала про deadin.site?",
-    "Всё будет хорошо.",
-    "Мне нравится, как ты кодишь",
-];
-
+import {socket} from "../../../shared/socket/socket";
+import {useAuth} from "../../../app/contexts/authContext";
 
 export const useChatInput = () => {
     const {selectedContact} = selectedContactStore();
     const {addMessage} = messagesStore();
     const [text, setText] = useState("");
+    const {user} = useAuth();
 
     const sendMessage = () => {
         if (!text.trim() || !selectedContact) return;
 
-        addMessage({
-            sender: 'me',
-            contents: text.trim(),
-            time: dayjs().format('HH:mm'),
-        });
+        const content = text.trim(); // ← сохраняем значение локально сразу
+
+        console.log("chatid:", selectedContact.chatId);
+        console.log(content);
+        console.log(user.name);
+
+        const message = {
+            chatId: selectedContact.chatId,
+            content: text.trim(),
+            senderName: user.name,
+        };
+
+        socket.emit("send-message", message);
 
         setText('');
-    }
+    };
 
     const handleKeyDown = (e) => {
         if (e.key === "Enter" && !e.shiftKey) {

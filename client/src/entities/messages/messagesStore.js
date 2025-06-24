@@ -1,52 +1,32 @@
-import {useContext} from "react";
 import {create} from 'zustand';
 import {getMessages} from "./api-get-messages";
-import {useAuth} from "../../app/contexts/authContext";
 
 export const messagesStore = create((set, get) => ({
-    messagesByContact: {},
-    isLoading: false,
+    messagesByChatId: {},
 
-    // загрузка чата с конкретным пользователем
-    loadMessages: async (contactName) => {
-        set({isLoading: true});
+    fetchMessages: async (chatId) => {
         try {
-            const messages = await getMessages(contactName);
-
+            const data = await getMessages(chatId);
             set((state) => ({
-                messagesByContact: {
-                    ...state.messagesByContact,
-                    [contactName]: messages,
+                messagesByChatId: {
+                    ...state.messagesByChatId,
+                    [chatId]: data,
                 },
             }));
         } catch (error) {
-            console.error("failed to load messages:", error);
-        } finally {
-            set({isLoading: false});
+            console.error("Ошибка при загрузке сообщений:", error);
         }
     },
 
-    addMessage: (msg, currentUserName) => {
-        const contactName = msg.senderName === currentUserName
-            ? msg.receiverName
-            : msg.senderName;
-
+    addMessage: (chatId, message) => {
+        console.log("chatid", chatId)
         set((state) => {
-            const prev = state.messagesByContact[contactName] || [];
-            return {
-                messagesByContact: {
-                    ...state.messagesByContact,
-                    [contactName]: [...prev, msg],
-                },
+            const existing = state.messagesByChatId[chatId] || [];
+            const updated = {
+                ...state.messagesByChatId,
+                [chatId]: [...existing, message],
             };
+            return {messagesByChatId: updated};
         });
-    },
+    }
 }));
-
-// export const messagesStore = create((set) => ({
-//     messages: [],
-//     addMessage: (message) =>
-//         set((state) => ({
-//             messages: [...state.messages, message],
-//         })),
-// }));

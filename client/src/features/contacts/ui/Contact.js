@@ -7,7 +7,6 @@ const Contact = ({ user, onClick }) => {
 
     const handleClick = () => {
         onClick();
-        setSelectedContact(user);
     };
 
     return (

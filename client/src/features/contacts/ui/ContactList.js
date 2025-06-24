@@ -1,5 +1,5 @@
 // import {createChat} from "../../join-chat/api-create-chat";
-import {useCreateChat} from "../../join-chat/useCreateChat";
+import {useCreateChat} from "../../../entities/chat/useCreateChat";
 import {useContactList} from "../model/useContactList";
 import SearchField from "../../search-users/ui/SearchField";
 import Contact from "./Contact";

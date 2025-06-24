@@ -1,7 +1,9 @@
 import {images} from "../../app/contexts/themeContext";
 import {useSetPfp} from "./useSetPfp";
+import {useAuth} from "../../app/contexts/authContext";
 
 export default function SetPfp({imgClassName}) {
+    const {user} = useAuth();
     const {
         fileInputRef, pfpPreview, handleFileChange,
     } = useSetPfp();
@@ -10,7 +12,7 @@ export default function SetPfp({imgClassName}) {
         <label className="set-pfp">
             <img
                 className={`set-pfp__pfp ${imgClassName}`}
-                src={pfpPreview || images.static.pfp_placeholder}
+                src={pfpPreview === null ? user.pfp : pfpPreview}
                 alt="your pfp"
             />
             <div className="set-pfp__overlay">

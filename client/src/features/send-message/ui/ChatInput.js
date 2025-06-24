@@ -16,10 +16,10 @@ export const ChatInput= () => {
         <div className="chat__input">
             {selectedContact ? (
                 <>
-                    <label htmlFor="file-input">
-                        <img src={images[theme].attach} alt="attach"/>
-                        <input type="file" id="file-input" hidden/>
-                    </label>
+                    {/*<label htmlFor="file-input">*/}
+                    {/*    <img src={images[theme].attach} alt="attach"/>*/}
+                    {/*    <input type="file" id="file-input" hidden/>*/}
+                    {/*</label>*/}
 
                     <TextareaAutosize
                         value={text}
